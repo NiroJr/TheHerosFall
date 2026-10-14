@@ -11,6 +11,7 @@ config_version=5
 [application]
 
 config/name="The Hero's Fall"
+run/main_scene="uid://b4lc4wen433rq"
 config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://icon.svg"
 
