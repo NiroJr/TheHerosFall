@@ -1,16 +1,16 @@
 [gd_scene format=3 uid="uid://ixg8ghykh70r"]
 
 [ext_resource type="Script" uid="uid://cb1dss3l8ws0u" path="res://Scripts/player.gd" id="1_onrkg"]
-[ext_resource type="Texture2D" uid="uid://bs055ycfbluxv" path="res://Assets/icon.svg" id="2_i3pqv"]
+[ext_resource type="Texture2D" uid="uid://s4u7u7xl7gnv" path="res://Assets/McFront.png.webp" id="2_cvnsp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i5tie"]
-size = Vector2(117, 118)
+size = Vector2(65, 117)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_xrrqc"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_i3pqv")
+"texture": ExtResource("2_cvnsp")
 }],
 "loop": 1,
 "name": &"default",
@@ -22,8 +22,10 @@ collision_mask = 6
 script = ExtResource("1_onrkg")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=396957255]
-position = Vector2(0.5, 0)
+position = Vector2(0.5, 0.5)
 shape = SubResource("RectangleShape2D_i5tie")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1537809165]
+position = Vector2(0.5, 0.5)
+scale = Vector2(3.7741935, 3.7741935)
 sprite_frames = SubResource("SpriteFrames_xrrqc")
