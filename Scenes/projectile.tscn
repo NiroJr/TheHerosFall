@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://curgw8bem18wq"]
+
+[ext_resource type="Script" uid="uid://cjxiy77alawh3" path="res://projectile.gd" id="1_f8cdk"]
+
+[node name="Projectile" type="CharacterBody2D" unique_id=445020188]
+script = ExtResource("1_f8cdk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=687197672]
