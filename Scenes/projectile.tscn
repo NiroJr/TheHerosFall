@@ -1,8 +1,15 @@
 [gd_scene format=3 uid="uid://curgw8bem18wq"]
 
 [ext_resource type="Script" uid="uid://cjxiy77alawh3" path="res://projectile.gd" id="1_f8cdk"]
+[ext_resource type="Texture2D" uid="uid://dwimqm11o45nq" path="res://Assets/MCSprites/disk1.png" id="2_yr2qt"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_pqcdl"]
 
 [node name="Projectile" type="CharacterBody2D" unique_id=445020188]
 script = ExtResource("1_f8cdk")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=687197672]
+shape = SubResource("CircleShape2D_pqcdl")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=824292023]
+texture = ExtResource("2_yr2qt")
