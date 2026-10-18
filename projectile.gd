@@ -11,5 +11,5 @@ func _ready():
 	global_rotation = spawnRot
 
 func _physics_process(delta):
-	velocity = Vector2(0,-speed).rotated(dir)
+	velocity = (Vector2.RIGHT * speed).rotated(dir)
 	move_and_slide()

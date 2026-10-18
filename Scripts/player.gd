@@ -2,9 +2,12 @@ extends CharacterBody2D
 
 @onready var main = get_tree().get_root().get_node("Main")
 @onready var projectile = load("res://Scenes/projectile.tscn")
+var facing_angle := 0.0
 const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
-
+var sprite_dir  := 0.0;
+var slice  := TAU/8;
+var sprite_index := 0;
 
 func _physics_process(delta: float) -> void:
 	# Get the input direction and handle the movement/deceleration.
@@ -21,6 +24,13 @@ func _physics_process(delta: float) -> void:
 		velocity.y = vDirection * SPEED
 	else:
 		velocity.y = move_toward(velocity.y, 0, SPEED)
+	#Rotates the player body and facing direction for projectile during movement
+	if(velocity != Vector2.ZERO):
+		facing_angle = velocity.angle()
+		sprite_dir = fposmod(facing_angle, TAU)
+		sprite_index = roundi(sprite_dir/slice)%8
+		$PlayerSprite.frame = sprite_index
+		
 
 	move_and_slide()
 	
@@ -30,8 +40,8 @@ func _physics_process(delta: float) -> void:
 	
 func shoot():
 	var instance = projectile.instantiate()
-	instance.dir = rotation
+	instance.dir = facing_angle
 	instance.spawnPos = global_position
-	instance.spawnRot = rotation
+	instance.spawnRot = facing_angle
 	main.add_child.call_deferred(instance)
 	print("spawned at ", global_position, " parent: ", get_tree().current_scene.name)

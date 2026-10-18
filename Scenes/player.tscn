@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://ci3yo7cinovso" path="res://Assets/MCSprites/MainChar1.png" id="2_cvnsp"]
 [ext_resource type="Texture2D" uid="uid://c6b2cr35pv65x" path="res://Assets/MCSprites/MainChar4.png" id="3_x3wgy"]
 [ext_resource type="Texture2D" uid="uid://r1yjyq8lytn4" path="res://Assets/MCSprites/MainChar5.png" id="4_3smsa"]
+[ext_resource type="Texture2D" uid="uid://bs055ycfbluxv" path="res://Assets/icon.svg" id="5_3smsa"]
 [ext_resource type="Texture2D" uid="uid://drhom26ny7wrn" path="res://Assets/MCSprites/MainChar3.png" id="5_8erm5"]
 [ext_resource type="Texture2D" uid="uid://bwfkemysp6tkx" path="res://Assets/MCSprites/MainChar2.png" id="6_f1ek2"]
 
@@ -14,10 +15,31 @@ size = Vector2(65, 117)
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("4_3smsa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_x3wgy")
+}, {
+"duration": 1.0,
 "texture": ExtResource("2_cvnsp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_3smsa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_3smsa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_3smsa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_8erm5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_f1ek2")
 }],
 "loop": 1,
-"name": &"default",
+"name": &"Movement",
 "speed": 5.0
 }, {
 "frames": [{
@@ -61,8 +83,8 @@ script = ExtResource("1_onrkg")
 position = Vector2(0.5, 0.5)
 shape = SubResource("RectangleShape2D_i5tie")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1537809165]
+[node name="PlayerSprite" type="AnimatedSprite2D" parent="." unique_id=1537809165]
 position = Vector2(0.5, 0.5)
 scale = Vector2(3.7741935, 3.7741935)
 sprite_frames = SubResource("SpriteFrames_xrrqc")
-animation = &"upRight"
+animation = &"Movement"
