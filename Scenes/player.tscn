@@ -1,7 +1,11 @@
 [gd_scene format=3 uid="uid://ixg8ghykh70r"]
 
 [ext_resource type="Script" uid="uid://cb1dss3l8ws0u" path="res://Scripts/player.gd" id="1_onrkg"]
-[ext_resource type="Texture2D" uid="uid://s4u7u7xl7gnv" path="res://Assets/McFront.png.webp" id="2_cvnsp"]
+[ext_resource type="Texture2D" uid="uid://ci3yo7cinovso" path="res://Assets/MCSprites/MainChar1.png" id="2_cvnsp"]
+[ext_resource type="Texture2D" uid="uid://c6b2cr35pv65x" path="res://Assets/MCSprites/MainChar4.png" id="3_x3wgy"]
+[ext_resource type="Texture2D" uid="uid://r1yjyq8lytn4" path="res://Assets/MCSprites/MainChar5.png" id="4_3smsa"]
+[ext_resource type="Texture2D" uid="uid://drhom26ny7wrn" path="res://Assets/MCSprites/MainChar3.png" id="5_8erm5"]
+[ext_resource type="Texture2D" uid="uid://bwfkemysp6tkx" path="res://Assets/MCSprites/MainChar2.png" id="6_f1ek2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i5tie"]
 size = Vector2(65, 117)
@@ -14,6 +18,38 @@ animations = [{
 }],
 "loop": 1,
 "name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_x3wgy")
+}],
+"loop": 1,
+"name": &"downRight",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_3smsa")
+}],
+"loop": 1,
+"name": &"right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_8erm5")
+}],
+"loop": 1,
+"name": &"up",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_f1ek2")
+}],
+"loop": 1,
+"name": &"upRight",
 "speed": 5.0
 }]
 
@@ -29,3 +65,4 @@ shape = SubResource("RectangleShape2D_i5tie")
 position = Vector2(0.5, 0.5)
 scale = Vector2(3.7741935, 3.7741935)
 sprite_frames = SubResource("SpriteFrames_xrrqc")
+animation = &"upRight"
