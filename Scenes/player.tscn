@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://d2exdcu6qhdmu" path="res://Assets/MCSprites/characterSprites/MainChar2.png" id="6_f1ek2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i5tie"]
-size = Vector2(65, 117)
+size = Vector2(32, 62)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_xrrqc"]
 animations = [{
@@ -53,12 +53,19 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vikc2"]
+size = Vector2(59, 10)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_i5tie"]
+
 [node name="Player" type="CharacterBody2D" unique_id=481447577]
+z_index = 10
+z_as_relative = false
 collision_mask = 6
 script = ExtResource("1_onrkg")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=396957255]
-position = Vector2(7, 1)
+position = Vector2(2, 0)
 shape = SubResource("RectangleShape2D_i5tie")
 
 [node name="PlayerSprite" type="AnimatedSprite2D" parent="." unique_id=1537809165]
@@ -66,3 +73,21 @@ position = Vector2(0.5, 0.5)
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_xrrqc")
 animation = &"down"
+
+[node name="SwordPivot" type="Node2D" parent="." unique_id=828499182]
+z_as_relative = false
+
+[node name="Sword" type="Area2D" parent="SwordPivot" unique_id=1179261997]
+collision_layer = 8
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SwordPivot/Sword" unique_id=1334359317]
+position = Vector2(30, 0)
+shape = SubResource("RectangleShape2D_vikc2")
+
+[node name="Sprite2D" type="Sprite2D" parent="SwordPivot/Sword" unique_id=1233708772]
+position = Vector2(0, -5)
+scale = Vector2(60, 10)
+texture = SubResource("PlaceholderTexture2D_i5tie")
+
+[node name="Combo" type="Timer" parent="." unique_id=741614805]
