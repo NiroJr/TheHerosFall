@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://couagsdjv4j23"]
+
+[ext_resource type="Texture2D" uid="uid://nesi60sbkqon" path="res://Assets/TerrainSprites/GrassGroundTiles1.png" id="1_688p1"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_oltiy"]
+texture = ExtResource("1_688p1")
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+3:2/0 = 0
+1:3/0 = 0
+2:3/0 = 0
+3:3/0 = 0
+1:4/0 = 0
+2:4/0 = 0
+3:4/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_it0lf"]
+sources/0 = SubResource("TileSetAtlasSource_oltiy")
+
+[node name="Ground" type="TileMapLayer" unique_id=1104582814]
+tile_set = SubResource("TileSet_it0lf")
