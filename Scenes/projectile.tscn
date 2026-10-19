@@ -1,9 +1,69 @@
 [gd_scene format=3 uid="uid://curgw8bem18wq"]
 
-[ext_resource type="Script" uid="uid://cjxiy77alawh3" path="res://projectile.gd" id="1_f8cdk"]
+[ext_resource type="Script" uid="uid://cjxiy77alawh3" path="res://Scripts/projectile.gd" id="1_f8cdk"]
 [ext_resource type="Texture2D" uid="uid://bs5kq05467nbe" path="res://Assets/MCSprites/diskSprites/disk1.png" id="2_yr2qt"]
+[ext_resource type="Texture2D" uid="uid://dm557s8v4655v" path="res://Assets/MCSprites/diskSprites/disk2.png" id="3_ay8ps"]
+[ext_resource type="Texture2D" uid="uid://wssl6xa6chjj" path="res://Assets/MCSprites/diskSprites/disk3.png" id="4_akv1x"]
+[ext_resource type="Texture2D" uid="uid://ddqgkubyl1go7" path="res://Assets/MCSprites/diskSprites/disk4.png" id="5_4bhuu"]
+[ext_resource type="Texture2D" uid="uid://be86sfigsoan4" path="res://Assets/MCSprites/diskSprites/disk5.png" id="6_h15bx"]
+[ext_resource type="Texture2D" uid="uid://dsl4ntmvw1vh5" path="res://Assets/MCSprites/diskSprites/disk6.png" id="7_2322j"]
+[ext_resource type="Texture2D" uid="uid://dpbvy5sshvn47" path="res://Assets/MCSprites/diskSprites/diskDiagnoal1.png" id="8_8wt1i"]
+[ext_resource type="Texture2D" uid="uid://c27g4apwyhx66" path="res://Assets/MCSprites/diskSprites/diskDiagnoal2.png" id="9_jdrjw"]
+[ext_resource type="Texture2D" uid="uid://clxwmipx04qvu" path="res://Assets/MCSprites/diskSprites/diskDiagnoal3.png" id="10_oxmit"]
+[ext_resource type="Texture2D" uid="uid://ctrr3fex3odrf" path="res://Assets/MCSprites/diskSprites/diskDiagnoal4.png" id="11_b66ev"]
+[ext_resource type="Texture2D" uid="uid://btwfa57yw7ugh" path="res://Assets/MCSprites/diskSprites/diskDiagnoal5.png" id="12_f4pur"]
+[ext_resource type="Texture2D" uid="uid://cg8nubhbo4fxo" path="res://Assets/MCSprites/diskSprites/diskDiagnoal6.png" id="13_ex1cl"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_pqcdl"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_m7t8w"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_yr2qt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_ay8ps")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_akv1x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_4bhuu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_h15bx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_2322j")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_8wt1i")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_jdrjw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_oxmit")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_b66ev")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_f4pur")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_ex1cl")
+}],
+"loop": 1,
+"name": &"diagonal",
+"speed": 5.0
+}]
 
 [node name="Projectile" type="CharacterBody2D" unique_id=445020188]
 collision_layer = 8
@@ -13,5 +73,8 @@ script = ExtResource("1_f8cdk")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=687197672]
 shape = SubResource("CircleShape2D_pqcdl")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=824292023]
-texture = ExtResource("2_yr2qt")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=693153417]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_m7t8w")
+animation = &"diagonal"
+frame_progress = 0.2842808

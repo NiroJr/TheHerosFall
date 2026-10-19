@@ -9,6 +9,17 @@ var sprite_dir  := 0.0;
 var slice  := TAU/8;
 var sprite_index := 0;
 
+const Animations := [
+	"right",
+	"downRight",
+	"down", 
+	"downRight", #downLeft
+	"right",  #left
+	"upRight", #upLeft
+	"up",	
+	"upRight"
+]
+
 func _physics_process(_delta: float) -> void:
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
@@ -31,14 +42,19 @@ func _physics_process(_delta: float) -> void:
 		
 		sprite_index = roundi(sprite_dir/slice)%8
 		
+		
+		#flips sprites when left input is recieved and the direction is given
 		if(sprite_index == 3
 		or sprite_index == 4
 		or sprite_index == 5):
 			$PlayerSprite.flip_h = true;
 		else:
 			$PlayerSprite.flip_h = false;
-			
-		$PlayerSprite.frame = sprite_index
+		
+		$PlayerSprite.play(Animations[sprite_index]);
+	else: 
+		$PlayerSprite.stop()
+		$PlayerSprite.frame = 0;
 		
 
 	move_and_slide()

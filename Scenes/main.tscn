@@ -18,45 +18,46 @@ size = Vector2(1.397971, 0.9819212)
 [node name="Player" parent="." unique_id=481447577 instance=ExtResource("1_jjgbg")]
 position = Vector2(230, 209)
 
-[node name="Sprite2D" type="StaticBody2D" parent="." unique_id=942738518]
+[node name="wallLeft" type="StaticBody2D" parent="." unique_id=942738518]
 position = Vector2(16.058273, 326.41016)
 scale = Vector2(-31.116547, 653.8203)
 collision_layer = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D" unique_id=1778432790]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="wallLeft" unique_id=1778432790]
 position = Vector2(0.005889952, -0.0052157342)
 scale = Vector2(0.99999946, 1)
 shape = SubResource("RectangleShape2D_vikc2")
 
-[node name="Sprite2D" type="Sprite2D" parent="Sprite2D" unique_id=994959771]
+[node name="Sprite2D" type="Sprite2D" parent="wallLeft" unique_id=994959771]
+position = Vector2(0.06614724, -0.5007647)
 texture = SubResource("PlaceholderTexture2D_vikc2")
 
-[node name="Sprite2D2" type="StaticBody2D" parent="." unique_id=1426162551]
-position = Vector2(16.058273, 326.41016)
+[node name="wallBottom" type="StaticBody2D" parent="." unique_id=1426162551]
+position = Vector2(27, 487)
 scale = Vector2(-31.116547, 653.8203)
 collision_layer = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D2" unique_id=919635688]
-position = Vector2(-18.380627, 0.50256896)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="wallBottom" unique_id=919635688]
+position = Vector2(-17.097013, -0.20800823)
 scale = Vector2(0.999999, 1)
 shape = SubResource("RectangleShape2D_bo1nx")
 
-[node name="Sprite2D" type="Sprite2D" parent="Sprite2D2" unique_id=392816331]
-position = Vector2(-18.5397, 0.5145763)
-scale = Vector2(35.635284, 0.073596895)
+[node name="Sprite2D" type="Sprite2D" parent="wallBottom" unique_id=392816331]
+position = Vector2(-29.501991, -0.022574998)
+scale = Vector2(35.635284, -0.25070527)
 texture = SubResource("PlaceholderTexture2D_vikc2")
 
-[node name="Sprite2D3" type="StaticBody2D" parent="." unique_id=1595424041]
+[node name="wallRight" type="StaticBody2D" parent="." unique_id=1595424041]
 position = Vector2(1154.0001, 315)
 scale = Vector2(-31.116547, 653.8203)
 collision_layer = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D3" unique_id=268147564]
-position = Vector2(-0.1205101, 0.021412611)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="wallRight" unique_id=268147564]
+position = Vector2(16.679235, -0.4511943)
 scale = Vector2(0.99999946, 1)
 shape = SubResource("RectangleShape2D_jjgbg")
 
-[node name="Sprite2D" type="Sprite2D" parent="Sprite2D3" unique_id=1753660120]
-position = Vector2(-0.09978986, 0.015294723)
+[node name="Sprite2D" type="Sprite2D" parent="wallRight" unique_id=1753660120]
+position = Vector2(15.811526, -0.54755104)
 scale = Vector2(1.3788834, 1)
 texture = SubResource("PlaceholderTexture2D_vikc2")

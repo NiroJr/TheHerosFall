@@ -14,31 +14,10 @@ size = Vector2(65, 117)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("4_3smsa")
-}, {
-"duration": 1.0,
-"texture": ExtResource("3_x3wgy")
-}, {
-"duration": 1.0,
 "texture": ExtResource("2_cvnsp")
-}, {
-"duration": 1.0,
-"texture": ExtResource("3_x3wgy")
-}, {
-"duration": 1.0,
-"texture": ExtResource("4_3smsa")
-}, {
-"duration": 1.0,
-"texture": ExtResource("6_f1ek2")
-}, {
-"duration": 1.0,
-"texture": ExtResource("5_8erm5")
-}, {
-"duration": 1.0,
-"texture": ExtResource("6_f1ek2")
 }],
 "loop": 1,
-"name": &"Movement",
+"name": &"down",
 "speed": 5.0
 }, {
 "frames": [{
@@ -84,6 +63,6 @@ shape = SubResource("RectangleShape2D_i5tie")
 
 [node name="PlayerSprite" type="AnimatedSprite2D" parent="." unique_id=1537809165]
 position = Vector2(0.5, 0.5)
-scale = Vector2(3.7741935, 3.7741935)
+scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_xrrqc")
-animation = &"Movement"
+animation = &"down"
