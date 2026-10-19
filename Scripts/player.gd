@@ -8,6 +8,12 @@ const JUMP_VELOCITY = -400.0
 var sprite_dir  := 0.0;
 var slice  := TAU/8;
 var sprite_index := 0;
+var combo_step := 0;
+var is_swinging := false;
+var swing_spread := deg_to_rad(20)
+
+func _ready() -> void:
+	$SwordPivot.visible = false
 
 func _physics_process(_delta: float) -> void:
 	# Get the input direction and handle the movement/deceleration.
@@ -28,7 +34,6 @@ func _physics_process(_delta: float) -> void:
 	if(velocity != Vector2.ZERO):
 		facing_angle = velocity.angle()
 		sprite_dir = fposmod(facing_angle, TAU)
-		
 		sprite_index = roundi(sprite_dir/slice)%8
 		
 		if(sprite_index == 3
@@ -46,7 +51,40 @@ func _physics_process(_delta: float) -> void:
 	if Input.is_action_just_pressed("ui_accept"):
 		print("shoot called")
 		shoot()
-	
+	if Input.is_action_just_pressed("sword_swing"):
+		if(is_swinging):
+			return
+		is_swinging = true
+		$Combo.stop()
+		$SwordPivot.visible = true
+		var side := 1 if(cos(facing_angle) >=0) else -1
+		match combo_step:
+			0:
+				$SwordPivot.rotation = facing_angle-side*swing_spread
+				var swing_tween = create_tween()
+				swing_tween.tween_property($SwordPivot, "rotation", facing_angle+side*swing_spread, 0.15)
+				await swing_tween.finished
+			1:
+				$SwordPivot.rotation = facing_angle+side*swing_spread
+				var swing_tween = create_tween()
+				swing_tween.tween_property($SwordPivot, "rotation", facing_angle-side*swing_spread, 0.15)
+				await swing_tween.finished
+			2:
+				$SwordPivot.rotation = facing_angle
+				var swing_tween = create_tween()
+				swing_tween.tween_property($SwordPivot, "rotation", facing_angle+TAU, 0.15)
+				await swing_tween.finished
+		combo_step= (combo_step+1)%3
+		$Combo.start()
+		await get_tree().create_timer(0.2).timeout
+		$SwordPivot.visible = false
+		is_swinging = false;
+		
+		
+func _on_combo_timeout() -> void:
+	combo_step = 0;
+	is_swinging = false;
+		
 func shoot():
 	var instance = projectile.instantiate()
 	instance.scale.x = -1
