@@ -53,24 +53,7 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="GDScript" id="GDScript_x3wgy"]
-script/source = "extends Node2D
-
-
-# Called when the node enters the scene tree for the first time.
-func _swing() -> void:
-	rotation 
-	pass # Replace with function body.
-
-"
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_68yga"]
-size = Vector2(70.5, 11)
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_3smsa"]
-
 [node name="Player" type="CharacterBody2D" unique_id=481447577]
-z_index = 10
 collision_mask = 6
 script = ExtResource("1_onrkg")
 
@@ -82,30 +65,4 @@ shape = SubResource("RectangleShape2D_i5tie")
 position = Vector2(0.5, 0.5)
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_xrrqc")
-<<<<<<< HEAD
 animation = &"down"
-=======
-animation = &"Movement"
-
-[node name="SwordPivot" type="Node2D" parent="." unique_id=593590255]
-z_as_relative = false
-script = SubResource("GDScript_x3wgy")
-
-[node name="Sword" type="Area2D" parent="SwordPivot" unique_id=1672099469]
-z_as_relative = false
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="SwordPivot/Sword" unique_id=1252650168]
-position = Vector2(34.75, 0)
-shape = SubResource("RectangleShape2D_68yga")
-
-[node name="Sprite2D" type="Sprite2D" parent="SwordPivot/Sword" unique_id=1497155905]
-position = Vector2(35.25, 4.7683716e-07)
-scale = Vector2(71.5, 12.000001)
-texture = SubResource("PlaceholderTexture2D_3smsa")
-
-[node name="Combo" type="Timer" parent="." unique_id=194007479]
-wait_time = 0.4
-one_shot = true
-
-[connection signal="timeout" from="Combo" to="." method="_on_combo_timeout"]
->>>>>>> combo_attack
