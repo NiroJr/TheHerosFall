@@ -1,12 +1,11 @@
 [gd_scene format=3 uid="uid://ixg8ghykh70r"]
 
 [ext_resource type="Script" uid="uid://cb1dss3l8ws0u" path="res://Scripts/player.gd" id="1_onrkg"]
-[ext_resource type="Texture2D" uid="uid://ci3yo7cinovso" path="res://Assets/MCSprites/MainChar1.png" id="2_cvnsp"]
-[ext_resource type="Texture2D" uid="uid://c6b2cr35pv65x" path="res://Assets/MCSprites/MainChar4.png" id="3_x3wgy"]
-[ext_resource type="Texture2D" uid="uid://r1yjyq8lytn4" path="res://Assets/MCSprites/MainChar5.png" id="4_3smsa"]
-[ext_resource type="Texture2D" uid="uid://bs055ycfbluxv" path="res://Assets/icon.svg" id="5_3smsa"]
-[ext_resource type="Texture2D" uid="uid://drhom26ny7wrn" path="res://Assets/MCSprites/MainChar3.png" id="5_8erm5"]
-[ext_resource type="Texture2D" uid="uid://bwfkemysp6tkx" path="res://Assets/MCSprites/MainChar2.png" id="6_f1ek2"]
+[ext_resource type="Texture2D" uid="uid://bx8ixurtkk4nc" path="res://Assets/MCSprites/characterSprites/MainChar1.png" id="2_cvnsp"]
+[ext_resource type="Texture2D" uid="uid://clvcdejrp6f3l" path="res://Assets/MCSprites/characterSprites/MainChar4.png" id="3_x3wgy"]
+[ext_resource type="Texture2D" uid="uid://cr7ku3tt1t0hm" path="res://Assets/MCSprites/characterSprites/MainChar5.png" id="4_3smsa"]
+[ext_resource type="Texture2D" uid="uid://dnhrommmhvo6b" path="res://Assets/MCSprites/characterSprites/MainChar3.png" id="5_8erm5"]
+[ext_resource type="Texture2D" uid="uid://d2exdcu6qhdmu" path="res://Assets/MCSprites/characterSprites/MainChar2.png" id="6_f1ek2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i5tie"]
 size = Vector2(65, 117)
@@ -24,13 +23,13 @@ animations = [{
 "texture": ExtResource("2_cvnsp")
 }, {
 "duration": 1.0,
-"texture": ExtResource("5_3smsa")
+"texture": ExtResource("3_x3wgy")
 }, {
 "duration": 1.0,
-"texture": ExtResource("5_3smsa")
+"texture": ExtResource("4_3smsa")
 }, {
 "duration": 1.0,
-"texture": ExtResource("5_3smsa")
+"texture": ExtResource("6_f1ek2")
 }, {
 "duration": 1.0,
 "texture": ExtResource("5_8erm5")
