@@ -13,7 +13,8 @@ var slice  := TAU/8;
 var sprite_index := 0;
 var combo_step := 0;
 var is_swinging := false;
-var swing_spread := deg_to_rad(20)
+var buffered_swing := false;
+
 
 func _ready() -> void:
 	$SwordSwing.visible = false
@@ -39,7 +40,6 @@ func _physics_process(_delta: float) -> void:
 		velocity.x = hDirection * SPEED
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
-		
 	if vDirection:
 		velocity.y = vDirection * SPEED
 	else:
@@ -70,11 +70,19 @@ func _physics_process(_delta: float) -> void:
 		shoot()
 	if Input.is_action_just_pressed("sword_swing"):
 		if(is_swinging):
-			return
-		is_swinging = true
+			buffered_swing = true;
+		else:
+			sword_swing()
+func sword_swing() ->void:
+	is_swinging = true
+	while true:
+		buffered_swing = false	
 		$Combo.stop()
 		$SwordSwing.visible = true
+		$Combo.start()
 		var side := 1 if(cos(facing_angle) >=0) else -1
+		if(roundi(sin(facing_angle)) != 0):
+			$SwordSwing.scale = Vector2(1.75,1.75)
 		match combo_step:
 			0:
 				$SwordSwing/Combo1.rotation = facing_angle+PI
@@ -105,17 +113,21 @@ func _physics_process(_delta: float) -> void:
 				$SwordSwing/Combo3.visible = true
 				$SwordSwing/Combo3/SwordAnimation.play("Combo3")
 				await $SwordSwing/Combo3/SwordAnimation.animation_finished
-		combo_step= (combo_step+1)%3
-		$Combo.start()
+		combo_step = (combo_step+1)%3
 		$SwordSwing.visible = false
-		is_swinging = false;
-		
+		$SwordSwing.scale = Vector2(1.25, 1.25)
+		if(buffered_swing):
+			continue
+		else:
+			break
+	is_swinging = false;
 func _input(event):
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 		shoot()
 		
 func _on_combo_timeout() -> void:
-	combo_step = 0;
+	if(!is_swinging):
+		combo_step = 0;
 		
 func shoot():
 	var instance = projectile.instantiate()
