@@ -29,8 +29,8 @@ const Animations := [
 func _physics_process(_delta: float) -> void:
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
-	var hDirection := Input.get_axis("ui_left", "ui_right")
-	var vDirection := Input.get_axis("ui_up", "ui_down")
+	var hDirection := Input.get_axis("Left", "Right")
+	var vDirection := Input.get_axis("Up", "Down")
 	
 	if hDirection:
 		velocity.x = hDirection * SPEED
@@ -64,8 +64,7 @@ func _physics_process(_delta: float) -> void:
 
 	move_and_slide()
 	
-	if Input.is_action_just_pressed("ui_accept"):
-		print("shoot called")
+	if Input.is_action_just_pressed("Shoot"):
 		shoot()
 	if Input.is_action_just_pressed("sword_swing"):
 		if(is_swinging):
@@ -76,37 +75,51 @@ func _physics_process(_delta: float) -> void:
 		var side := 1 if(cos(facing_angle) >=0) else -1
 		match combo_step:
 			0:
+				$SwordPivot/Sword/SwordAnimation.flip_h = (side == 1)
+				$SwordPivot/Sword/SwordAnimation.flip_v = false
 				$SwordPivot.rotation = facing_angle-side*swing_spread
 				var swing_tween = create_tween()
 				swing_tween.tween_property($SwordPivot, "rotation", facing_angle+side*swing_spread, 0.15)
+				$SwordPivot/Sword/SwordAnimation.play("Combo1")
 				await swing_tween.finished
+				await $SwordPivot/Sword/SwordAnimation.animation_finished
 			1:
 				$SwordPivot.rotation = facing_angle+side*swing_spread
+				$SwordPivot/Sword/SwordAnimation.flip_h = true
+				$SwordPivot/Sword/SwordAnimation.rotation = deg_to_rad(180)
+				$SwordPivot/Sword/SwordAnimation.flip_v = (side==1)
 				var swing_tween = create_tween()
 				swing_tween.tween_property($SwordPivot, "rotation", facing_angle-side*swing_spread, 0.15)
+				$SwordPivot/Sword/SwordAnimation.play("Combo2")
 				await swing_tween.finished
+				await $SwordPivot/Sword/SwordAnimation.animation_finished
 			2:
-				$SwordPivot.rotation = facing_angle
+				$SwordPivot/Sword/SwordAnimation.flip_h = false
+				$SwordPivot/Sword/SwordAnimation.flip_v = false
+				$SwordPivot.rotation = facing_angle+side*swing_spread
+				$SwordPivot/Sword/SwordAnimation.rotation = deg_to_rad(-90) -side*swing_spread
+				var fix: float =  $SwordPivot/Sword/SwordAnimation.global_rotation
 				var swing_tween = create_tween()
-				swing_tween.tween_property($SwordPivot, "rotation", facing_angle+TAU, 0.15)
+				swing_tween.tween_property($SwordPivot, "rotation", facing_angle-side*swing_spread, 0.15)
+				swing_tween.parallel().tween_property($SwordPivot/Sword/SwordAnimation, "global_rotation", fix, 0.15)
+				$SwordPivot/Sword/SwordAnimation.play("Combo3")
 				await swing_tween.finished
+				await $SwordPivot/Sword/SwordAnimation.animation_finished
 		combo_step= (combo_step+1)%3
-		$Combo.start()
-		await get_tree().create_timer(0.2).timeout
 		$SwordPivot.visible = false
+		$SwordPivot/Sword/SwordAnimation.stop()
+		await get_tree().create_timer(0.1).timeout
+		$Combo.start()
 		is_swinging = false;
 		
 		
 func _on_combo_timeout() -> void:
 	combo_step = 0;
-	is_swinging = false;
 		
 func shoot():
 	var instance = projectile.instantiate()
-	instance.scale.x = -1
-	instance.scale.y = -1
-	instance.dir = facing_angle
+	var angle = (get_global_mouse_position() - global_position).angle()
+	instance.dir = angle
 	instance.spawnPos = global_position
-	instance.spawnRot = facing_angle
+	instance.spawnRot = angle
 	main.add_child.call_deferred(instance)
-	print("spawned at ", global_position, " parent: ", get_tree().current_scene.name)

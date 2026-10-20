@@ -6,6 +6,19 @@
 [ext_resource type="Texture2D" uid="uid://cr7ku3tt1t0hm" path="res://Assets/MCSprites/characterSprites/MainChar5.png" id="4_3smsa"]
 [ext_resource type="Texture2D" uid="uid://dnhrommmhvo6b" path="res://Assets/MCSprites/characterSprites/MainChar3.png" id="5_8erm5"]
 [ext_resource type="Texture2D" uid="uid://d2exdcu6qhdmu" path="res://Assets/MCSprites/characterSprites/MainChar2.png" id="6_f1ek2"]
+[ext_resource type="Texture2D" uid="uid://dvtsqyt8nnv1v" path="res://Assets/MCSprites/attackSprites/fireAttack1.png" id="7_fs7ks"]
+[ext_resource type="Texture2D" uid="uid://u8nksm1b80nx" path="res://Assets/MCSprites/attackSprites/fireAttack2.png" id="8_l6n3p"]
+[ext_resource type="Texture2D" uid="uid://bpvmumcw7ubxj" path="res://Assets/MCSprites/attackSprites/fireAttack3.png" id="9_olqyp"]
+[ext_resource type="Texture2D" uid="uid://bllr5fx03wofs" path="res://Assets/MCSprites/attackSprites/fireAttack4.png" id="10_wpjfl"]
+[ext_resource type="Texture2D" uid="uid://c8w0roh5ng0md" path="res://Assets/MCSprites/attackSprites/fireAttack5.png" id="11_bi64h"]
+[ext_resource type="Texture2D" uid="uid://bt2gn60veo0nn" path="res://Assets/MCSprites/attackSprites/fireAttack6.png" id="12_2ijsl"]
+[ext_resource type="Texture2D" uid="uid://dfttfrc0xaily" path="res://Assets/MCSprites/attackSprites/fireAttack7.png" id="13_p1odr"]
+[ext_resource type="Texture2D" uid="uid://bdg263dbb0t1l" path="res://Assets/MCSprites/attackSprites/fireAttack8.png" id="14_0gysh"]
+[ext_resource type="Texture2D" uid="uid://cey0ehk1c6utm" path="res://Assets/MCSprites/attackSprites/fireAttack9.png" id="15_vfarp"]
+[ext_resource type="Texture2D" uid="uid://666dgaiu6bp0" path="res://Assets/MCSprites/attackSprites/fireAttack10.png" id="16_y6uwr"]
+[ext_resource type="Texture2D" uid="uid://ba6731eua4m7" path="res://Assets/MCSprites/attackSprites/fireAttack11.png" id="17_83xs0"]
+[ext_resource type="Texture2D" uid="uid://c1os5dfj0jy05" path="res://Assets/MCSprites/attackSprites/fireAttack12.png" id="18_ypfnu"]
+[ext_resource type="Texture2D" uid="uid://c52l7eh5v3une" path="res://Assets/MCSprites/attackSprites/fireAttack13.png" id="19_xuaoq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i5tie"]
 size = Vector2(32, 62)
@@ -56,7 +69,62 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vikc2"]
 size = Vector2(59, 10)
 
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_i5tie"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_i5tie"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_fs7ks")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_l6n3p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_olqyp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_wpjfl")
+}],
+"loop": 0,
+"name": &"Combo1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("11_bi64h")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_2ijsl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_p1odr")
+}],
+"loop": 0,
+"name": &"Combo2",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("14_0gysh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_vfarp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_y6uwr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_83xs0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_ypfnu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_xuaoq")
+}],
+"loop": 0,
+"name": &"Combo3",
+"speed": 5.0
+}]
 
 [node name="Player" type="CharacterBody2D" unique_id=481447577]
 z_index = 10
@@ -65,11 +133,9 @@ collision_mask = 6
 script = ExtResource("1_onrkg")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=396957255]
-position = Vector2(2, 0)
 shape = SubResource("RectangleShape2D_i5tie")
 
 [node name="PlayerSprite" type="AnimatedSprite2D" parent="." unique_id=1537809165]
-position = Vector2(0.5, 0.5)
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_xrrqc")
 animation = &"down"
@@ -85,9 +151,14 @@ collision_mask = 4
 position = Vector2(30, 0)
 shape = SubResource("RectangleShape2D_vikc2")
 
-[node name="Sprite2D" type="Sprite2D" parent="SwordPivot/Sword" unique_id=1233708772]
-position = Vector2(0, -5)
-scale = Vector2(60, 10)
-texture = SubResource("PlaceholderTexture2D_i5tie")
+[node name="SwordAnimation" type="AnimatedSprite2D" parent="SwordPivot/Sword" unique_id=1076756845]
+position = Vector2(20, 0)
+rotation = -3.1415927
+scale = Vector2(1.4921261, 1.344719)
+sprite_frames = SubResource("SpriteFrames_i5tie")
+animation = &"Combo2"
 
 [node name="Combo" type="Timer" parent="." unique_id=741614805]
+one_shot = true
+
+[connection signal="timeout" from="Combo" to="." method="_on_combo_timeout"]

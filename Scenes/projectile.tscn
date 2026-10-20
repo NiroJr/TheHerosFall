@@ -78,3 +78,8 @@ scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_m7t8w")
 animation = &"diagonal"
 frame_progress = 0.2842808
+
+[node name="Life" type="Timer" parent="." unique_id=872869785]
+one_shot = true
+
+[connection signal="timeout" from="Life" to="." method="_on_life_timeout"]

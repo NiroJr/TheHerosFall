@@ -39,12 +39,12 @@ position = Vector2(0.06614724, -0.5007647)
 texture = SubResource("PlaceholderTexture2D_vikc2")
 
 [node name="wallBottom" type="StaticBody2D" parent="." unique_id=1426162551]
-position = Vector2(27, 487)
+position = Vector2(22.000002, 356)
 scale = Vector2(-31.116547, 653.8203)
 collision_layer = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="wallBottom" unique_id=919635688]
-position = Vector2(-17.097013, -0.20800823)
+position = Vector2(-16.936327, -1.4901161e-08)
 scale = Vector2(0.999999, 1)
 shape = SubResource("RectangleShape2D_bo1nx")
 
