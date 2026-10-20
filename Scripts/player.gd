@@ -1,5 +1,8 @@
 extends CharacterBody2D
 
+@export var c1_a :float
+#@export var c2_a :float
+#@export var c3_a :float
 @onready var main = get_tree().get_root().get_node("Main")
 @onready var projectile = load("res://Scenes/projectile.tscn")
 var facing_angle := 0.0
@@ -13,7 +16,7 @@ var is_swinging := false;
 var swing_spread := deg_to_rad(20)
 
 func _ready() -> void:
-	$SwordPivot.visible = false
+	$SwordSwing.visible = false
 
 const Animations := [
 	"right",
@@ -70,45 +73,41 @@ func _physics_process(_delta: float) -> void:
 			return
 		is_swinging = true
 		$Combo.stop()
-		$SwordPivot.visible = true
+		$SwordSwing.visible = true
 		var side := 1 if(cos(facing_angle) >=0) else -1
 		match combo_step:
 			0:
-				$SwordPivot/Sword/SwordAnimation.flip_h = (side == 1)
-				$SwordPivot/Sword/SwordAnimation.flip_v = false
-				$SwordPivot.rotation = facing_angle-side*swing_spread
-				var swing_tween = create_tween()
-				swing_tween.tween_property($SwordPivot, "rotation", facing_angle+side*swing_spread, 0.15)
-				$SwordPivot/Sword/SwordAnimation.play("Combo1")
-				await swing_tween.finished
-				await $SwordPivot/Sword/SwordAnimation.animation_finished
+				$SwordSwing/Combo1.rotation = facing_angle+PI
+				$SwordSwing/Combo1/SwordAnimation.rotation += deg_to_rad(c1_a)
+				$SwordSwing/Combo1/SwordAnimation.flip_h = (side == 1)
+				$SwordSwing/Combo1.visible = true
+				$SwordSwing/Combo2.visible = false
+				$SwordSwing/Combo3.visible = false
+				$SwordSwing/Combo1/SwordAnimation.play("Combo1")
+				await $SwordSwing/Combo1/SwordAnimation.animation_finished
+				$SwordSwing/Combo1/SwordAnimation.rotation = deg_to_rad(c1_a)
 			1:
-				$SwordPivot.rotation = facing_angle+side*swing_spread
-				$SwordPivot/Sword/SwordAnimation.flip_h = true
-				$SwordPivot/Sword/SwordAnimation.rotation = deg_to_rad(180)
-				$SwordPivot/Sword/SwordAnimation.flip_v = (side==1)
-				var swing_tween = create_tween()
-				swing_tween.tween_property($SwordPivot, "rotation", facing_angle-side*swing_spread, 0.15)
-				$SwordPivot/Sword/SwordAnimation.play("Combo2")
-				await swing_tween.finished
-				await $SwordPivot/Sword/SwordAnimation.animation_finished
+				$SwordSwing/Combo2.rotation = facing_angle+PI
+				if(side == 1):
+					$SwordSwing/Combo2/SwordAnimation.flip_v = false
+					$SwordSwing/Combo2/SwordAnimation.offset.y = -15 
+				$SwordSwing/Combo1.visible = false
+				$SwordSwing/Combo2.visible = true
+				$SwordSwing/Combo3.visible = false
+				$SwordSwing/Combo2/SwordAnimation.play("Combo2")
+				await $SwordSwing/Combo2/SwordAnimation.animation_finished
+				$SwordSwing/Combo2/SwordAnimation.flip_v = true
+				$SwordSwing/Combo2/SwordAnimation.offset.y = 15
 			2:
-				$SwordPivot/Sword/SwordAnimation.flip_h = false
-				$SwordPivot/Sword/SwordAnimation.flip_v = false
-				$SwordPivot.rotation = facing_angle+side*swing_spread
-				$SwordPivot/Sword/SwordAnimation.rotation = deg_to_rad(-90) -side*swing_spread
-				var fix: float =  $SwordPivot/Sword/SwordAnimation.global_rotation
-				var swing_tween = create_tween()
-				swing_tween.tween_property($SwordPivot, "rotation", facing_angle-side*swing_spread, 0.15)
-				swing_tween.parallel().tween_property($SwordPivot/Sword/SwordAnimation, "global_rotation", fix, 0.15)
-				$SwordPivot/Sword/SwordAnimation.play("Combo3")
-				await swing_tween.finished
-				await $SwordPivot/Sword/SwordAnimation.animation_finished
+				$SwordSwing/Combo3.rotation = facing_angle+PI
+				$SwordSwing/Combo1.visible = false
+				$SwordSwing/Combo2.visible = false
+				$SwordSwing/Combo3.visible = true
+				$SwordSwing/Combo3/SwordAnimation.play("Combo3")
+				await $SwordSwing/Combo3/SwordAnimation.animation_finished
 		combo_step= (combo_step+1)%3
-		$SwordPivot.visible = false
-		$SwordPivot/Sword/SwordAnimation.stop()
-		await get_tree().create_timer(0.1).timeout
 		$Combo.start()
+		$SwordSwing.visible = false
 		is_swinging = false;
 		
 func _input(event):
