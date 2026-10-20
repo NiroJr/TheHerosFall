@@ -13,6 +13,12 @@ func _ready():
 	global_rotation = spawnRot
 	sprite.play("default");
 
-func _physics_process(_delta):
-	velocity = (Vector2.RIGHT * speed).rotated(dir)
-	move_and_slide()
+func _physics_process(delta):
+	velocity = Vector2.RIGHT.rotated(dir) * speed
+	var collision = move_and_collide(velocity * delta)
+	if collision:
+		dir = velocity.bounce(collision.get_normal()).angle()
+		global_rotation = dir
+
+func _on_life_timeout() -> void:
+	queue_free()

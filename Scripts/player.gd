@@ -61,12 +61,8 @@ func _physics_process(_delta: float) -> void:
 		$PlayerSprite.stop()
 		$PlayerSprite.frame = 0;
 		
-
 	move_and_slide()
 	
-	if Input.is_action_just_pressed("ui_accept"):
-		print("shoot called")
-		shoot()
 	if Input.is_action_just_pressed("sword_swing"):
 		if(is_swinging):
 			return
@@ -96,6 +92,9 @@ func _physics_process(_delta: float) -> void:
 		$SwordPivot.visible = false
 		is_swinging = false;
 		
+func _input(event):
+	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+		shoot()
 		
 func _on_combo_timeout() -> void:
 	combo_step = 0;
@@ -103,10 +102,8 @@ func _on_combo_timeout() -> void:
 		
 func shoot():
 	var instance = projectile.instantiate()
-	instance.scale.x = -1
-	instance.scale.y = -1
-	instance.dir = facing_angle
+	var angle = (get_global_mouse_position() - global_position).angle()
+	instance.dir = angle             
 	instance.spawnPos = global_position
-	instance.spawnRot = facing_angle
+	instance.spawnRot = angle        
 	main.add_child.call_deferred(instance)
-	print("spawned at ", global_position, " parent: ", get_tree().current_scene.name)
