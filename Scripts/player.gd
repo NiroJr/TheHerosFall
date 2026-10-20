@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 @export var c1_a :float
-#@export var c2_a :float
+@export var c2_a :float
 #@export var c3_a :float
 @onready var main = get_tree().get_root().get_node("Main")
 @onready var projectile = load("res://Scenes/projectile.tscn")
@@ -82,8 +82,6 @@ func sword_swing() ->void:
 		$SwordSwing.visible = true
 		$Combo.start()
 		var side := 1 if(cos(facing_angle) >=0) else -1
-		if(roundi(sin(facing_angle)) != 0):
-			$SwordSwing.scale = Vector2(1.75,1.75)
 		match combo_step:
 			0:
 				$SwordSwing/Combo1.rotation = facing_angle+PI
@@ -99,7 +97,10 @@ func sword_swing() ->void:
 				$SwordSwing/Combo2.rotation = facing_angle+PI
 				if(side == 1):
 					$SwordSwing/Combo2/SwordAnimation.flip_v = false
-					$SwordSwing/Combo2/SwordAnimation.offset.y = -15 
+					$SwordSwing/Combo2/SwordAnimation.offset.y = -15
+					$SwordSwing/Combo2/SwordAnimation.rotation -= deg_to_rad(c2_a)
+				elif (side ==-1):
+					$SwordSwing/Combo2/SwordAnimation.rotation += deg_to_rad(c2_a-45)
 				$SwordSwing/Combo1.visible = false
 				$SwordSwing/Combo2.visible = true
 				$SwordSwing/Combo3.visible = false
@@ -107,6 +108,7 @@ func sword_swing() ->void:
 				await $SwordSwing/Combo2/SwordAnimation.animation_finished
 				$SwordSwing/Combo2/SwordAnimation.flip_v = true
 				$SwordSwing/Combo2/SwordAnimation.offset.y = 15
+				$SwordSwing/Combo2/SwordAnimation.rotation = deg_to_rad(240)
 			2:
 				$SwordSwing/Combo3.rotation = facing_angle+PI
 				$SwordSwing/Combo1.visible = false
@@ -116,7 +118,6 @@ func sword_swing() ->void:
 				await $SwordSwing/Combo3/SwordAnimation.animation_finished
 		combo_step = (combo_step+1)%3
 		$SwordSwing.visible = false
-		$SwordSwing.scale = Vector2(1.25, 1.25)
 		if(buffered_swing):
 			continue
 		else:

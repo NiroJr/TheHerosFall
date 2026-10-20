@@ -83,12 +83,33 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": ExtResource("10_wpjfl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_bi64h")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_2ijsl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_p1odr")
 }],
 "loop": 0,
 "name": &"Combo1",
-"speed": 10.0
+"speed": 24.0
 }, {
 "frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_fs7ks")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_l6n3p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_olqyp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_wpjfl")
+}, {
 "duration": 1.0,
 "texture": ExtResource("11_bi64h")
 }, {
@@ -100,7 +121,7 @@ animations = [{
 }],
 "loop": 0,
 "name": &"Combo2",
-"speed": 9.0
+"speed": 24.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -133,6 +154,7 @@ collision_mask = 6
 motion_mode = 1
 script = ExtResource("1_onrkg")
 c1_a = 39.2
+c2_a = 120.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=396957255]
 shape = SubResource("RectangleShape2D_i5tie")
@@ -145,7 +167,7 @@ animation = &"down"
 [node name="SwordSwing" type="Node2D" parent="." unique_id=794402511]
 z_index = 10
 z_as_relative = false
-scale = Vector2(1.25, 1.25)
+scale = Vector2(2, 2)
 
 [node name="Combo1" type="Area2D" parent="SwordSwing" unique_id=1024733563]
 visible = false
@@ -161,24 +183,26 @@ shape = SubResource("CircleShape2D_fkwtr")
 rotation = 0.68416905
 scale = Vector2(1.4921261, 1.344719)
 sprite_frames = SubResource("SpriteFrames_i5tie")
-animation = &"Combo3"
+animation = &"Combo2"
 offset = Vector2(3, -8)
 
 [node name="Combo2" type="Area2D" parent="SwordSwing" unique_id=162041491]
-visible = false
 collision_layer = 8
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SwordSwing/Combo2" unique_id=1608376536]
-position = Vector2(-13, 0)
+visible = false
+position = Vector2(-12.999999, 0)
+scale = Vector2(0.99999994, 0.99999994)
 shape = SubResource("CircleShape2D_fkwtr")
 
 [node name="SwordAnimation" type="AnimatedSprite2D" parent="SwordSwing/Combo2" unique_id=1949784242]
-rotation = 3.1415927
+rotation = 4.199262
 scale = Vector2(1.4921261, 1.344719)
 sprite_frames = SubResource("SpriteFrames_i5tie")
 animation = &"Combo2"
-offset = Vector2(-3, 15)
+frame = 6
+frame_progress = 1.0
 flip_v = true
 
 [node name="Combo3" type="Area2D" parent="SwordSwing" unique_id=44817697]
