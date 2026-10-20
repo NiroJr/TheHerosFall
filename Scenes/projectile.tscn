@@ -79,7 +79,8 @@ sprite_frames = SubResource("SpriteFrames_m7t8w")
 animation = &"diagonal"
 frame_progress = 0.2842808
 
-[node name="Life" type="Timer" parent="." unique_id=872869785]
-one_shot = true
+[node name="Life" type="Timer" parent="." unique_id=1925367326]
+wait_time = 3.0
+autostart = true
 
 [connection signal="timeout" from="Life" to="." method="_on_life_timeout"]

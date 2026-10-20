@@ -61,7 +61,6 @@ func _physics_process(_delta: float) -> void:
 		$PlayerSprite.stop()
 		$PlayerSprite.frame = 0;
 		
-
 	move_and_slide()
 	
 	if Input.is_action_just_pressed("Shoot"):
@@ -112,6 +111,9 @@ func _physics_process(_delta: float) -> void:
 		$Combo.start()
 		is_swinging = false;
 		
+func _input(event):
+	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+		shoot()
 		
 func _on_combo_timeout() -> void:
 	combo_step = 0;
@@ -119,7 +121,7 @@ func _on_combo_timeout() -> void:
 func shoot():
 	var instance = projectile.instantiate()
 	var angle = (get_global_mouse_position() - global_position).angle()
-	instance.dir = angle
+	instance.dir = angle             
 	instance.spawnPos = global_position
-	instance.spawnRot = angle
+	instance.spawnRot = angle        
 	main.add_child.call_deferred(instance)

@@ -12,7 +12,6 @@ func _ready():
 	global_position = spawnPos
 	global_rotation = spawnRot
 	sprite.play("default");
-	$Life.start()
 
 func _physics_process(delta):
 	velocity = Vector2.RIGHT.rotated(dir) * speed
@@ -23,4 +22,3 @@ func _physics_process(delta):
 
 func _on_life_timeout() -> void:
 	queue_free()
-	$Life.stop()
