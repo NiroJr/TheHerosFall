@@ -161,4 +161,6 @@ animation = &"Combo2"
 [node name="Combo" type="Timer" parent="." unique_id=741614805]
 one_shot = true
 
+[node name="Camera2D" type="Camera2D" parent="." unique_id=931367381]
+
 [connection signal="timeout" from="Combo" to="." method="_on_combo_timeout"]

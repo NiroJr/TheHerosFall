@@ -3,17 +3,6 @@
 [ext_resource type="PackedScene" uid="uid://couagsdjv4j23" path="res://Scenes/ground.tscn" id="1_bo1nx"]
 [ext_resource type="PackedScene" uid="uid://ixg8ghykh70r" path="res://Scenes/player.tscn" id="1_jjgbg"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_vikc2"]
-size = Vector2(1.2935246, 0.9819212)
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_vikc2"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_bo1nx"]
-size = Vector2(35.8652, 0.058119774)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_jjgbg"]
-size = Vector2(1.397971, 0.9819212)
-
 [node name="Main" type="Node2D" unique_id=1706061838]
 
 [node name="Ground" parent="." unique_id=1104582814 instance=ExtResource("1_bo1nx")]
@@ -22,50 +11,3 @@ tile_map_data = PackedByteArray("AAD8//T/AAABAAEAAAD8//X/AAABAAIAAAD8//b/AAABAAI
 
 [node name="Player" parent="." unique_id=481447577 instance=ExtResource("1_jjgbg")]
 position = Vector2(230, 209)
-
-[node name="wallLeft" type="StaticBody2D" parent="." unique_id=942738518]
-position = Vector2(16.058273, 326.41016)
-scale = Vector2(-31.116547, 653.8203)
-collision_layer = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="wallLeft" unique_id=1778432790]
-position = Vector2(0.005889952, -0.0052157342)
-scale = Vector2(0.99999946, 1)
-shape = SubResource("RectangleShape2D_vikc2")
-
-[node name="Sprite2D" type="Sprite2D" parent="wallLeft" unique_id=994959771]
-visible = false
-position = Vector2(0.06614724, -0.5007647)
-texture = SubResource("PlaceholderTexture2D_vikc2")
-
-[node name="wallBottom" type="StaticBody2D" parent="." unique_id=1426162551]
-position = Vector2(22.000002, 356)
-scale = Vector2(-31.116547, 653.8203)
-collision_layer = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="wallBottom" unique_id=919635688]
-position = Vector2(-16.936327, -1.4901161e-08)
-scale = Vector2(0.999999, 1)
-shape = SubResource("RectangleShape2D_bo1nx")
-
-[node name="Sprite2D" type="Sprite2D" parent="wallBottom" unique_id=392816331]
-visible = false
-position = Vector2(-29.501991, -0.022574998)
-scale = Vector2(35.635284, -0.25070527)
-texture = SubResource("PlaceholderTexture2D_vikc2")
-
-[node name="wallRight" type="StaticBody2D" parent="." unique_id=1595424041]
-position = Vector2(1154.0001, 315)
-scale = Vector2(-31.116547, 653.8203)
-collision_layer = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="wallRight" unique_id=268147564]
-position = Vector2(16.679235, -0.4511943)
-scale = Vector2(0.99999946, 1)
-shape = SubResource("RectangleShape2D_jjgbg")
-
-[node name="Sprite2D" type="Sprite2D" parent="wallRight" unique_id=1753660120]
-visible = false
-position = Vector2(15.811526, -0.54755104)
-scale = Vector2(1.3788834, 1)
-texture = SubResource("PlaceholderTexture2D_vikc2")
