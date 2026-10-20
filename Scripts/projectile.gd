@@ -10,7 +10,7 @@ var spawnRot : float
 
 func _ready():
 	global_position = spawnPos
-	global_rotation = spawnRot
+	global_rotation = spawnRot + PI
 	sprite.play("default");
 
 func _physics_process(delta):
@@ -18,7 +18,7 @@ func _physics_process(delta):
 	var collision = move_and_collide(velocity * delta)
 	if collision:
 		dir = velocity.bounce(collision.get_normal()).angle()
-		global_rotation = dir
+		global_rotation = dir + PI
 
 func _on_life_timeout() -> void:
 	queue_free()
