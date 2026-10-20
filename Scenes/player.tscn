@@ -130,6 +130,7 @@ animations = [{
 z_index = 10
 z_as_relative = false
 collision_mask = 6
+motion_mode = 1
 script = ExtResource("1_onrkg")
 c1_a = 39.2
 
@@ -147,6 +148,7 @@ z_as_relative = false
 scale = Vector2(1.25, 1.25)
 
 [node name="Combo1" type="Area2D" parent="SwordSwing" unique_id=1024733563]
+visible = false
 collision_layer = 8
 collision_mask = 4
 

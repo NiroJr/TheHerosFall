@@ -18,6 +18,7 @@ var buffered_swing := false;
 
 func _ready() -> void:
 	$SwordSwing.visible = false
+	add_to_group("player")
 
 const Animations := [
 	"right",

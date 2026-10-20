@@ -1,6 +1,9 @@
 [gd_scene format=3 uid="uid://couagsdjv4j23"]
 
 [ext_resource type="Texture2D" uid="uid://nesi60sbkqon" path="res://Assets/TerrainSprites/GrassGroundTiles1.png" id="1_688p1"]
+[ext_resource type="Texture2D" uid="uid://bwf1okise5hey" path="res://Assets/TerrainSprites/GrassGroundTiles17.png" id="2_s6h8e"]
+[ext_resource type="Texture2D" uid="uid://ckrifxs5fmn28" path="res://Assets/TerrainSprites/GrassGroundTiles18.png" id="3_kv0ry"]
+[ext_resource type="Texture2D" uid="uid://cwaobivjwixts" path="res://Assets/TerrainSprites/GrassGroundTiles19.png" id="4_ribny"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_oltiy"]
 texture = ExtResource("1_688p1")
@@ -28,9 +31,24 @@ texture = ExtResource("1_688p1")
 3:2/0 = 0
 3:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(8, -8, 8, 8, 4.9421577, 8, 4.839287, -8)
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rjkga"]
+texture = ExtResource("2_s6h8e")
+2:4/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_s6h8e"]
+texture = ExtResource("3_kv0ry")
+1:4/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_kv0ry"]
+texture = ExtResource("4_ribny")
+3:4/0 = 0
+
 [sub_resource type="TileSet" id="TileSet_it0lf"]
 physics_layer_0/collision_layer = 255
 sources/0 = SubResource("TileSetAtlasSource_oltiy")
+sources/5 = SubResource("TileSetAtlasSource_rjkga")
+sources/8 = SubResource("TileSetAtlasSource_s6h8e")
+sources/9 = SubResource("TileSetAtlasSource_kv0ry")
 
 [node name="Ground" type="TileMapLayer" unique_id=1104582814]
 tile_set = SubResource("TileSet_it0lf")
