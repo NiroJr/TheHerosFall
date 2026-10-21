@@ -45,6 +45,8 @@ func _physics_process(_delta: float) -> void:
 		velocity.y = vDirection * SPEED
 	else:
 		velocity.y = move_toward(velocity.y, 0, SPEED)
+		
+	velocity = velocity.normalized() * SPEED
 	#Rotates the player body and facing direction for projectile during movement
 	if(velocity != Vector2.ZERO):
 		facing_angle = velocity.angle()
