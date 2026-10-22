@@ -3,7 +3,7 @@ extends CharacterBody2D
 @export var c1_a :float
 @export var c2_a :float
 #@export var c3_a :float
-@onready var main = get_tree().get_root().get_node("Main")
+@onready var main = get_tree().current_scene
 @onready var projectile = load("res://Scenes/projectile.tscn")
 var facing_angle := 0.0
 const SPEED = 300.0
