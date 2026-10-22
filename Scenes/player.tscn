@@ -20,6 +20,9 @@
 [ext_resource type="Texture2D" uid="uid://c1os5dfj0jy05" path="res://Assets/MCSprites/attackSprites/fireAttack12.png" id="18_ypfnu"]
 [ext_resource type="Texture2D" uid="uid://c52l7eh5v3une" path="res://Assets/MCSprites/attackSprites/fireAttack13.png" id="19_xuaoq"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_it0lf"]
+size = Vector2(32.25, 17.75)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i5tie"]
 size = Vector2(32, 17)
 
@@ -147,6 +150,9 @@ animations = [{
 "speed": 18.0
 }]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8gbba"]
+bg_color = Color(1, 0, 0, 1)
+
 [node name="Player" type="CharacterBody2D" unique_id=481447577]
 z_index = 10
 z_as_relative = false
@@ -155,6 +161,14 @@ motion_mode = 1
 script = ExtResource("1_onrkg")
 c1_a = 39.2
 c2_a = 120.0
+
+[node name="HitBox" type="Area2D" parent="." unique_id=1825929533 groups=["PlayerHitBox"]]
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=565094471]
+position = Vector2(0.125, 23.125)
+shape = SubResource("RectangleShape2D_it0lf")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=396957255]
 position = Vector2(0, 22.5)
@@ -170,7 +184,7 @@ z_index = 10
 z_as_relative = false
 scale = Vector2(2, 2)
 
-[node name="Combo1" type="Area2D" parent="SwordSwing" unique_id=1024733563]
+[node name="Combo1" type="Area2D" parent="SwordSwing" unique_id=1024733563 groups=["Combo1"]]
 visible = false
 collision_layer = 8
 collision_mask = 4
@@ -187,7 +201,8 @@ sprite_frames = SubResource("SpriteFrames_i5tie")
 animation = &"Combo2"
 offset = Vector2(3, -8)
 
-[node name="Combo2" type="Area2D" parent="SwordSwing" unique_id=162041491]
+[node name="Combo2" type="Area2D" parent="SwordSwing" unique_id=162041491 groups=["Combo2"]]
+visible = false
 collision_layer = 8
 collision_mask = 4
 
@@ -201,12 +216,10 @@ shape = SubResource("CircleShape2D_fkwtr")
 rotation = 4.199262
 scale = Vector2(1.4921261, 1.344719)
 sprite_frames = SubResource("SpriteFrames_i5tie")
-animation = &"Combo2"
-frame = 6
-frame_progress = 1.0
+animation = &"Combo1"
 flip_v = true
 
-[node name="Combo3" type="Area2D" parent="SwordSwing" unique_id=44817697]
+[node name="Combo3" type="Area2D" parent="SwordSwing" unique_id=44817697 groups=["Combo3"]]
 visible = false
 collision_layer = 8
 collision_mask = 4
@@ -227,5 +240,13 @@ offset = Vector2(0, -5)
 ignore_time_scale = true
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=931367381]
+
+[node name="HealthBar" type="ProgressBar" parent="." unique_id=2122394639]
+offset_left = -316.0
+offset_top = -176.0
+offset_right = -203.0
+offset_bottom = -156.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_8gbba")
+show_percentage = false
 
 [connection signal="timeout" from="Combo" to="." method="_on_combo_timeout"]

@@ -15,10 +15,18 @@ var combo_step := 0;
 var is_swinging := false;
 var buffered_swing := false;
 
+var health := 100
+@onready var health_bar : ProgressBar = $HealthBar
+
+var enemies_hit: Array[Node] = []
 
 func _ready() -> void:
 	$SwordSwing.visible = false
 	add_to_group("player")
+	health_bar.value = health
+	$SwordSwing/Combo1/CollisionShape2D.set_deferred("disabled", true)
+	$SwordSwing/Combo2/CollisionShape2D.set_deferred("disabled", true)
+	$SwordSwing/Combo3/CollisionShape2D.set_deferred("disabled", true)
 
 const Animations := [
 	"right",
@@ -77,6 +85,7 @@ func _physics_process(_delta: float) -> void:
 		else:
 			sword_swing()
 func sword_swing() ->void:
+	
 	is_swinging = true
 	while true:
 		buffered_swing = false	
@@ -92,8 +101,10 @@ func sword_swing() ->void:
 				$SwordSwing/Combo1.visible = true
 				$SwordSwing/Combo2.visible = false
 				$SwordSwing/Combo3.visible = false
+				$SwordSwing/Combo1/CollisionShape2D.set_deferred("disabled", false)
 				$SwordSwing/Combo1/SwordAnimation.play("Combo1")
 				await $SwordSwing/Combo1/SwordAnimation.animation_finished
+				$SwordSwing/Combo1/CollisionShape2D.set_deferred("disabled", true)
 				$SwordSwing/Combo1/SwordAnimation.rotation = deg_to_rad(c1_a)
 			1:
 				$SwordSwing/Combo2.rotation = facing_angle+PI
@@ -106,8 +117,10 @@ func sword_swing() ->void:
 				$SwordSwing/Combo1.visible = false
 				$SwordSwing/Combo2.visible = true
 				$SwordSwing/Combo3.visible = false
+				$SwordSwing/Combo2/CollisionShape2D.set_deferred("disabled", false)
 				$SwordSwing/Combo2/SwordAnimation.play("Combo2")
 				await $SwordSwing/Combo2/SwordAnimation.animation_finished
+				$SwordSwing/Combo2/CollisionShape2D.set_deferred("disabled", true)
 				$SwordSwing/Combo2/SwordAnimation.flip_v = true
 				$SwordSwing/Combo2/SwordAnimation.offset.y = 15
 				$SwordSwing/Combo2/SwordAnimation.rotation = deg_to_rad(240)
@@ -116,8 +129,10 @@ func sword_swing() ->void:
 				$SwordSwing/Combo1.visible = false
 				$SwordSwing/Combo2.visible = false
 				$SwordSwing/Combo3.visible = true
+				$SwordSwing/Combo3/CollisionShape2D.set_deferred("disabled", false)
 				$SwordSwing/Combo3/SwordAnimation.play("Combo3")
 				await $SwordSwing/Combo3/SwordAnimation.animation_finished
+				$SwordSwing/Combo3/CollisionShape2D.set_deferred("disabled", true)
 		combo_step = (combo_step+1)%3
 		$SwordSwing.visible = false
 		if(buffered_swing):
@@ -125,6 +140,7 @@ func sword_swing() ->void:
 		else:
 			break
 	is_swinging = false;
+	enemies_hit.clear()
 func _input(event):
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 		shoot()
@@ -140,3 +156,7 @@ func shoot():
 	instance.spawnPos = global_position
 	instance.spawnRot = angle        
 	main.add_child.call_deferred(instance)
+	
+func take_damage(amount: int):
+	health = clampi(health - amount, 0, 100)
+	health_bar.value = health
