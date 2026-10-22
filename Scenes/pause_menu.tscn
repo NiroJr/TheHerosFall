@@ -1,0 +1,48 @@
+[gd_scene format=3 uid="uid://dbo51ckeahp7d"]
+
+[ext_resource type="Script" uid="uid://b0ekh1t45px4p" path="res://pause_menu.gd" id="1_emv3i"]
+
+[node name="PauseMenu" type="Control" unique_id=1151853713]
+process_mode = 3
+z_index = 10
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_emv3i")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=479299684]
+visible = false
+layout_mode = 0
+offset_right = 426.0
+offset_bottom = 275.0
+
+[node name="Panel" type="Panel" parent="." unique_id=129143286]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Panel" unique_id=1004259212]
+layout_mode = 0
+offset_left = 224.0
+offset_top = 42.0
+offset_right = 400.0
+offset_bottom = 111.0
+theme_override_font_sizes/font_size = 50
+text = "Paused"
+
+[node name="Button" type="Button" parent="Panel" unique_id=1066935477]
+layout_mode = 0
+offset_left = 229.0
+offset_top = 191.0
+offset_right = 383.0
+offset_bottom = 234.0
+theme_override_font_sizes/font_size = 25
+text = "Resume"
+
+[connection signal="pressed" from="Panel/Button" to="." method="_on_button_pressed"]
