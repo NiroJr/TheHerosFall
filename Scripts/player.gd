@@ -114,6 +114,8 @@ func _physics_process(_delta: float) -> void:
 			buffered_swing = true;
 		else:
 			sword_swing()
+			
+"""
 func sword_swing() ->void:
 	
 	is_swinging = true
@@ -172,6 +174,42 @@ func sword_swing() ->void:
 		else:
 			break
 	is_swinging = false;
+"""
+func sword_swing() -> void:
+	is_swinging = true
+	while true:
+		buffered_swing = false
+		$Combo.stop()
+		$SwordSwing.visible = true
+		$Combo.start()
+
+		# Steps 0 and 1 both use Combo1 (step 1 is mirrored), step 2 uses Combo3
+		var use_combo1 := (combo_step == 0 or combo_step == 1)
+		var combo_node: Node2D = $SwordSwing/Combo1 if use_combo1 else $SwordSwing/Combo3
+		var anim_name := "Combo1" if use_combo1 else "Combo3"
+
+		$SwordSwing/Combo1.visible = use_combo1
+		$SwordSwing/Combo3.visible = not use_combo1
+
+		combo_node.rotation = facing_angle - PI/2
+		# Mirror on the second hit, reset on the others
+		combo_node.scale.x = -1 if combo_step == 1 else 1
+
+		var shape: CollisionShape2D = combo_node.get_node("CollisionShape2D")
+		var anim: AnimatedSprite2D = combo_node.get_node("SwordAnimation")
+
+		shape.set_deferred("disabled", false)
+		anim.play(anim_name)
+		await anim.animation_finished
+		shape.set_deferred("disabled", true)
+
+		combo_step = (combo_step + 1) % 3
+		$SwordSwing.visible = false
+		if buffered_swing:
+			continue
+		else:
+			break
+	is_swinging = false
 	enemies_hit.clear()
 
 func _on_combo_timeout() -> void:

@@ -184,19 +184,18 @@ animation = &"down"
 [node name="SwordSwing" type="Node2D" parent="." unique_id=794402511]
 z_index = 10
 z_as_relative = false
-scale = Vector2(1.5, 1.5)
+scale = Vector2(2, 2)
 
 [node name="Combo1" type="Area2D" parent="SwordSwing" unique_id=1024733563 groups=["Combo1"]]
 collision_layer = 8
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SwordSwing/Combo1" unique_id=1225933086]
-position = Vector2(-13, 0)
+position = Vector2(0, 15)
 rotation = 1.5707964
 shape = SubResource("CircleShape2D_fkwtr")
 
 [node name="SwordAnimation" type="AnimatedSprite2D" parent="SwordSwing/Combo1" unique_id=1568799830]
-scale = Vector2(1.4921261, 1.344719)
 sprite_frames = SubResource("SpriteFrames_i5tie")
 animation = &"Combo1"
 offset = Vector2(3, -8)
@@ -207,29 +206,26 @@ collision_layer = 8
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SwordSwing/Combo2" unique_id=1608376536]
-position = Vector2(-12.999999, 0)
+visible = false
+position = Vector2(0, 20)
 scale = Vector2(0.99999994, 0.99999994)
 shape = SubResource("CircleShape2D_fkwtr")
 
 [node name="SwordAnimation" type="AnimatedSprite2D" parent="SwordSwing/Combo2" unique_id=1949784242]
-rotation = 4.199262
-scale = Vector2(1.4921261, 1.344719)
+visible = false
 sprite_frames = SubResource("SpriteFrames_i5tie")
 animation = &"Combo1"
 flip_v = true
 
 [node name="Combo3" type="Area2D" parent="SwordSwing" unique_id=44817697 groups=["Combo3"]]
-visible = false
 collision_layer = 8
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SwordSwing/Combo3" unique_id=1835157658]
-position = Vector2(-13, 0)
+position = Vector2(0, 15)
 shape = SubResource("CircleShape2D_fkwtr")
 
 [node name="SwordAnimation" type="AnimatedSprite2D" parent="SwordSwing/Combo3" unique_id=867388474]
-rotation = 1.5707964
-scale = Vector2(1.4921261, 1.344719)
 sprite_frames = SubResource("SpriteFrames_i5tie")
 animation = &"Combo3"
 frame = 2
