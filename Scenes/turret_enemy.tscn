@@ -71,7 +71,7 @@ script = ExtResource("1_et2mp")
 scale = Vector2(1.3928571, 1.2053567)
 sprite_frames = SubResource("SpriteFrames_i5tie")
 animation = &"up_right"
-frame_progress = 0.59771776
+frame_progress = 0.9700982
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=599427503]
 position = Vector2(4.7683716e-07, -0.49999985)
@@ -79,15 +79,15 @@ scale = Vector2(0.99999976, 0.99999976)
 shape = SubResource("RectangleShape2D_i5tie")
 
 [node name="PlayerDetection" type="Area2D" parent="." unique_id=462406931]
-visible = false
+scale = Vector2(1.5, 1.5)
 collision_layer = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetection" unique_id=668590451]
-scale = Vector2(3.5, 3.5)
+scale = Vector2(6, 6)
 shape = SubResource("CircleShape2D_vikc2")
 
 [node name="RayCast2D" type="RayCast2D" parent="PlayerDetection" unique_id=1269816521 groups=["Enemy"]]
-target_position = Vector2(46, 0)
+target_position = Vector2(78, 0)
 collision_mask = 7
 collide_with_areas = true
 collide_with_bodies = false

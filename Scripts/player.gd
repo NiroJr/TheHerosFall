@@ -13,9 +13,9 @@ var sprite_index := 0;
 var combo_step := 0;
 var is_swinging := false;
 var buffered_swing := false;
-var attack_dash_dist := 40
+var is_dashing := false;
+var attack_dash_dist := 20
 var attack_dash_dur := 0.2
-var dash_timer := 0.0
 var dash_dir = Vector2(0,0)
 
 var health := 100
@@ -72,17 +72,22 @@ func _physics_process(_delta: float) -> void:
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var hDirection := Input.get_axis("Left", "Right")
 	var vDirection := Input.get_axis("Up", "Down")
+	if Input.is_action_just_pressed("Dash"):
+		if(!is_dashing):
+			_dash(80, 0.15);
+	if(is_dashing):
+		velocity = dash_dir*(attack_dash_dist/attack_dash_dur)
+	else:
+		if hDirection:
+			velocity.x = hDirection * SPEED
+		else:
+			velocity.x = move_toward(velocity.x, 0, SPEED)
+		if vDirection:
+			velocity.y = vDirection * SPEED
+		else:
+			velocity.y = move_toward(velocity.y, 0, SPEED)
 	
-	if hDirection:
-		velocity.x = hDirection * SPEED
-	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-	if vDirection:
-		velocity.y = vDirection * SPEED
-	else:
-		velocity.y = move_toward(velocity.y, 0, SPEED)
-		
-	velocity = velocity.normalized() * SPEED
+		velocity = velocity.normalized() * SPEED
 	#Rotates the player body and facing direction for projectile during movement
 	if(velocity != Vector2.ZERO):
 		facing_angle = velocity.angle()
@@ -102,9 +107,6 @@ func _physics_process(_delta: float) -> void:
 	else: 
 		$PlayerSprite.stop()
 		$PlayerSprite.frame = 0;
-	if dash_timer > 0.0:
-		velocity = dash_dir * (attack_dash_dist / attack_dash_dur)
-		dash_timer -= _delta
 	move_with_elevation(_delta)
 	
 	if Input.is_action_just_pressed("Shoot"):
@@ -115,6 +117,14 @@ func _physics_process(_delta: float) -> void:
 		else:
 			sword_swing()
 			
+func _dash(dist: int, speed: float)-> void:
+	is_dashing = true
+	dash_dir = Vector2.RIGHT.rotated(facing_angle)
+	attack_dash_dist = dist
+	attack_dash_dur = speed
+	await get_tree().create_timer(speed).timeout
+	is_dashing = false
+	
 func sword_swing() -> void:
 	is_swinging = true
 	while true:
@@ -140,8 +150,7 @@ func sword_swing() -> void:
 
 		shape.set_deferred("disabled", false)
 		anim.play(anim_name)
-		dash_dir = Vector2.RIGHT.rotated(facing_angle)
-		dash_timer = attack_dash_dur
+		_dash(40, 0.2)
 		await anim.animation_finished
 		shape.set_deferred("disabled", true)
 
@@ -167,6 +176,8 @@ func shoot():
 	main.add_child.call_deferred(instance)
 	
 func take_damage(amount: int):
+	if(is_dashing):
+		return
 	health = clampi(health - amount, 0, 100)
 	health_bar.value = health
 	

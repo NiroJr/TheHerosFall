@@ -1,34 +1,58 @@
 [gd_scene format=3 uid="uid://bwmfdn52i4svu"]
 
 [ext_resource type="Script" uid="uid://baql77nsqgh5f" path="res://Scripts/basic_enemy.gd" id="1_fecjr"]
-[ext_resource type="Texture2D" uid="uid://dmh2ey3aw70mi" path="res://Assets/icon.svg" id="2_lal1l"]
+[ext_resource type="Texture2D" uid="uid://d4fe7ijm2twut" path="res://Assets/EnemySprites/MovingEnemy/SpinningSawEnemy1.png" id="2_6kac6"]
+[ext_resource type="Texture2D" uid="uid://cowf82id2ec13" path="res://Assets/EnemySprites/MovingEnemy/SpinningSawEnemy2.png" id="3_6cefa"]
+[ext_resource type="Texture2D" uid="uid://darg7jr8cw41y" path="res://Assets/EnemySprites/MovingEnemy/SpinningSawEnemy3.png" id="4_6pvwk"]
+[ext_resource type="Texture2D" uid="uid://poyuwxiwy0re" path="res://Assets/EnemySprites/MovingEnemy/SpinningSawEnemy4.png" id="5_dhrsy"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_68yga"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_6kac6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_6cefa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_6pvwk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_dhrsy")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xrik0"]
-size = Vector2(44.5, 44)
+size = Vector2(18.125, 14)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fecjr"]
 bg_color = Color(1, 0, 0, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_it0lf"]
-size = Vector2(60, 60)
+size = Vector2(24, 18)
 
 [node name="basicEnemy" type="CharacterBody2D" unique_id=42976722]
+collision_mask = 2
 motion_mode = 1
 script = ExtResource("1_fecjr")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1554719048]
-position = Vector2(9.536743e-07, 9.536743e-07)
-scale = Vector2(0.34374997, 0.34374997)
-texture = ExtResource("2_lal1l")
+[node name="Sprite2D" type="AnimatedSprite2D" parent="." unique_id=417532793]
+position = Vector2(-1.4305115e-06, -1.4305115e-06)
+scale = Vector2(0.76562494, 0.76562494)
+sprite_frames = SubResource("SpriteFrames_68yga")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=399873067]
 shape = SubResource("RectangleShape2D_xrik0")
 
 [node name="HealthBar" type="ProgressBar" parent="." unique_id=1558368081]
-offset_left = -26.0
-offset_top = -34.0
-offset_right = 26.0
-offset_bottom = -26.0
+offset_left = -12.0
+offset_top = -16.0
+offset_right = 12.0
+offset_bottom = -10.0
 theme_override_styles/fill = SubResource("StyleBoxFlat_fecjr")
 show_percentage = false
 
