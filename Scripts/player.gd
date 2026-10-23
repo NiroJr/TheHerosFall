@@ -19,16 +19,20 @@ var health := 100
 
 var enemies_hit: Array[Node] = []
 const TILE := 16.0
-const JUMP_SPEED := 180.0
+const STEP_UP_SPEED := 160.0
 const GRAVITY := 800.0
 const FEET := Vector2(0, 28) #feet relative to player
 const FOOT_SIZE := Vector2(6, 3) #feet radius
 const FALL_LIMIT := -160.0 #void detection
+const CAN_FALL_INTO_VOID := false
+const STEP_UP_PUSH := 8.0
 
+enum { WALK, STEP_UP, FALL }  
+var state := WALK
 var elevation := 0
 var z_height := 0.0
 var z_velocity := 0.0
-var in_air := false
+var push_left := Vector2.ZERO
 var floors: Node = null
 var spawn_position := Vector2.ZERO
 var spawn_elevation := 0
@@ -182,28 +186,38 @@ func take_damage(amount: int):
 	health_bar.value = health
 	
 func move_with_elevation(delta: float) -> void:
-	_update_jump(delta)
 	if floors == null:
 		move_and_slide()
-		_update_visuals()
 		return
-	var step := velocity * delta
-	if not _can_move(Vector2(step.x, 0)):
-		velocity.x = 0
-	if not _can_move(Vector2(0, step.y)):
-		velocity.y = 0
-	move_and_slide()
-	_update_floor()
+	match state:
+		WALK:
+			var step := velocity * delta
+			if not _can_move(Vector2(step.x, 0)):
+				velocity.x = 0
+			if not _can_move(Vector2(0, step.y)):
+				velocity.y = 0
+			move_and_slide()
+			_check_level_change()
+		STEP_UP:
+			z_height = move_toward(z_height, 0.0, STEP_UP_SPEED * delta)
+			if push_left != Vector2.ZERO:
+				var move := push_left.limit_length(STEP_UP_SPEED * STEP_UP_PUSH / TILE * delta)
+				if _ground_level(_feet_world() + move + move.sign() * FOOT_SIZE) == elevation:
+					move_and_collide(move)
+					push_left -= move
+				else:
+					push_left = Vector2.ZERO
+			if z_height == 0.0 and push_left == Vector2.ZERO:
+				state = WALK
+		FALL:
+			z_velocity -= GRAVITY * delta
+			z_height += z_velocity * delta
+			if _ground_level(_feet_world()) >= 0:
+				if z_height <= 0.0:
+					_land()
+			elif z_height < FALL_LIMIT:
+				_respawn()
 	_update_visuals()
-func _update_jump(delta: float) -> void:
-	if not in_air and Input.is_action_just_pressed("Jump"):
-		in_air = true
-		z_velocity = JUMP_SPEED
-	if in_air:
-		z_velocity -= GRAVITY * delta
-		z_height += z_velocity * delta
-		if floors == null and z_height <= 0:
-			_land()
 
 func _feet_world() -> Vector2:
 	return global_position + FEET + Vector2(0, elevation * TILE)
@@ -231,33 +245,36 @@ func _can_move(step: Vector2) -> bool:
 		return true
 	var probe := _feet_world() + step + step.sign() * FOOT_SIZE
 	var ground := _ground_level(probe)
-	if not in_air:
-		return ground == elevation
-	return ground * TILE <= elevation * TILE + z_height
-	
-func _update_floor() -> void:
-	var ground := _ground_level(_feet_world())
-	if not in_air and ground != elevation:
-		in_air = true
-	if not in_air:
-		return
-	if ground >= 0 and ground != elevation:
-		var total := elevation * TILE + z_height
-		var shift := (ground - elevation) * TILE
-		global_position.y -= shift
-		$Camera2D.position.y += shift
-		elevation = ground
-		z_height = total - elevation * TILE
-		_update_sort()
-	if ground >= 0 and z_height <= 0:
-		_land()
-	elif ground < 0 and z_height < FALL_LIMIT:
-		_respawn()
+	if ground < 0:
+		return CAN_FALL_INTO_VOID
+	return ground <= elevation + 1
 
+
+func _check_level_change() -> void:
+	var ground := _ground_level(_feet_world())
+	if ground == elevation:
+		return
+	if ground < 0:
+		state = FALL
+		z_velocity = 0.0
+		return
+	var shift := (ground - elevation) * TILE
+	global_position.y -= shift
+	$Camera2D.position.y += shift
+	z_height = -shift
+	elevation = ground
+	_update_sort()
+	z_velocity = 0.0
+	if shift > 0:
+		state = STEP_UP
+		push_left = velocity.normalized() * STEP_UP_PUSH
+	else:
+		state = FALL
+	
 func _land() -> void:
 	z_height = 0.0
 	z_velocity = 0.0
-	in_air = false
+	state = WALK
 
 
 func _respawn() -> void:
@@ -279,4 +296,7 @@ func _update_sort() -> void:
 		return
 	for h in range(1, floors.get_child_count()):
 		var layer := floors.get_child(h) as TileMapLayer
-		layer.y_sort_origin = int(TILE * (h - elevation) - TILE / 2 - FEET.y)
+		if h <= elevation:
+			layer.y_sort_origin = (h - elevation - 1) * 100000
+		else:
+			layer.y_sort_origin = int(TILE * (h - elevation) - TILE / 2 - FEET.y)
