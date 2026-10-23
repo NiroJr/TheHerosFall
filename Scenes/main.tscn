@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://couagsdjv4j23" path="res://Scenes/ground.tscn" id="1_bo1nx"]
 [ext_resource type="PackedScene" uid="uid://ixg8ghykh70r" path="res://Scenes/player.tscn" id="1_jjgbg"]
 [ext_resource type="PackedScene" uid="uid://bwmfdn52i4svu" path="res://Scenes/basic_enemy.tscn" id="3_8gbba"]
+[ext_resource type="PackedScene" uid="uid://bm4o0xwai1isc" path="res://Scenes/turret_enemy.tscn" id="4_jjvhh"]
 
 [node name="Main" type="Node2D" unique_id=1706061838]
 
@@ -15,3 +16,7 @@ position = Vector2(230, 209)
 
 [node name="basicEnemy" parent="." unique_id=42976722 instance=ExtResource("3_8gbba")]
 position = Vector2(412, 153)
+
+[node name="TurretEnemy" parent="." unique_id=320407485 instance=ExtResource("4_jjvhh")]
+position = Vector2(567, 279)
+scale = Vector2(0.5, 0.5)
