@@ -13,6 +13,10 @@ var sprite_index := 0;
 var combo_step := 0;
 var is_swinging := false;
 var buffered_swing := false;
+var attack_dash_dist := 40
+var attack_dash_dur := 0.2
+var dash_timer := 0.0
+var dash_dir = Vector2(0,0)
 
 var health := 100
 @onready var health_bar : ProgressBar = $HUD/HealthBar
@@ -94,7 +98,9 @@ func _physics_process(_delta: float) -> void:
 	else: 
 		$PlayerSprite.stop()
 		$PlayerSprite.frame = 0;
-		
+	if dash_timer > 0.0:
+		velocity = dash_dir * (attack_dash_dist / attack_dash_dur)
+		dash_timer -= _delta
 	move_with_elevation(_delta)
 	
 	if Input.is_action_just_pressed("Shoot"):
@@ -123,6 +129,8 @@ func sword_swing() ->void:
 				$SwordSwing/Combo3.visible = false
 				$SwordSwing/Combo1/CollisionShape2D.set_deferred("disabled", false)
 				$SwordSwing/Combo1/SwordAnimation.play("Combo1")
+				dash_dir = Vector2.RIGHT.rotated(facing_angle)
+				dash_timer = attack_dash_dur
 				await $SwordSwing/Combo1/SwordAnimation.animation_finished
 				$SwordSwing/Combo1/CollisionShape2D.set_deferred("disabled", true)
 				$SwordSwing/Combo1/SwordAnimation.rotation = deg_to_rad(c1_a)
@@ -161,10 +169,7 @@ func sword_swing() ->void:
 			break
 	is_swinging = false;
 	enemies_hit.clear()
-func _input(event):
-	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-		shoot()
-		
+
 func _on_combo_timeout() -> void:
 	if(!is_swinging):
 		combo_step = 0;

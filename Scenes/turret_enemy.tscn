@@ -21,6 +21,7 @@ size = Vector2(129, 127)
 radius = 118.6086
 
 [node name="TurretEnemy" type="CharacterBody2D" unique_id=320407485]
+scale = Vector2(0.35, 0.35)
 collision_layer = 4
 collision_mask = 9
 script = ExtResource("1_et2mp")
@@ -33,15 +34,18 @@ position = Vector2(0.5, -1.5)
 shape = SubResource("RectangleShape2D_i5tie")
 
 [node name="PlayerDetection" type="Area2D" parent="." unique_id=462406931]
+scale = Vector2(0.7, 0.7)
 collision_layer = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetection" unique_id=668590451]
 scale = Vector2(3.5, 3.5)
 shape = SubResource("CircleShape2D_vikc2")
 
-[node name="RayCast2D" type="RayCast2D" parent="PlayerDetection" unique_id=1269816521]
+[node name="RayCast2D" type="RayCast2D" parent="PlayerDetection" unique_id=1269816521 groups=["Enemy"]]
 target_position = Vector2(415, 0)
-collision_mask = 3
+collision_mask = 7
+collide_with_areas = true
+collide_with_bodies = false
 
 [node name="Fire" type="Timer" parent="." unique_id=2014376432]
 

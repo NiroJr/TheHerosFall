@@ -24,6 +24,10 @@ window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 mouse_cursor/custom_image="uid://c8hbd1q3tnkuy"
 
+[global_group]
+
+Enemy=""
+
 [input]
 
 sword_swing={

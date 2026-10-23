@@ -14,8 +14,6 @@
 [ext_resource type="Texture2D" uid="uid://btwfa57yw7ugh" path="res://Assets/MCSprites/diskSprites/diskDiagnoal5.png" id="12_f4pur"]
 [ext_resource type="Texture2D" uid="uid://cg8nubhbo4fxo" path="res://Assets/MCSprites/diskSprites/diskDiagnoal6.png" id="13_ex1cl"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_pqcdl"]
-
 [sub_resource type="SpriteFrames" id="SpriteFrames_m7t8w"]
 animations = [{
 "frames": [{
@@ -65,13 +63,12 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_pqcdl"]
+
 [node name="Projectile" type="CharacterBody2D" unique_id=445020188]
 collision_layer = 8
 collision_mask = 6
 script = ExtResource("1_f8cdk")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=687197672]
-shape = SubResource("CircleShape2D_pqcdl")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=693153417]
 scale = Vector2(2, 2)
@@ -83,4 +80,14 @@ frame_progress = 0.2842808
 wait_time = 3.0
 autostart = true
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=251493798]
+shape = SubResource("CircleShape2D_pqcdl")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=587561607]
+collision_mask = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=687197672]
+shape = SubResource("CircleShape2D_pqcdl")
+
 [connection signal="timeout" from="Life" to="." method="_on_life_timeout"]
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
