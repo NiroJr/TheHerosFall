@@ -15,7 +15,7 @@ func _ready() -> void:
 	$PlayerDetection/RayCast2D.add_exception(self)
 	health_bar.value = MAX_HEALTH
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if(player):
 		check_sight_line()
 	else:
