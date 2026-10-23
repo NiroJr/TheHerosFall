@@ -28,9 +28,14 @@ func _on_life_timeout() -> void:
 
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
+	var collide = area.get_parent()
 	if enemy_projectile:
 		if area.is_in_group("PlayerHitBox"):
-			area.get_parent().take_damage(1)
+			collide.take_damage(1)
 			queue_free()
-		elif(area.get_parent().is_in_group("Enemy")):
+		elif(area.is_in_group("Enemy")):
 			queue_free()
+	elif(area.is_in_group("Enemy")):
+			collide.take_damage(5)
+			queue_free()
+		

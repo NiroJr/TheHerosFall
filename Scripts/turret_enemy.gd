@@ -1,14 +1,19 @@
 extends CharacterBody2D
 @onready var projectile = load("res://Scenes/projectile.tscn")
 @onready var main = get_tree().current_scene
+@onready var health_bar = $HealthBar
 var player : Area2D = null 
 var line_of_sight := false
 var can_shoot := true
+const MAX_HEALTH := 100
+var health := MAX_HEALTH
+
 
 func _ready() -> void:
 	$PlayerDetection.area_entered.connect(detected)
 	$PlayerDetection.area_exited.connect(_outOfRange)
 	$PlayerDetection/RayCast2D.add_exception(self)
+	health_bar.value = MAX_HEALTH
 
 func _physics_process(delta: float) -> void:
 	if(player):
@@ -50,6 +55,19 @@ func shoot() -> void:
 	$Fire.start()
 	return
 
-
 func _on_fire_timeout() -> void:
 	can_shoot = true
+
+func take_damage(amount: int):
+	health = clampi(health - amount, 0, MAX_HEALTH)
+	health_bar.value = health
+
+func _on_hit_box_area_entered(area: Area2D) -> void:
+	print("hit by ", area.name, " groups: ", area.get_groups())
+	player.get_parent().enemies_hit.append(self)
+	if area.is_in_group("Combo1"):
+		take_damage(10)
+	elif area.is_in_group("Combo2"):
+		take_damage(20)
+	elif area.is_in_group("Combo3"):
+		take_damage(50)

@@ -32,7 +32,7 @@ offset_bottom = -26.0
 theme_override_styles/fill = SubResource("StyleBoxFlat_fecjr")
 show_percentage = false
 
-[node name="HitBox" type="Area2D" parent="." unique_id=131301359]
+[node name="HitBox" type="Area2D" parent="." unique_id=131301359 groups=["Enemy"]]
 collision_layer = 4
 collision_mask = 13
 
