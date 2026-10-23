@@ -1,0 +1,48 @@
+[gd_scene format=3 uid="uid://bm4o0xwai1isc"]
+
+[ext_resource type="Script" uid="uid://csympr0y5insx" path="res://Scripts/turret_enemy.gd" id="1_et2mp"]
+[ext_resource type="Texture2D" uid="uid://dmh2ey3aw70mi" path="res://Assets/icon.svg" id="2_gaacj"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_i5tie"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_gaacj")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i5tie"]
+size = Vector2(129, 127)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vikc2"]
+radius = 118.6086
+
+[node name="TurretEnemy" type="CharacterBody2D" unique_id=320407485]
+collision_layer = 4
+collision_mask = 9
+script = ExtResource("1_et2mp")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=282563391]
+sprite_frames = SubResource("SpriteFrames_i5tie")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=599427503]
+position = Vector2(0.5, -1.5)
+shape = SubResource("RectangleShape2D_i5tie")
+
+[node name="PlayerDetection" type="Area2D" parent="." unique_id=462406931]
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetection" unique_id=668590451]
+scale = Vector2(3.5, 3.5)
+shape = SubResource("CircleShape2D_vikc2")
+
+[node name="RayCast2D" type="RayCast2D" parent="PlayerDetection" unique_id=1269816521]
+target_position = Vector2(415, 0)
+collision_mask = 3
+
+[node name="Fire" type="Timer" parent="." unique_id=2014376432]
+
+[connection signal="timeout" from="Fire" to="." method="_on_fire_timeout"]
