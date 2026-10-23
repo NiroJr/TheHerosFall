@@ -71,7 +71,6 @@ collision_mask = 6
 script = ExtResource("1_f8cdk")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=693153417]
-scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_m7t8w")
 animation = &"diagonal"
 frame_progress = 0.2842808

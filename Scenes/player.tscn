@@ -162,29 +162,28 @@ c1_a = 39.2
 c2_a = 120.0
 
 [node name="Shadow" type="Node2D" parent="." unique_id=431461792]
-position = Vector2(0, 28)
+position = Vector2(0, 14)
 script = ExtResource("20_l6n3p")
 
 [node name="HitBox" type="Area2D" parent="." unique_id=1825929533 groups=["PlayerHitBox"]]
 collision_mask = 12
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=565094471]
-position = Vector2(0, 0.9375)
+scale = Vector2(0.5, 0.5)
 shape = SubResource("RectangleShape2D_it0lf")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=396957255]
-position = Vector2(0, 28)
+position = Vector2(0, 14)
+scale = Vector2(0.5, 0.5)
 shape = SubResource("RectangleShape2D_i5tie")
 
 [node name="PlayerSprite" type="AnimatedSprite2D" parent="." unique_id=1537809165]
-scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_xrrqc")
 animation = &"down"
 
 [node name="SwordSwing" type="Node2D" parent="." unique_id=794402511]
 z_index = 10
 z_as_relative = false
-scale = Vector2(2, 2)
 
 [node name="Combo1" type="Area2D" parent="SwordSwing" unique_id=1024733563 groups=["Combo1"]]
 collision_layer = 8

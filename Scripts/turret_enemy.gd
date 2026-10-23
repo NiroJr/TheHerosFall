@@ -10,7 +10,7 @@ func _ready() -> void:
 	$PlayerDetection.area_exited.connect(_outOfRange)
 	$PlayerDetection/RayCast2D.add_exception(self)
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if(player):
 		check_sight_line()
 	else:
