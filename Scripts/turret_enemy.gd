@@ -2,12 +2,26 @@ extends CharacterBody2D
 @onready var projectile = load("res://Scenes/projectile.tscn")
 @onready var main = get_tree().current_scene
 @onready var health_bar = $HealthBar
-var player : Area2D = null 
+var player : Area2D = null
+var facing_angle = 0.0
+var sprite_dir = 0
+var sprite_index = 0
+var slice = TAU/8
 var line_of_sight := false
 var can_shoot := true
 const MAX_HEALTH := 100
 var health := MAX_HEALTH
 
+const Animations := [
+	"right",
+	"down_right",
+	"down", 
+	"down_right", #downLeft
+	"right",  #left
+	"up_right", #upLeft
+	"up",	
+	"up_right"
+]
 
 func _ready() -> void:
 	$PlayerDetection.area_entered.connect(detected)
@@ -15,12 +29,21 @@ func _ready() -> void:
 	$PlayerDetection/RayCast2D.add_exception(self)
 	health_bar.value = MAX_HEALTH
 
-func _physics_process(_delta: float) -> void:
+func _physics_process(_delta: float) -> void:		
 	if(player):
 		check_sight_line()
+		if(sprite_index == 3
+		or sprite_index == 4
+		or sprite_index == 5):
+			$AnimatedSprite2D.flip_h = true;
+		else:
+			$AnimatedSprite2D.flip_h = false;
+		
+		$AnimatedSprite2D.play(Animations[sprite_index]);
 	else:
 		line_of_sight = false
-
+		$AnimatedSprite2D.stop()
+		$AnimatedSprite2D.frame = 0;
 func detected(body: Area2D) -> void:
 	if(body.is_in_group("PlayerHitBox")):
 		player = body
@@ -35,6 +58,9 @@ func check_sight_line() -> void:
 	$PlayerDetection/RayCast2D.force_raycast_update()
 	if($PlayerDetection/RayCast2D.is_colliding() && $PlayerDetection/RayCast2D.get_collider() == player):
 		line_of_sight = true
+		facing_angle = (player.global_position - global_position).angle()
+		sprite_dir = fposmod(facing_angle, TAU)
+		sprite_index = roundi(sprite_dir/slice)%8
 		if(can_shoot):
 			shoot()
 	else:
@@ -48,8 +74,8 @@ func shoot() -> void:
 	instance.spawnPos = global_position
 	instance.spawnRot = angle
 	instance.enemy_projectile = true
+	instance.shooter = self
 	instance.speed = 200
-	instance.modulate = Color(1.0,0.3,0.3)
 	instance.set_collision_mask_value(3, false)
 	main.add_child.call_deferred(instance)
 	$Fire.start()
@@ -61,9 +87,10 @@ func _on_fire_timeout() -> void:
 func take_damage(amount: int):
 	health = clampi(health - amount, 0, MAX_HEALTH)
 	health_bar.value = health
+	if(health <= 0):
+		queue_free()
 
 func _on_hit_box_area_entered(area: Area2D) -> void:
-	print("hit by ", area.name, " groups: ", area.get_groups())
 	player.get_parent().enemies_hit.append(self)
 	if area.is_in_group("Combo1"):
 		take_damage(10)

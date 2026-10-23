@@ -22,7 +22,7 @@ position = Vector2(230, 209)
 [node name="basicEnemy" parent="." unique_id=42976722 instance=ExtResource("3_8gbba")]
 position = Vector2(412, 153)
 
-[node name="TurretEnemy2" parent="." unique_id=320407485 instance=ExtResource("4_21xkr")]
+[node name="TurretEnemy" parent="." unique_id=320407485 instance=ExtResource("4_21xkr")]
 position = Vector2(164, 145)
 
 [node name="LevelExit" type="Area2D" parent="." unique_id=1553636488]

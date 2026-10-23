@@ -115,66 +115,6 @@ func _physics_process(_delta: float) -> void:
 		else:
 			sword_swing()
 			
-"""
-func sword_swing() ->void:
-	
-	is_swinging = true
-	while true:
-		buffered_swing = false	
-		$Combo.stop()
-		$SwordSwing.visible = true
-		$Combo.start()
-		var side := 1 if(cos(facing_angle) >=0) else -1
-		match combo_step:
-			0:
-				$SwordSwing/Combo1.rotation = facing_angle+PI
-				$SwordSwing/Combo1/SwordAnimation.rotation += deg_to_rad(c1_a)
-				$SwordSwing/Combo1/SwordAnimation.flip_h = (side == 1)
-				$SwordSwing/Combo1.visible = true
-				$SwordSwing/Combo2.visible = false
-				$SwordSwing/Combo3.visible = false
-				$SwordSwing/Combo1/CollisionShape2D.set_deferred("disabled", false)
-				$SwordSwing/Combo1/SwordAnimation.play("Combo1")
-				dash_dir = Vector2.RIGHT.rotated(facing_angle)
-				dash_timer = attack_dash_dur
-				await $SwordSwing/Combo1/SwordAnimation.animation_finished
-				$SwordSwing/Combo1/CollisionShape2D.set_deferred("disabled", true)
-				$SwordSwing/Combo1/SwordAnimation.rotation = deg_to_rad(c1_a)
-			1:
-				$SwordSwing/Combo2.rotation = facing_angle+PI
-				if(side == 1):
-					$SwordSwing/Combo2/SwordAnimation.flip_v = false
-					$SwordSwing/Combo2/SwordAnimation.offset.y = -15
-					$SwordSwing/Combo2/SwordAnimation.rotation -= deg_to_rad(c2_a)
-				elif (side ==-1):
-					$SwordSwing/Combo2/SwordAnimation.rotation += deg_to_rad(c2_a-45)
-				$SwordSwing/Combo1.visible = false
-				$SwordSwing/Combo2.visible = true
-				$SwordSwing/Combo3.visible = false
-				$SwordSwing/Combo2/CollisionShape2D.set_deferred("disabled", false)
-				$SwordSwing/Combo2/SwordAnimation.play("Combo2")
-				await $SwordSwing/Combo2/SwordAnimation.animation_finished
-				$SwordSwing/Combo2/CollisionShape2D.set_deferred("disabled", true)
-				$SwordSwing/Combo2/SwordAnimation.flip_v = true
-				$SwordSwing/Combo2/SwordAnimation.offset.y = 15
-				$SwordSwing/Combo2/SwordAnimation.rotation = deg_to_rad(240)
-			2:
-				$SwordSwing/Combo3.rotation = facing_angle+PI
-				$SwordSwing/Combo1.visible = false
-				$SwordSwing/Combo2.visible = false
-				$SwordSwing/Combo3.visible = true
-				$SwordSwing/Combo3/CollisionShape2D.set_deferred("disabled", false)
-				$SwordSwing/Combo3/SwordAnimation.play("Combo3")
-				await $SwordSwing/Combo3/SwordAnimation.animation_finished
-				$SwordSwing/Combo3/CollisionShape2D.set_deferred("disabled", true)
-		combo_step = (combo_step+1)%3
-		$SwordSwing.visible = false
-		if(buffered_swing):
-			continue
-		else:
-			break
-	is_swinging = false;
-"""
 func sword_swing() -> void:
 	is_swinging = true
 	while true:
@@ -200,6 +140,8 @@ func sword_swing() -> void:
 
 		shape.set_deferred("disabled", false)
 		anim.play(anim_name)
+		dash_dir = Vector2.RIGHT.rotated(facing_angle)
+		dash_timer = attack_dash_dur
 		await anim.animation_finished
 		shape.set_deferred("disabled", true)
 

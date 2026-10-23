@@ -13,6 +13,10 @@
 [ext_resource type="Texture2D" uid="uid://ctrr3fex3odrf" path="res://Assets/MCSprites/diskSprites/diskDiagnoal4.png" id="11_b66ev"]
 [ext_resource type="Texture2D" uid="uid://btwfa57yw7ugh" path="res://Assets/MCSprites/diskSprites/diskDiagnoal5.png" id="12_f4pur"]
 [ext_resource type="Texture2D" uid="uid://cg8nubhbo4fxo" path="res://Assets/MCSprites/diskSprites/diskDiagnoal6.png" id="13_ex1cl"]
+[ext_resource type="Texture2D" uid="uid://pl6hthq1gj5c" path="res://Assets/EnemySprites/Turret+Bullets/bullet1.png" id="14_2322j"]
+[ext_resource type="Texture2D" uid="uid://bgcg5idj6d5x7" path="res://Assets/EnemySprites/Turret+Bullets/bullet2.png" id="15_8wt1i"]
+[ext_resource type="Texture2D" uid="uid://cukt80rnltsx7" path="res://Assets/EnemySprites/Turret+Bullets/bullet3.png" id="16_jdrjw"]
+[ext_resource type="Texture2D" uid="uid://c1vxdinqp7ap1" path="res://Assets/EnemySprites/Turret+Bullets/bullet4.png" id="17_oxmit"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_m7t8w"]
 animations = [{
@@ -61,6 +65,23 @@ animations = [{
 "loop": 1,
 "name": &"diagonal",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("14_2322j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_8wt1i")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_jdrjw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_oxmit")
+}],
+"loop": 1,
+"name": &"turret",
+"speed": 5.0
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_pqcdl"]
@@ -72,8 +93,7 @@ script = ExtResource("1_f8cdk")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=693153417]
 sprite_frames = SubResource("SpriteFrames_m7t8w")
-animation = &"diagonal"
-frame_progress = 0.2842808
+animation = &"turret"
 
 [node name="Life" type="Timer" parent="." unique_id=1925367326]
 wait_time = 3.0

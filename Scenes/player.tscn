@@ -197,6 +197,8 @@ shape = SubResource("CircleShape2D_fkwtr")
 [node name="SwordAnimation" type="AnimatedSprite2D" parent="SwordSwing/Combo1" unique_id=1568799830]
 sprite_frames = SubResource("SpriteFrames_i5tie")
 animation = &"Combo1"
+frame = 6
+frame_progress = 1.0
 offset = Vector2(3, -8)
 
 [node name="Combo2" type="Area2D" parent="SwordSwing" unique_id=162041491 groups=["Combo2"]]
@@ -217,6 +219,7 @@ animation = &"Combo1"
 flip_v = true
 
 [node name="Combo3" type="Area2D" parent="SwordSwing" unique_id=44817697 groups=["Combo3"]]
+visible = false
 collision_layer = 8
 collision_mask = 4
 

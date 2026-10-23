@@ -1,47 +1,85 @@
 [gd_scene format=3 uid="uid://bm4o0xwai1isc"]
 
 [ext_resource type="Script" uid="uid://csympr0y5insx" path="res://Scripts/turret_enemy.gd" id="1_et2mp"]
-[ext_resource type="Texture2D" uid="uid://dmh2ey3aw70mi" path="res://Assets/icon.svg" id="2_gaacj"]
+[ext_resource type="Texture2D" uid="uid://de86k44wuo504" path="res://Assets/EnemySprites/Turret+Bullets/turret1.png" id="2_1y4gf"]
+[ext_resource type="Texture2D" uid="uid://bgokxejlbhmqy" path="res://Assets/EnemySprites/Turret+Bullets/turret2.png" id="3_soew2"]
+[ext_resource type="Texture2D" uid="uid://cq8grmbro6tp1" path="res://Assets/EnemySprites/Turret+Bullets/turret3.png" id="4_tjr58"]
+[ext_resource type="Texture2D" uid="uid://bt40c4rupsivu" path="res://Assets/EnemySprites/Turret+Bullets/turret5.png" id="5_ppywy"]
+[ext_resource type="Texture2D" uid="uid://c0n65ufgfodeo" path="res://Assets/EnemySprites/Turret+Bullets/turret4.png" id="6_nl20t"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_i5tie"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_gaacj")
+"texture": ExtResource("2_1y4gf")
 }],
 "loop": 1,
-"name": &"default",
+"name": &"down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_soew2")
+}],
+"loop": 1,
+"name": &"down_right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_tjr58")
+}],
+"loop": 1,
+"name": &"right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_ppywy")
+}],
+"loop": 1,
+"name": &"up",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_nl20t")
+}],
+"loop": 1,
+"name": &"up_right",
 "speed": 5.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i5tie"]
-size = Vector2(125.71431, 125.7143)
+size = Vector2(20.000004, 17.000004)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vikc2"]
-radius = 118.6086
+radius = 13.038404
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_et2mp"]
 bg_color = Color(1, 0, 0, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_68yga"]
-size = Vector2(134.28577, 131.42862)
+size = Vector2(23.000011, 19.00001)
 
 [node name="TurretEnemy" type="CharacterBody2D" unique_id=320407485]
-scale = Vector2(0.35, 0.35)
 collision_layer = 4
 collision_mask = 9
 script = ExtResource("1_et2mp")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=282563391]
+scale = Vector2(1.3928571, 1.2053567)
 sprite_frames = SubResource("SpriteFrames_i5tie")
+animation = &"up_right"
+frame_progress = 0.59771776
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=599427503]
-position = Vector2(3.6614276e-06, 2.1713117e-06)
+position = Vector2(4.7683716e-07, -0.49999985)
 scale = Vector2(0.99999976, 0.99999976)
 shape = SubResource("RectangleShape2D_i5tie")
 
 [node name="PlayerDetection" type="Area2D" parent="." unique_id=462406931]
-scale = Vector2(0.7, 0.7)
+visible = false
 collision_layer = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetection" unique_id=668590451]
@@ -49,7 +87,7 @@ scale = Vector2(3.5, 3.5)
 shape = SubResource("CircleShape2D_vikc2")
 
 [node name="RayCast2D" type="RayCast2D" parent="PlayerDetection" unique_id=1269816521 groups=["Enemy"]]
-target_position = Vector2(415, 0)
+target_position = Vector2(46, 0)
 collision_mask = 7
 collide_with_areas = true
 collide_with_bodies = false
@@ -57,10 +95,10 @@ collide_with_bodies = false
 [node name="Fire" type="Timer" parent="." unique_id=2014376432]
 
 [node name="HealthBar" type="ProgressBar" parent="." unique_id=608802613]
-offset_left = -45.714287
-offset_top = -85.71429
-offset_right = 48.857155
-offset_bottom = -68.85714
+offset_left = -10.0
+offset_top = -13.0
+offset_right = 10.0
+offset_bottom = -9.0
 theme_override_styles/fill = SubResource("StyleBoxFlat_et2mp")
 show_percentage = false
 
@@ -69,7 +107,7 @@ collision_layer = 4
 collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=1662275397]
-position = Vector2(1.4285697, 6.8119584e-07)
+position = Vector2(0.49999905, 0.49999976)
 scale = Vector2(0.9999995, 0.9999995)
 shape = SubResource("RectangleShape2D_68yga")
 
