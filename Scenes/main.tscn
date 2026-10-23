@@ -4,6 +4,11 @@
 [ext_resource type="PackedScene" uid="uid://ixg8ghykh70r" path="res://Scenes/player.tscn" id="1_jjgbg"]
 [ext_resource type="PackedScene" uid="uid://bwmfdn52i4svu" path="res://Scenes/basic_enemy.tscn" id="3_8gbba"]
 [ext_resource type="PackedScene" uid="uid://bm4o0xwai1isc" path="res://Scenes/turret_enemy.tscn" id="4_jjvhh"]
+[ext_resource type="Script" uid="uid://c1ouhp60rfwy" path="res://Scripts/level_exit.gd" id="4_jjvhh"]
+[ext_resource type="PackedScene" uid="uid://dbo51ckeahp7d" path="res://Scenes/pause_menu.tscn" id="5_kry3j"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kry3j"]
+size = Vector2(32, 32)
 
 [node name="Main" type="Node2D" unique_id=1706061838]
 
@@ -20,3 +25,25 @@ position = Vector2(412, 153)
 [node name="TurretEnemy" parent="." unique_id=320407485 instance=ExtResource("4_jjvhh")]
 position = Vector2(567, 279)
 scale = Vector2(0.5, 0.5)
+[node name="LevelExit" type="Area2D" parent="." unique_id=1553636488]
+position = Vector2(560, 300)
+collision_layer = 0
+script = ExtResource("4_jjvhh")
+next_level = "uid://nrus3nukru1d"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelExit" unique_id=687286376]
+shape = SubResource("RectangleShape2D_kry3j")
+debug_color = Color(0.2, 0.9, 0.3, 0.45)
+
+[node name="ExitMarker" type="ColorRect" parent="LevelExit" unique_id=1265670126]
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 16.0
+offset_bottom = 16.0
+mouse_filter = 2
+color = Color(0.2, 0.9, 0.3, 0.35)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1132967213]
+
+[node name="PauseMenu" parent="CanvasLayer" unique_id=1151853713 instance=ExtResource("5_kry3j")]
+visible = false
