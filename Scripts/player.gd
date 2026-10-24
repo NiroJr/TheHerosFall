@@ -5,6 +5,10 @@ extends CharacterBody2D
 #@export var c3_a :float
 @onready var main = get_tree().current_scene
 @onready var projectile = load("res://Scenes/projectile.tscn")
+@onready var timer: Timer = get_parent().get_node("ShootCooldown")
+var crosshair = load("res://Assets/MCSprites/aimReticle/aimReticle1.png")
+var crosshairReady = load("res://Assets/MCSprites/aimReticle/aimReticle2.png")
+var is_fully_charged := false
 var facing_angle := 0.0
 const SPEED = 300.0
 var sprite_dir  := 0.0;
@@ -56,6 +60,14 @@ func _ready() -> void:
 		_update_sort()
 	spawn_position = global_position
 	spawn_elevation = elevation
+	timer.wait_time = 3.0
+	timer.one_shot = true
+	timer.timeout.connect(_on_charge_timeout)
+	Input.set_custom_mouse_cursor(crosshair, Input.CURSOR_ARROW, Vector2(16, 16))
+
+func _on_charge_timeout() -> void:
+	is_fully_charged = true
+	Input.set_custom_mouse_cursor(crosshairReady, Input.CURSOR_ARROW, Vector2(16, 16))
 
 const Animations := [
 	"right",
@@ -109,8 +121,18 @@ func _physics_process(_delta: float) -> void:
 		$PlayerSprite.frame = 0;
 	move_with_elevation(_delta)
 	
-	if Input.is_action_just_pressed("Shoot"):
-		shoot()
+	var holding := Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT)
+
+	if holding:
+		if timer.is_stopped() and not is_fully_charged:
+			timer.start()
+	else:
+		if is_fully_charged:
+			shoot()
+			Input.set_custom_mouse_cursor(crosshair, Input.CURSOR_ARROW, Vector2(16, 16))
+		timer.stop()
+		is_fully_charged = false
+	
 	if Input.is_action_just_pressed("sword_swing"):
 		if(is_swinging):
 			buffered_swing = true;

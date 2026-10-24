@@ -47,3 +47,7 @@ color = Color(0.2, 0.9, 0.3, 0.35)
 
 [node name="PauseMenu" parent="CanvasLayer" unique_id=1151853713 instance=ExtResource("5_kry3j")]
 visible = false
+
+[node name="ShootCooldown" type="Timer" parent="." unique_id=328436883]
+wait_time = 2.0
+one_shot = true
