@@ -134,13 +134,13 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("15_vfarp")
 }, {
-"duration": 1.0,
+"duration": 1.5,
 "texture": ExtResource("16_y6uwr")
 }, {
 "duration": 1.5,
 "texture": ExtResource("17_83xs0")
 }, {
-"duration": 1.5,
+"duration": 1.0,
 "texture": ExtResource("18_ypfnu")
 }, {
 "duration": 1.0,
@@ -169,10 +169,12 @@ script = ExtResource("20_l6n3p")
 collision_mask = 12
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=565094471]
+visible = false
 scale = Vector2(0.5, 0.5)
 shape = SubResource("RectangleShape2D_it0lf")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=396957255]
+visible = false
 position = Vector2(0, 14)
 scale = Vector2(0.5, 0.5)
 shape = SubResource("RectangleShape2D_i5tie")
@@ -190,6 +192,7 @@ collision_layer = 8
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SwordSwing/Combo1" unique_id=1225933086]
+visible = false
 position = Vector2(0, 15)
 rotation = 1.5707964
 shape = SubResource("CircleShape2D_fkwtr")
@@ -219,18 +222,17 @@ animation = &"Combo1"
 flip_v = true
 
 [node name="Combo3" type="Area2D" parent="SwordSwing" unique_id=44817697 groups=["Combo3"]]
-visible = false
 collision_layer = 8
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SwordSwing/Combo3" unique_id=1835157658]
+visible = false
 position = Vector2(0, 15)
 shape = SubResource("CircleShape2D_fkwtr")
 
 [node name="SwordAnimation" type="AnimatedSprite2D" parent="SwordSwing/Combo3" unique_id=867388474]
 sprite_frames = SubResource("SpriteFrames_i5tie")
-animation = &"Combo3"
-frame = 2
+animation = &"Combo1"
 offset = Vector2(0, -5)
 
 [node name="Combo" type="Timer" parent="." unique_id=741614805]

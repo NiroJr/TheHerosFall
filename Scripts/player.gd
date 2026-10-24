@@ -60,7 +60,7 @@ func _ready() -> void:
 		_update_sort()
 	spawn_position = global_position
 	spawn_elevation = elevation
-	timer.wait_time = 3.0
+	timer.wait_time = 1
 	timer.one_shot = true
 	timer.timeout.connect(_on_charge_timeout)
 	Input.set_custom_mouse_cursor(crosshair, Input.CURSOR_ARROW, Vector2(16, 16))
@@ -82,9 +82,13 @@ const Animations := [
 func _physics_process(_delta: float) -> void:
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
-	var hDirection := Input.get_axis("Left", "Right")
-	var vDirection := Input.get_axis("Up", "Down")
-	if Input.is_action_just_pressed("Dash"):
+	var hDirection = 0
+	var vDirection = 0
+	if(!is_swinging):
+		hDirection = Input.get_axis("Left", "Right")
+		vDirection = Input.get_axis("Up", "Down")
+	
+	if Input.is_action_just_pressed("Dash") && (!is_swinging):
 		if(!is_dashing):
 			_dash(80, 0.15);
 	if(is_dashing):
@@ -98,8 +102,11 @@ func _physics_process(_delta: float) -> void:
 			velocity.y = vDirection * SPEED
 		else:
 			velocity.y = move_toward(velocity.y, 0, SPEED)
-	
+
 		velocity = velocity.normalized() * SPEED
+	
+		
+		
 	#Rotates the player body and facing direction for projectile during movement
 	if(velocity != Vector2.ZERO):
 		facing_angle = velocity.angle()
@@ -172,7 +179,11 @@ func sword_swing() -> void:
 
 		shape.set_deferred("disabled", false)
 		anim.play(anim_name)
-		_dash(40, 0.2)
+		if(use_combo1):
+			_dash(10, 0.1)
+		else:
+			_dash(20, 0.1)
+		velocity = Vector2.ZERO;
 		await anim.animation_finished
 		shape.set_deferred("disabled", true)
 
