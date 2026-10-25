@@ -70,8 +70,6 @@ func _process(_delta: float) -> void:
 		notify_runtime_tile_data_update()
 	
 		
-	print("player Tile: ", player_cell)
-	print("Wall tile at player: ", cell_groups.has(player_cell))
 
 
 func _use_tile_data_runtime_update(

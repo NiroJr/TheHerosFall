@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://bwf1okise5hey" path="res://Assets/TerrainSprites/GrassGroundTiles17.png" id="3_1t3wb"]
 [ext_resource type="Texture2D" uid="uid://ckrifxs5fmn28" path="res://Assets/TerrainSprites/GrassGroundTiles18.png" id="4_tkeme"]
 [ext_resource type="Texture2D" uid="uid://cwaobivjwixts" path="res://Assets/TerrainSprites/GrassGroundTiles19.png" id="5_5umf1"]
-[ext_resource type="Script" uid="uid://bigw7lqiuyb7b" path="res://Scripts/walls.gd" id="6_yqcox"]
+[ext_resource type="Script" uid="uid://bigw7lqiuyb7b" path="res://Scripts/foreground.gd" id="6_yqcox"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_161hv"]
 texture = ExtResource("1_etcaa")
@@ -66,6 +66,8 @@ texture = ExtResource("1_etcaa")
 7:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, 8, -8, -8, 8, -8, 8, 8)
 0:7/0 = 0
 1:7/0 = 0
+0:1/0 = 0
+8:1/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gjafl"]
 texture = ExtResource("4_tkeme")
