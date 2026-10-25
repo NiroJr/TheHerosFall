@@ -25,7 +25,17 @@ func _physics_process(_delta):
 	var direction = global_position.direction_to(
 		player.global_position
 	)
-	velocity = direction * speed
+	
+	var distance = global_position.distance_to(
+		player.global_position
+	)
+	
+	if distance < 200:
+		velocity = direction * speed
+	else:
+		velocity = direction * 0
+	
+
 
 	move_and_slide()
 	
@@ -50,3 +60,4 @@ func _on_hit_box_area_entered(area: Area2D) -> void:
 		take_damage(20)
 	elif area.is_in_group("Combo3"):
 		take_damage(50)
+		
