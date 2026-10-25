@@ -18,6 +18,7 @@ func _ready():
 
 
 func _physics_process(_delta):
+	
 	if not is_instance_valid(player):
 		velocity = Vector2.ZERO
 		return
@@ -35,7 +36,10 @@ func _physics_process(_delta):
 	else:
 		velocity = direction * 0
 	
-
+	if(velocity == Vector2.ZERO):
+		$Sprite2D.animation = "default"
+	else:
+		$Sprite2D.animation = "moving"
 
 	move_and_slide()
 	

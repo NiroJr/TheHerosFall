@@ -11,7 +11,12 @@ animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("2_6kac6")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
 }, {
+"frames": [{
 "duration": 1.0,
 "texture": ExtResource("3_6cefa")
 }, {
@@ -22,8 +27,8 @@ animations = [{
 "texture": ExtResource("5_dhrsy")
 }],
 "loop": 1,
-"name": &"default",
-"speed": 5.0
+"name": &"moving",
+"speed": 15.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xrik0"]
@@ -42,10 +47,11 @@ script = ExtResource("1_fecjr")
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="." unique_id=417532793]
 position = Vector2(-1.4305115e-06, -1.4305115e-06)
-scale = Vector2(0.76562494, 0.76562494)
 sprite_frames = SubResource("SpriteFrames_68yga")
+animation = &"moving"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=399873067]
+scale = Vector2(1.5, 1.5)
 shape = SubResource("RectangleShape2D_xrik0")
 
 [node name="HealthBar" type="ProgressBar" parent="." unique_id=1558368081]
@@ -61,6 +67,7 @@ collision_layer = 4
 collision_mask = 13
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=637691548]
+scale = Vector2(1.5, 1.5)
 shape = SubResource("RectangleShape2D_it0lf")
 
 [connection signal="area_entered" from="HitBox" to="." method="_on_hit_box_area_entered"]

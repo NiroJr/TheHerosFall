@@ -68,22 +68,21 @@ collision_mask = 9
 script = ExtResource("1_et2mp")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=282563391]
-scale = Vector2(1.3928571, 1.2053567)
 sprite_frames = SubResource("SpriteFrames_i5tie")
 animation = &"up_right"
 frame_progress = 0.9700982
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=599427503]
 position = Vector2(4.7683716e-07, -0.49999985)
-scale = Vector2(0.99999976, 0.99999976)
+scale = Vector2(0.5, 0.5)
 shape = SubResource("RectangleShape2D_i5tie")
 
 [node name="PlayerDetection" type="Area2D" parent="." unique_id=462406931]
-scale = Vector2(1.5, 1.5)
+scale = Vector2(2, 2)
 collision_layer = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetection" unique_id=668590451]
-scale = Vector2(6, 6)
+scale = Vector2(4, 4)
 shape = SubResource("CircleShape2D_vikc2")
 
 [node name="RayCast2D" type="RayCast2D" parent="PlayerDetection" unique_id=1269816521 groups=["Enemy"]]
@@ -107,8 +106,8 @@ collision_layer = 4
 collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=1662275397]
-position = Vector2(0.49999905, 0.49999976)
-scale = Vector2(0.9999995, 0.9999995)
+position = Vector2(1, 0.5)
+scale = Vector2(0.5, 0.5)
 shape = SubResource("RectangleShape2D_68yga")
 
 [connection signal="timeout" from="Fire" to="." method="_on_fire_timeout"]
