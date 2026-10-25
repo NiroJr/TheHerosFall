@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c71r8pkw011rr"
-path="res://.godot/imported/MainChar8.png-01144da64720c5f767d8ea6af00ba4c8.ctex"
+uid="uid://d1sb5hgo505ug"
+path="res://.godot/imported/electricDoor9.png-0abd756c9f27acba4694e3108087b12f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/MCSprites/characterSprites/WalkingSprites/MainChar8.png"
-dest_files=["res://.godot/imported/MainChar8.png-01144da64720c5f767d8ea6af00ba4c8.ctex"]
+source_file="res://Assets/PuzzleSprites/doors/electricDoor9.png"
+dest_files=["res://.godot/imported/electricDoor9.png-0abd756c9f27acba4694e3108087b12f.ctex"]
 
 [params]
 

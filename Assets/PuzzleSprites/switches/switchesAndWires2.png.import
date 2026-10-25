@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bpu7nwo8dbowh"
-path="res://.godot/imported/MainChar6.png-e1c23cab2f17d8410f104f10da2ef928.ctex"
+uid="uid://c2w3vlvw88kj3"
+path="res://.godot/imported/switchesAndWires2.png-7239dbb33141fb31a4aed80bee8972e8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/MCSprites/characterSprites/WalkingSprites/MainChar6.png"
-dest_files=["res://.godot/imported/MainChar6.png-e1c23cab2f17d8410f104f10da2ef928.ctex"]
+source_file="res://Assets/PuzzleSprites/switches/switchesAndWires2.png"
+dest_files=["res://.godot/imported/switchesAndWires2.png-7239dbb33141fb31a4aed80bee8972e8.ctex"]
 
 [params]
 
