@@ -1,8 +1,5 @@
 extends CharacterBody2D
 
-@export var c1_a :float
-@export var c2_a :float
-#@export var c3_a :float
 @onready var main = get_tree().current_scene
 @onready var projectile = load("res://Scenes/projectile.tscn")
 @onready var timer: Timer = get_parent().get_node("ShootCooldown")
@@ -18,6 +15,7 @@ var combo_step := 0;
 var is_swinging := false;
 var buffered_swing := false;
 var is_dashing := false;
+var can_dash = true;
 var attack_dash_dist := 20
 var attack_dash_dur := 0.2
 var dash_dir = Vector2(0,0)
@@ -70,14 +68,22 @@ func _on_charge_timeout() -> void:
 	Input.set_custom_mouse_cursor(crosshairReady, Input.CURSOR_ARROW, Vector2(16, 16))
 
 const Animations := [
-	"right",
-	"downRight",
-	"down", 
-	"downRight", #downLeft
-	"right",  #left
-	"upRight", #upLeft
-	"up",	
-	"upRight"
+	"right_walk",
+	"downRight_walk",
+	"down_walk", 
+	"downRight_walk", #downLeft
+	"right_walk",  #left
+	"upRight_walk", #upLeft
+	"up_walk",	
+	"upRight_walk",
+	"right_idle",
+	"downRight_idle",
+	"down_idle", 
+	"downRight_idle", #downLeft
+	"right_idle",  #left
+	"upRight_idle", #upLeft
+	"up_idle",	
+	"upRight_idle"
 ]
 func _physics_process(_delta: float) -> void:
 	# Get the input direction and handle the movement/deceleration.
@@ -89,8 +95,10 @@ func _physics_process(_delta: float) -> void:
 		vDirection = Input.get_axis("Up", "Down")
 	
 	if Input.is_action_just_pressed("Dash") && (!is_swinging):
-		if(!is_dashing):
+		if(!is_dashing && can_dash):
 			_dash(80, 0.15);
+			await get_tree().create_timer(0.5).timeout
+			can_dash = true;
 	if(is_dashing):
 		velocity = dash_dir*(attack_dash_dist/attack_dash_dur)
 	else:
@@ -125,6 +133,7 @@ func _physics_process(_delta: float) -> void:
 		$PlayerSprite.play(Animations[sprite_index]);
 	else: 
 		$PlayerSprite.stop()
+		$PlayerSprite.play(Animations[sprite_index+8])
 		$PlayerSprite.frame = 0;
 	move_with_elevation(_delta)
 	
@@ -145,8 +154,10 @@ func _physics_process(_delta: float) -> void:
 			buffered_swing = true;
 		else:
 			sword_swing()
+		is_dashing = false
 			
 func _dash(dist: int, speed: float)-> void:
+	can_dash = false
 	is_dashing = true
 	dash_dir = Vector2.RIGHT.rotated(facing_angle)
 	attack_dash_dist = dist

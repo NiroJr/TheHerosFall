@@ -3,7 +3,7 @@ extends CharacterBody2D
 
 var speed = 75.0
 var player: Node2D
-
+var direction := Vector2.ZERO
 const MAX_HEALTH := 100
 var health := MAX_HEALTH
 @onready var health_bar = $HealthBar
@@ -23,7 +23,7 @@ func _physics_process(_delta):
 		velocity = Vector2.ZERO
 		return
 	
-	var direction = global_position.direction_to(
+	direction = global_position.direction_to(
 		player.global_position
 	)
 	
@@ -46,9 +46,12 @@ func _physics_process(_delta):
 func take_damage(amount: int):
 	health = clampi(health - amount, 0, MAX_HEALTH)
 	health_bar.value = health
-	
 	if(health <= 0):
 		queue_free()
+	#knockback on attacks
+	var tween = create_tween()
+	var target_position = position + direction*-40
+	tween.tween_property(self, "position", target_position, 0.25)
 
 
 func _on_hit_box_area_entered(area: Area2D) -> void:
