@@ -102,29 +102,6 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("11_qpa8y")
-}, {
-"duration": 1.0,
-"texture": ExtResource("12_sbwqj")
-}, {
-"duration": 1.0,
-"texture": ExtResource("13_xwi16")
-}, {
-"duration": 1.0,
-"texture": ExtResource("14_sweqm")
-}, {
-"duration": 1.0,
-"texture": ExtResource("15_ph33w")
-}, {
-"duration": 1.0,
-"texture": ExtResource("16_7ldla")
-}],
-"loop": 1,
-"name": &"parry",
-"speed": 12.0
-}, {
-"frames": [{
-"duration": 1.0,
 "texture": ExtResource("4_3smsa")
 }],
 "loop": 1,
@@ -203,7 +180,7 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fkwtr"]
-radius = 23.409399
+radius = 16.124516
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_i5tie"]
 animations = [{
@@ -281,6 +258,29 @@ animations = [{
 "loop": 0,
 "name": &"Combo3",
 "speed": 18.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("11_qpa8y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_sbwqj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_xwi16")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_sweqm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_ph33w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_7ldla")
+}],
+"loop": 0,
+"name": &"parry",
+"speed": 12.0
 }]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8gbba"]
@@ -296,6 +296,7 @@ position = Vector2(0, 14)
 script = ExtResource("20_l6n3p")
 
 [node name="HitBox" type="Area2D" parent="." unique_id=1825929533 groups=["PlayerHitBox"]]
+process_mode = 1
 collision_mask = 12
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=565094471]
@@ -311,15 +312,14 @@ shape = SubResource("RectangleShape2D_i5tie")
 
 [node name="PlayerSprite" type="AnimatedSprite2D" parent="." unique_id=1537809165]
 sprite_frames = SubResource("SpriteFrames_xrrqc")
-animation = &"right_walk"
-frame_progress = 0.88067085
+animation = &"downRight_idle"
 
 [node name="SwordSwing" type="Node2D" parent="." unique_id=794402511]
-visible = false
 z_index = 10
 z_as_relative = false
 
 [node name="Combo1" type="Area2D" parent="SwordSwing" unique_id=1024733563 groups=["Combo1"]]
+visible = false
 collision_layer = 8
 collision_mask = 4
 
@@ -367,6 +367,21 @@ shape = SubResource("CircleShape2D_fkwtr")
 sprite_frames = SubResource("SpriteFrames_i5tie")
 animation = &"Combo1"
 offset = Vector2(0, -5)
+
+[node name="Parry" type="Area2D" parent="SwordSwing" unique_id=121541716 groups=["Parry"]]
+visible = false
+collision_mask = 12
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SwordSwing/Parry" unique_id=24537388]
+position = Vector2(0, 10)
+shape = SubResource("CircleShape2D_fkwtr")
+
+[node name="parry_anim" type="AnimatedSprite2D" parent="SwordSwing/Parry" unique_id=303857955]
+sprite_frames = SubResource("SpriteFrames_i5tie")
+animation = &"parry"
+frame = 5
+frame_progress = 1.0
+offset = Vector2(0, 5)
 
 [node name="Combo" type="Timer" parent="." unique_id=741614805]
 ignore_time_scale = true

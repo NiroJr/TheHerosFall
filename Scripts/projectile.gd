@@ -6,7 +6,6 @@ var dir : float
 var spawnPos : Vector2
 var spawnRot : float
 var shooter : Node2D
-
 @onready var sprite = $AnimatedSprite2D 
 
 func _ready():
@@ -41,6 +40,10 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 		if area.is_in_group("PlayerHitBox"):
 			collide.take_damage(1)
 			queue_free()
+		elif(area.is_in_group("Parry")):
+			dir = dir + PI
+			global_rotation = global_rotation+ PI
+			self.enemy_projectile = false
 		elif(area.is_in_group("Enemy") && collide != shooter):
 			queue_free()
 	elif(area.is_in_group("Enemy")):

@@ -51,7 +51,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i5tie"]
-size = Vector2(20.000004, 17.000004)
+size = Vector2(24, 22)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vikc2"]
 radius = 13.038404
@@ -60,7 +60,7 @@ radius = 13.038404
 bg_color = Color(1, 0, 0, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_68yga"]
-size = Vector2(23.000011, 19.00001)
+size = Vector2(35, 32)
 
 [node name="TurretEnemy" type="CharacterBody2D" unique_id=320407485]
 collision_layer = 4
@@ -73,18 +73,15 @@ animation = &"up_right"
 frame_progress = 0.9700982
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=599427503]
-visible = false
-position = Vector2(4.7683716e-07, -0.49999985)
+position = Vector2(-2.3841858e-07, -0.49999988)
 scale = Vector2(0.5, 0.5)
 shape = SubResource("RectangleShape2D_i5tie")
 
 [node name="PlayerDetection" type="Area2D" parent="." unique_id=462406931]
-visible = false
 scale = Vector2(3, 3)
 collision_layer = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetection" unique_id=668590451]
-visible = false
 scale = Vector2(6, 6)
 shape = SubResource("CircleShape2D_vikc2")
 
@@ -105,12 +102,11 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_et2mp")
 show_percentage = false
 
 [node name="HitBox" type="Area2D" parent="." unique_id=1889613140 groups=["Enemy"]]
-visible = false
 collision_layer = 4
 collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=1662275397]
-position = Vector2(1, 0.5)
+position = Vector2(-0.25, -1)
 scale = Vector2(0.5, 0.5)
 shape = SubResource("RectangleShape2D_68yga")
 

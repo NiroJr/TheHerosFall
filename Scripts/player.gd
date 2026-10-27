@@ -52,6 +52,7 @@ func _ready() -> void:
 	$SwordSwing/Combo1/CollisionShape2D.set_deferred("disabled", true)
 	$SwordSwing/Combo2/CollisionShape2D.set_deferred("disabled", true)
 	$SwordSwing/Combo3/CollisionShape2D.set_deferred("disabled", true)
+	$SwordSwing/Parry/CollisionShape2D.set_deferred("disabled", true)
 	floors = get_tree().current_scene.get_node_or_null("Floors")
 	if floors:
 		elevation = _start_elevation()
@@ -96,9 +97,11 @@ func _physics_process(_delta: float) -> void:
 	
 	if Input.is_action_just_pressed("Dash") && (!is_swinging):
 		if(!is_dashing && can_dash):
-			_dash(80, 0.15);
-			await get_tree().create_timer(0.5).timeout
+			_dash(160, 0.15);
+			await get_tree().create_timer(0.4).timeout
+			self.process_mode = Node.PROCESS_MODE_PAUSABLE
 			can_dash = true;
+			
 	if(is_dashing):
 		velocity = dash_dir*(attack_dash_dist/attack_dash_dur)
 	else:
@@ -153,8 +156,11 @@ func _physics_process(_delta: float) -> void:
 		if(is_swinging):
 			buffered_swing = true;
 		else:
+			is_dashing = false
 			sword_swing()
-		is_dashing = false
+	
+	if Input.is_action_just_pressed("Parry"):
+		_parry()
 			
 func _dash(dist: int, speed: float)-> void:
 	can_dash = false
@@ -162,8 +168,29 @@ func _dash(dist: int, speed: float)-> void:
 	dash_dir = Vector2.RIGHT.rotated(facing_angle)
 	attack_dash_dist = dist
 	attack_dash_dur = speed
+	$HitBox/CollisionShape2D.process_mode = PROCESS_MODE_DISABLED
 	await get_tree().create_timer(speed).timeout
 	is_dashing = false
+	$HitBox/CollisionShape2D.process_mode = Node.PROCESS_MODE_INHERIT
+	if(!is_swinging):
+		self.process_mode = Node.PROCESS_MODE_DISABLED
+	
+func _parry()-> void:
+	var parry : Node2D = $SwordSwing/Parry
+	parry.rotation = facing_angle - PI/2
+	$SwordSwing.visible = true
+	$SwordSwing/Combo1.visible = false
+	$SwordSwing/Combo2.visible = false
+	$SwordSwing/Combo3.visible = false
+	parry.visible = true
+	var shape = parry.get_node("CollisionShape2D")
+	var anim = parry.get_node(("parry_anim"))
+	shape.set_deferred("disabled", false)
+	anim.play("parry")
+	await anim.animation_finished
+	$SwordSwing.visible = false
+	parry.visible = false
+	shape.set_deferred("disabled", true)
 	
 func sword_swing() -> void:
 	is_swinging = true
@@ -191,9 +218,10 @@ func sword_swing() -> void:
 		shape.set_deferred("disabled", false)
 		anim.play(anim_name)
 		if(use_combo1):
-			_dash(10, 0.1)
+			_dash(16, 0.12)
 		else:
-			_dash(20, 0.1)
+			_dash(32, 0.12)
+		can_dash = true
 		velocity = Vector2.ZERO;
 		await anim.animation_finished
 		shape.set_deferred("disabled", true)
@@ -220,8 +248,8 @@ func shoot():
 	main.add_child.call_deferred(instance)
 	
 func take_damage(amount: int):
-	if(is_dashing):
-		return
+	#if(is_dashing):
+	#	return
 	health = clampi(health - amount, 0, 100)
 	health_bar.value = health
 	
@@ -340,3 +368,4 @@ func _update_sort() -> void:
 			layer.y_sort_origin = (h - elevation - 1) * 100000
 		else:
 			layer.y_sort_origin = int(TILE * (h - elevation) - TILE / 2 - FEET.y)
+# Replace with function body.

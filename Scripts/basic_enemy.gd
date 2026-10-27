@@ -67,4 +67,6 @@ func _on_hit_box_area_entered(area: Area2D) -> void:
 		take_damage(20)
 	elif area.is_in_group("Combo3"):
 		take_damage(50)
+	elif area.is_in_group("Parry"):
+		take_damage(0)
 		
