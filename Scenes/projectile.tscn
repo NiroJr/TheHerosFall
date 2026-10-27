@@ -100,9 +100,11 @@ wait_time = 3.0
 autostart = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=251493798]
+visible = false
 shape = SubResource("CircleShape2D_pqcdl")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=587561607]
+visible = false
 collision_mask = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=687197672]

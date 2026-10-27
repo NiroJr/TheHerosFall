@@ -50,7 +50,7 @@ func take_damage(amount: int):
 		queue_free()
 	#knockback on attacks
 	var tween = create_tween()
-	var target_position = position + direction*-40
+	var target_position = position + direction*-20
 	tween.tween_property(self, "position", target_position, 0.25)
 
 
