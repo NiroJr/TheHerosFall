@@ -51,7 +51,6 @@ sprite_frames = SubResource("SpriteFrames_68yga")
 animation = &"moving"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=399873067]
-visible = false
 scale = Vector2(1.5, 1.5)
 shape = SubResource("RectangleShape2D_xrik0")
 
@@ -64,7 +63,6 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_fecjr")
 show_percentage = false
 
 [node name="HitBox" type="Area2D" parent="." unique_id=131301359 groups=["Enemy"]]
-visible = false
 collision_layer = 4
 collision_mask = 45
 

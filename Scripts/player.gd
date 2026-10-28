@@ -162,8 +162,6 @@ func _physics_process(_delta: float) -> void:
 	if Input.is_action_just_pressed("Parry"):
 		_parry()
 
-	if($SwordSwing/Parry/parry_anim.frame == 4):
-		$SwordSwing/Parry/CollisionShape2D.set_deferred("disabled", false)
 			
 func _dash(dist: int, speed: float)-> void:
 	can_dash = false
@@ -188,6 +186,10 @@ func _parry()-> void:
 	var shape = parry.get_node("CollisionShape2D")
 	var anim = parry.get_node(("parry_anim"))
 	anim.play("parry")
+	while (anim.is_playing() && anim.frame < 4):
+		await anim.frame_changed
+	if(anim.is_playing()):
+		shape.set_deferred("disabled", false)
 	await anim.animation_finished
 	$SwordSwing.visible = false
 	parry.visible = false

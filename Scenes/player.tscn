@@ -308,7 +308,6 @@ process_mode = 1
 collision_mask = 12
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=565094471]
-visible = false
 scale = Vector2(0.5, 0.5)
 shape = SubResource("RectangleShape2D_it0lf")
 
