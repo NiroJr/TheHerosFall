@@ -180,7 +180,7 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fkwtr"]
-radius = 16.124516
+radius = 20.024984
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_i5tie"]
 animations = [{
@@ -260,28 +260,36 @@ animations = [{
 "speed": 18.0
 }, {
 "frames": [{
-"duration": 1.0,
-"texture": ExtResource("11_qpa8y")
-}, {
-"duration": 1.0,
-"texture": ExtResource("12_sbwqj")
-}, {
-"duration": 1.0,
-"texture": ExtResource("13_xwi16")
-}, {
-"duration": 1.0,
-"texture": ExtResource("14_sweqm")
-}, {
-"duration": 1.0,
-"texture": ExtResource("15_ph33w")
-}, {
-"duration": 1.0,
+"duration": 1.5,
 "texture": ExtResource("16_7ldla")
 }],
 "loop": 0,
+"name": &"parried",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 4.0,
+"texture": ExtResource("11_qpa8y")
+}, {
+"duration": 4.0,
+"texture": ExtResource("12_sbwqj")
+}, {
+"duration": 4.0,
+"texture": ExtResource("13_xwi16")
+}, {
+"duration": 4.0,
+"texture": ExtResource("15_ph33w")
+}, {
+"duration": 12.0,
+"texture": ExtResource("14_sweqm")
+}],
+"loop": 0,
 "name": &"parry",
-"speed": 12.0
+"speed": 60.0
 }]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r7t2e"]
+size = Vector2(34, 42)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8gbba"]
 bg_color = Color(1, 0, 0, 1)
@@ -369,18 +377,16 @@ animation = &"Combo1"
 offset = Vector2(0, -5)
 
 [node name="Parry" type="Area2D" parent="SwordSwing" unique_id=121541716 groups=["Parry"]]
-visible = false
+collision_layer = 32
 collision_mask = 12
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SwordSwing/Parry" unique_id=24537388]
-position = Vector2(0, 10)
-shape = SubResource("CircleShape2D_fkwtr")
+position = Vector2(0, 5)
+shape = SubResource("RectangleShape2D_r7t2e")
 
 [node name="parry_anim" type="AnimatedSprite2D" parent="SwordSwing/Parry" unique_id=303857955]
 sprite_frames = SubResource("SpriteFrames_i5tie")
-animation = &"parry"
-frame = 5
-frame_progress = 1.0
+animation = &"parried"
 offset = Vector2(0, 5)
 
 [node name="Combo" type="Timer" parent="." unique_id=741614805]
@@ -398,4 +404,5 @@ offset_bottom = 28.0
 theme_override_styles/fill = SubResource("StyleBoxFlat_8gbba")
 show_percentage = false
 
+[connection signal="area_entered" from="SwordSwing/Parry" to="." method="_on_parry_area_entered"]
 [connection signal="timeout" from="Combo" to="." method="_on_combo_timeout"]

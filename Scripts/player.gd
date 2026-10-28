@@ -161,6 +161,9 @@ func _physics_process(_delta: float) -> void:
 	
 	if Input.is_action_just_pressed("Parry"):
 		_parry()
+
+	if($SwordSwing/Parry/parry_anim.frame == 4):
+		$SwordSwing/Parry/CollisionShape2D.set_deferred("disabled", false)
 			
 func _dash(dist: int, speed: float)-> void:
 	can_dash = false
@@ -177,7 +180,6 @@ func _dash(dist: int, speed: float)-> void:
 	
 func _parry()-> void:
 	var parry : Node2D = $SwordSwing/Parry
-	parry.rotation = facing_angle - PI/2
 	$SwordSwing.visible = true
 	$SwordSwing/Combo1.visible = false
 	$SwordSwing/Combo2.visible = false
@@ -185,13 +187,15 @@ func _parry()-> void:
 	parry.visible = true
 	var shape = parry.get_node("CollisionShape2D")
 	var anim = parry.get_node(("parry_anim"))
-	shape.set_deferred("disabled", false)
 	anim.play("parry")
 	await anim.animation_finished
 	$SwordSwing.visible = false
 	parry.visible = false
 	shape.set_deferred("disabled", true)
-	
+
+func _on_parry_area_entered(area: Area2D) -> void:
+	$SwordSwing/Parry/parry_anim.play("parried")
+
 func sword_swing() -> void:
 	is_swinging = true
 	while true:
@@ -207,6 +211,7 @@ func sword_swing() -> void:
 
 		$SwordSwing/Combo1.visible = use_combo1
 		$SwordSwing/Combo3.visible = not use_combo1
+		$SwordSwing/Parry.visible = false
 
 		combo_node.rotation = facing_angle - PI/2
 		# Mirror on the second hit, reset on the others

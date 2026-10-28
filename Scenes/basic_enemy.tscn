@@ -66,7 +66,7 @@ show_percentage = false
 [node name="HitBox" type="Area2D" parent="." unique_id=131301359 groups=["Enemy"]]
 visible = false
 collision_layer = 4
-collision_mask = 13
+collision_mask = 45
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=637691548]
 scale = Vector2(1.5, 1.5)
