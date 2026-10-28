@@ -1,4 +1,4 @@
-extends CharacterBody2D
+extends ElevationBody
 
 @onready var main = get_tree().current_scene
 @onready var projectile = load("res://Scenes/projectile.tscn")
@@ -24,26 +24,8 @@ var health := 100
 @onready var health_bar : ProgressBar = $HUD/HealthBar
 
 var enemies_hit: Array[Node] = []
-const TILE := 16.0
-const STEP_UP_SPEED := 160.0
-const GRAVITY := 800.0
-const FEET := Vector2(0, 28) #feet relative to player
-const FOOT_SIZE := Vector2(6, 3) #feet radius
-const FALL_LIMIT := -160.0 #void detection
-const CAN_FALL_INTO_VOID := false
-const STEP_UP_PUSH := 8.0
 
-enum { WALK, STEP_UP, FALL }  
-var state := WALK
-var elevation := 0
-var z_height := 0.0
-var z_velocity := 0.0
-var push_left := Vector2.ZERO
-var floors: Node = null
-var spawn_position := Vector2.ZERO
-var spawn_elevation := 0
-@onready var sprite_base_y: float = $PlayerSprite.position.y
-@onready var swing_base_y: float = $SwordSwing.position.y
+
 
 func _ready() -> void:
 	$SwordSwing.visible = false
@@ -53,12 +35,9 @@ func _ready() -> void:
 	$SwordSwing/Combo2/CollisionShape2D.set_deferred("disabled", true)
 	$SwordSwing/Combo3/CollisionShape2D.set_deferred("disabled", true)
 	$SwordSwing/Parry/CollisionShape2D.set_deferred("disabled", true)
-	floors = get_tree().current_scene.get_node_or_null("Floors")
-	if floors:
-		elevation = _start_elevation()
-		_update_sort()
-	spawn_position = global_position
-	spawn_elevation = elevation
+	feet = Vector2(0, 14)
+	setup_elevation([$PlayerSprite, $SwordSwing])
+	_update_sort()
 	timer.wait_time = 1
 	timer.one_shot = true
 	timer.timeout.connect(_on_charge_timeout)
@@ -249,6 +228,7 @@ func _on_combo_timeout() -> void:
 func shoot():
 	var instance = projectile.instantiate()
 	var angle = (get_global_mouse_position() - global_position).angle()
+	instance.elevation = elevation
 	instance.dir = angle             
 	instance.spawnPos = global_position
 	instance.spawnRot = angle        
@@ -260,119 +240,29 @@ func take_damage(amount: int):
 	health = clampi(health - amount, 0, 100)
 	health_bar.value = health
 	
-func move_with_elevation(delta: float) -> void:
-	if floors == null:
-		move_and_slide()
-		return
-	match state:
-		WALK:
-			var step := velocity * delta
-			if not _can_move(Vector2(step.x, 0)):
-				velocity.x = 0
-			if not _can_move(Vector2(0, step.y)):
-				velocity.y = 0
-			move_and_slide()
-			_check_level_change()
-		STEP_UP:
-			z_height = move_toward(z_height, 0.0, STEP_UP_SPEED * delta)
-			if push_left != Vector2.ZERO:
-				var move := push_left.limit_length(STEP_UP_SPEED * STEP_UP_PUSH / TILE * delta)
-				if _ground_level(_feet_world() + move + move.sign() * FOOT_SIZE) == elevation:
-					move_and_collide(move)
-					push_left -= move
-				else:
-					push_left = Vector2.ZERO
-			if z_height == 0.0 and push_left == Vector2.ZERO:
-				state = WALK
-		FALL:
-			z_velocity -= GRAVITY * delta
-			z_height += z_velocity * delta
-			if _ground_level(_feet_world()) >= 0:
-				if z_height <= 0.0:
-					_land()
-			elif z_height < FALL_LIMIT:
-				_respawn()
-	_update_visuals()
-
-func _feet_world() -> Vector2:
-	return global_position + FEET + Vector2(0, elevation * TILE)
-
-func _is_floor(h: int, point: Vector2) -> bool:
-	var layer := floors.get_child(h) as TileMapLayer
-	var cell := layer.local_to_map(layer.to_local(point))
-	var data := layer.get_cell_tile_data(cell)
-	return data != null and data.get_custom_data("is_floor")
-
-func _ground_level(world: Vector2) -> int:
-	for h in range(floors.get_child_count() - 1, -1, -1):
-		if _is_floor(h, world - Vector2(0, h * TILE)):
-			return h
-	return -1
-	
-func _start_elevation() -> int:
-	for h in range(floors.get_child_count() - 1, -1, -1):
-		if _is_floor(h, global_position + FEET):
-			return h
-	return 0
-	
-func _can_move(step: Vector2) -> bool:
-	if step == Vector2.ZERO:
-		return true
-	var probe := _feet_world() + step + step.sign() * FOOT_SIZE
-	var ground := _ground_level(probe)
-	if ground < 0:
-		return CAN_FALL_INTO_VOID
-	return ground <= elevation + 1
-
-
-func _check_level_change() -> void:
-	var ground := _ground_level(_feet_world())
-	if ground == elevation:
-		return
-	if ground < 0:
-		state = FALL
-		z_velocity = 0.0
-		return
-	var shift := (ground - elevation) * TILE
-	global_position.y -= shift
+ 
+func _level_changed(shift: float) -> void:
 	$Camera2D.position.y += shift
-	z_height = -shift
-	elevation = ground
 	_update_sort()
-	z_velocity = 0.0
-	if shift > 0:
-		state = STEP_UP
-		push_left = velocity.normalized() * STEP_UP_PUSH
-	else:
-		state = FALL
-	
-func _land() -> void:
-	z_height = 0.0
-	z_velocity = 0.0
-	state = WALK
-
-
-func _respawn() -> void:
-	global_position = spawn_position
-	elevation = spawn_elevation
+ 
+ 
+func _fell_into_void() -> void:
+	super()
 	$Camera2D.position.y = 0
-	_land()
 	_update_sort()
-
+ 
+ 
 func _update_visuals() -> void:
-	$PlayerSprite.position.y = sprite_base_y - z_height
-	$SwordSwing.position.y = swing_base_y - z_height
+	super()
 	$Camera2D.position.y = move_toward($Camera2D.position.y, 0, 120 * get_physics_process_delta_time())
 	$Shadow.scale = Vector2.ONE * clampf(1.0 - z_height / 64.0, 0.5, 1.0)
-	$Shadow.visible = floors == null or _ground_level(_feet_world()) >= 0
-	
+	$Shadow.visible = floor_layers.is_empty() or _ground_level(_feet_world()) >= 0
+ 
+ 
 func _update_sort() -> void:
-	if floors == null:
-		return
-	for h in range(1, floors.get_child_count()):
-		var layer := floors.get_child(h) as TileMapLayer
+	for h in range(1, floor_layers.size()):
+		var layer := floor_layers[h]
 		if h <= elevation:
 			layer.y_sort_origin = (h - elevation - 1) * 100000
 		else:
-			layer.y_sort_origin = int(TILE * (h - elevation) - TILE / 2 - FEET.y)
-# Replace with function body.
+			layer.y_sort_origin = int(TILE * (h - elevation) - TILE / 2 - feet.y)

@@ -6,6 +6,7 @@ var dir : float
 var spawnPos : Vector2
 var spawnRot : float
 var shooter : Node2D
+var elevation := 0
 @onready var sprite = $AnimatedSprite2D 
 
 func _ready():
@@ -16,7 +17,7 @@ func _ready():
 	else:
 		global_rotation = spawnRot - PI/2
 		sprite.play("turret");
-
+ 
 func _physics_process(delta):
 	velocity = Vector2.RIGHT.rotated(dir) * speed
 	var collision = move_and_collide(velocity * delta)
@@ -36,6 +37,8 @@ func _on_life_timeout() -> void:
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	var collide = area.get_parent()
+	if _elevation_of(area) != elevation:
+		return
 	if enemy_projectile:
 		if area.is_in_group("PlayerHitBox"):
 			collide.take_damage(1)
@@ -50,4 +53,9 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 	elif(area.is_in_group("Enemy")):
 			collide.take_damage(5)
 			queue_free()
+			
+func _elevation_of(node: Node) -> int:
+	while node != null and not ("elevation" in node):
+		node = node.get_parent()
+	return node.elevation if node != null else elevation
 		

@@ -1,4 +1,4 @@
-extends CharacterBody2D
+extends ElevationBody
 @onready var projectile = load("res://Scenes/projectile.tscn")
 @onready var main = get_tree().current_scene
 @onready var health_bar = $HealthBar
@@ -28,6 +28,8 @@ func _ready() -> void:
 	$PlayerDetection.area_exited.connect(_outOfRange)
 	$PlayerDetection/RayCast2D.add_exception(self)
 	health_bar.value = MAX_HEALTH
+	feet = Vector2(0, 5)
+	setup_elevation()
 
 func _physics_process(_delta: float) -> void:		
 	if(player):
@@ -54,6 +56,9 @@ func _outOfRange(body: Area2D) -> void:
 		line_of_sight = false
 
 func check_sight_line() -> void:
+	if player.get_parent().elevation != elevation:
+		line_of_sight = false
+		return
 	$PlayerDetection/RayCast2D.target_position = $PlayerDetection/RayCast2D.to_local(player.global_position)
 	$PlayerDetection/RayCast2D.force_raycast_update()
 	if($PlayerDetection/RayCast2D.is_colliding() && $PlayerDetection/RayCast2D.get_collider() == player):
@@ -76,6 +81,7 @@ func shoot() -> void:
 	instance.enemy_projectile = true
 	instance.shooter = self
 	instance.speed = 200
+	instance.elevation = elevation
 	instance.set_collision_mask_value(3, false)
 	main.add_child.call_deferred(instance)
 	$Fire.start()
@@ -91,6 +97,8 @@ func take_damage(amount: int):
 		queue_free()
 
 func _on_hit_box_area_entered(area: Area2D) -> void:
+	if get_tree().get_first_node_in_group("player").elevation != elevation:
+		return
 	player.get_parent().enemies_hit.append(self)
 	if area.is_in_group("Combo1"):
 		take_damage(10)
