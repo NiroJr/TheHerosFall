@@ -1,6 +1,6 @@
 extends Node2D
 
-@export var radius := 16.0;
+@export var radius := 8.0;
 @export var color := Color(0, 0, 0, 0.35)
 
 func _draw() -> void:

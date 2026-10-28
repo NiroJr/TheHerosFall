@@ -386,7 +386,6 @@ shape = SubResource("RectangleShape2D_r7t2e")
 [node name="parry_anim" type="AnimatedSprite2D" parent="SwordSwing/Parry" unique_id=303857955]
 sprite_frames = SubResource("SpriteFrames_i5tie")
 animation = &"parried"
-offset = Vector2(0, 5)
 
 [node name="Combo" type="Timer" parent="." unique_id=741614805]
 ignore_time_scale = true
