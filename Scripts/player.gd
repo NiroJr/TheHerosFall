@@ -2,9 +2,8 @@ extends CharacterBody2D
 
 @onready var main = get_tree().current_scene
 @onready var projectile = load("res://Scenes/projectile.tscn")
-@onready var timer: Timer = get_parent().get_node("ShootCooldown")
-var crosshair = load("res://Assets/MCSprites/aimReticle/aimReticle1.png")
-var crosshairReady = load("res://Assets/MCSprites/aimReticle/aimReticle2.png")
+@onready var timer: Timer = get_node("ShootCooldown")
+@onready var crosshair: Sprite2D = get_node("Cursor")
 var is_fully_charged := false
 var facing_angle := 0.0
 const SPEED = 300.0
@@ -59,14 +58,11 @@ func _ready() -> void:
 		_update_sort()
 	spawn_position = global_position
 	spawn_elevation = elevation
-	timer.wait_time = 1
-	timer.one_shot = true
 	timer.timeout.connect(_on_charge_timeout)
-	Input.set_custom_mouse_cursor(crosshair, Input.CURSOR_ARROW, Vector2(16, 16))
 
 func _on_charge_timeout() -> void:
 	is_fully_charged = true
-	Input.set_custom_mouse_cursor(crosshairReady, Input.CURSOR_ARROW, Vector2(16, 16))
+	crosshair.texture = load("res://Assets/MCSprites/aimReticle/aimReticle1.png")
 
 const Animations := [
 	"right_walk",
@@ -148,7 +144,7 @@ func _physics_process(_delta: float) -> void:
 	else:
 		if is_fully_charged:
 			shoot()
-			Input.set_custom_mouse_cursor(crosshair, Input.CURSOR_ARROW, Vector2(16, 16))
+			crosshair.texture = load("res://Assets/MCSprites/aimReticle/aimReticle2.png")
 		timer.stop()
 		is_fully_charged = false
 	

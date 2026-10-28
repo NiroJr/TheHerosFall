@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://b1cesy271wjp0"]
+
+[ext_resource type="Texture2D" uid="uid://b4b0n3gxq383s" path="res://Assets/MCSprites/aimReticle/aimReticle2.png" id="1_44v1i"]
+[ext_resource type="Script" uid="uid://btp88reri6afh" path="res://Scenes/reticle.gd" id="2_q3m2b"]
+
+[node name="Cursor" type="Sprite2D" unique_id=549343459]
+z_index = 4096
+texture = ExtResource("1_44v1i")
+script = ExtResource("2_q3m2b")
