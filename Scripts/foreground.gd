@@ -4,7 +4,7 @@ var player : Node2D
 @export_range(0.0,1.0) 
 var fade_alpha := 0.3
 @export_range(0, 8) 
-var detection_depth := 0
+var detection_depth := -1
 
 var cell_groups: Dictionary = {}
 var groups: Array = []
@@ -50,6 +50,9 @@ func build_groups() -> void:
 
 
 func _process(_delta: float) -> void:
+	if player == null:
+		player = get_tree().get_first_node_in_group("player")
+		return
 	
 	var player_cell: Vector2i = local_to_map(
 		to_local(player.global_position)
