@@ -312,7 +312,6 @@ scale = Vector2(0.5, 0.5)
 shape = SubResource("RectangleShape2D_it0lf")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=396957255]
-visible = false
 position = Vector2(0, 14)
 scale = Vector2(0.5, 0.5)
 shape = SubResource("RectangleShape2D_i5tie")
@@ -322,6 +321,7 @@ sprite_frames = SubResource("SpriteFrames_xrrqc")
 animation = &"downRight_idle"
 
 [node name="SwordSwing" type="Node2D" parent="." unique_id=794402511]
+visible = false
 z_index = 10
 z_as_relative = false
 

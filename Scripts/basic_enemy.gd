@@ -55,7 +55,7 @@ func take_damage(amount: int):
 	if(health <= 0):
 		queue_free()
 	#knockback on attacks
-	knockback = -direction * 160
+	knockback = -direction * 240
 	
 
 

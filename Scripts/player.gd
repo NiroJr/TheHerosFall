@@ -144,10 +144,10 @@ func _dash(dist: int, speed: float)-> void:
 	dash_dir = Vector2.RIGHT.rotated(facing_angle)
 	attack_dash_dist = dist
 	attack_dash_dur = speed
-	$HitBox/CollisionShape2D.process_mode = PROCESS_MODE_DISABLED
+	$HitBox.process_mode = PROCESS_MODE_DISABLED if !is_swinging else PROCESS_MODE_PAUSABLE
 	await get_tree().create_timer(speed).timeout
+	$HitBox.process_mode = Node.PROCESS_MODE_PAUSABLE
 	is_dashing = false
-	$HitBox/CollisionShape2D.process_mode = Node.PROCESS_MODE_INHERIT
 	if(!is_swinging):
 		self.process_mode = Node.PROCESS_MODE_DISABLED
 	

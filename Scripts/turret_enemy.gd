@@ -51,7 +51,8 @@ func detected(body: Area2D) -> void:
 		player = body
 
 func _outOfRange(body: Area2D) -> void:
-	if(body == player):
+	var to_player: Vector2 = world_offset_to(body.get_parent())
+	if(body == player && to_player.length() > 6*13.04):
 		player = null
 		line_of_sight = false
 
@@ -98,6 +99,8 @@ func take_damage(amount: int):
 
 func _on_hit_box_area_entered(area: Area2D) -> void:
 	if get_tree().get_first_node_in_group("player").elevation != elevation:
+		return
+	if(player == null):
 		return
 	player.get_parent().enemies_hit.append(self)
 	if area.is_in_group("Combo1"):

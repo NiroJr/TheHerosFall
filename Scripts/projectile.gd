@@ -44,7 +44,6 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 			collide.take_damage(1)
 			queue_free()
 		elif(area.is_in_group("Parry")):
-			print("area:", area)
 			dir = dir + PI
 			global_rotation = global_rotation+ PI
 			self.enemy_projectile = false
