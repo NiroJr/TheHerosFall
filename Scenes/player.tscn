@@ -44,6 +44,8 @@
 [ext_resource type="Texture2D" uid="uid://dlb7skgrk5eqp" path="res://Assets/MCSprites/characterSprites/WalkingSprites/right&left/MainChar41.png" id="21_3vlem"]
 [ext_resource type="Texture2D" uid="uid://1rcvoapcf21h" path="res://Assets/MCSprites/characterSprites/WalkingSprites/right&left/MainChar42.png" id="22_8eeqe"]
 [ext_resource type="Texture2D" uid="uid://bnvn05l8nedaj" path="res://Assets/MCSprites/characterSprites/WalkingSprites/right&left/MainChar43.png" id="23_5x828"]
+[ext_resource type="Texture2D" uid="uid://b4b0n3gxq383s" path="res://Assets/MCSprites/aimReticle/aimReticle2.png" id="45_ax3m3"]
+[ext_resource type="Script" uid="uid://btp88reri6afh" path="res://Scripts/reticle.gd" id="46_3vlem"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_it0lf"]
 size = Vector2(32.25, 61.875)
@@ -401,6 +403,14 @@ offset_right = 121.0
 offset_bottom = 28.0
 theme_override_styles/fill = SubResource("StyleBoxFlat_8gbba")
 show_percentage = false
+
+[node name="ShootCooldown" type="Timer" parent="." unique_id=1339821598]
+one_shot = true
+
+[node name="Cursor" type="Sprite2D" parent="." unique_id=760588539]
+z_index = 4096
+texture = ExtResource("45_ax3m3")
+script = ExtResource("46_3vlem")
 
 [connection signal="area_entered" from="SwordSwing/Parry" to="." method="_on_parry_area_entered"]
 [connection signal="timeout" from="Combo" to="." method="_on_combo_timeout"]

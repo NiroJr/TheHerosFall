@@ -13,6 +13,7 @@ const FALL_LIMIT := -160.0
 var feet := Vector2(0, 14) #feet to the characters middle point
 var foot_size := Vector2(6, 3) 
 var can_fall_into_void := false # true = can fall into void
+var skip_floor_check := false
 
 enum { WALK, STEP_UP, FALL }
 var state := WALK
@@ -23,6 +24,8 @@ var push_left := Vector2.ZERO
 var floor_layers: Array[TileMapLayer] = []
 var spawn_position := Vector2.ZERO
 var spawn_elevation := 0
+var last_safe_position := Vector2.ZERO
+var last_safe_elevation := 0
 var lift_nodes: Array = []
 var lift_base_y: Array = []
 
@@ -57,13 +60,17 @@ func move_with_elevation(delta: float) -> void:
 		return
 	match state:
 		WALK:
+			if not skip_floor_check and _ground_level(_feet_world()) == elevation:
+				last_safe_position = global_position
+				last_safe_elevation = elevation
 			var step := velocity * delta
 			if not _can_move(Vector2(step.x, 0)):
 				velocity.x = 0
 			if not _can_move(Vector2(0, step.y)):
 				velocity.y = 0
 			move_and_slide()
-			_check_level_change()
+			if not skip_floor_check:
+				_check_level_change()
 		STEP_UP:
 			z_height = move_toward(z_height, 0.0, STEP_UP_SPEED * delta)
 			if push_left != Vector2.ZERO:
@@ -116,6 +123,8 @@ func _can_move(step: Vector2) -> bool:
 		return true
 	var probe := _feet_world() + step + step.sign() * foot_size
 	var ground := _ground_level(probe)
+	if skip_floor_check:
+		return ground <= elevation
 	if ground < 0:
 		return can_fall_into_void
 	return ground <= elevation + 1
@@ -125,6 +134,9 @@ func _check_level_change() -> void:
 	var ground := _ground_level(_feet_world())
 	if ground == elevation:
 		return
+	if ground < elevation:
+		spawn_position = last_safe_position
+		spawn_elevation = last_safe_elevation
 	if ground < 0:
 		state = FALL
 		z_velocity = 0.0

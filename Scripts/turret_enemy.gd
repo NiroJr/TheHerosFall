@@ -83,6 +83,7 @@ func shoot() -> void:
 	instance.shooter = self
 	instance.speed = 200
 	instance.elevation = elevation
+	instance.ground_offset = feet.y
 	instance.set_collision_mask_value(3, false)
 	main.add_child.call_deferred(instance)
 	$Fire.start()

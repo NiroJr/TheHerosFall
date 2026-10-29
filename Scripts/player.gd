@@ -38,6 +38,7 @@ func _ready() -> void:
 	setup_elevation([$PlayerSprite, $SwordSwing])
 	_update_sort()
 	timer.timeout.connect(_on_charge_timeout)
+	can_fall_into_void = true
 
 func _on_charge_timeout() -> void:
 	is_fully_charged = true
@@ -113,6 +114,8 @@ func _physics_process(_delta: float) -> void:
 		$PlayerSprite.stop()
 		$PlayerSprite.play(Animations[sprite_index+8])
 		$PlayerSprite.frame = 0;
+		
+	skip_floor_check = is_dashing
 	move_with_elevation(_delta)
 	
 	var holding := Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT)
@@ -225,6 +228,8 @@ func shoot():
 	var instance = projectile.instantiate()
 	var angle = (get_global_mouse_position() - global_position).angle()
 	instance.elevation = elevation
+	instance.shooter = self
+	instance.ground_offset = feet.y
 	instance.dir = angle             
 	instance.spawnPos = global_position
 	instance.spawnRot = angle        
