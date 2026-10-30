@@ -46,6 +46,7 @@
 [ext_resource type="Texture2D" uid="uid://bnvn05l8nedaj" path="res://Assets/MCSprites/characterSprites/WalkingSprites/right&left/MainChar43.png" id="23_5x828"]
 [ext_resource type="Texture2D" uid="uid://b4b0n3gxq383s" path="res://Assets/MCSprites/aimReticle/aimReticle2.png" id="45_ax3m3"]
 [ext_resource type="Script" uid="uid://btp88reri6afh" path="res://Scripts/reticle.gd" id="46_3vlem"]
+[ext_resource type="Script" uid="uid://7cnvadojo7pc" path="res://Scenes/trajectory.gd" id="47_3vlem"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_it0lf"]
 size = Vector2(32.25, 61.875)
@@ -411,6 +412,9 @@ one_shot = true
 z_index = 4096
 texture = ExtResource("45_ax3m3")
 script = ExtResource("46_3vlem")
+
+[node name="Trajectory" type="Line2D" parent="." unique_id=17269404]
+script = ExtResource("47_3vlem")
 
 [connection signal="area_entered" from="SwordSwing/Parry" to="." method="_on_parry_area_entered"]
 [connection signal="timeout" from="Combo" to="." method="_on_combo_timeout"]

@@ -4,6 +4,7 @@ extends ElevationBody
 @onready var projectile = load("res://Scenes/projectile.tscn")
 @onready var timer: Timer = get_node("ShootCooldown")
 @onready var crosshair: Sprite2D = get_node("Cursor")
+@onready var trajectory: Line2D = get_node("Trajectory")
 var is_fully_charged := false
 var facing_angle := 0.0
 const SPEED = 300.0
@@ -123,12 +124,14 @@ func _physics_process(_delta: float) -> void:
 	if holding:
 		if timer.is_stopped() and not is_fully_charged:
 			timer.start()
+		trajectory.update_trajectory((get_global_mouse_position() - global_position).normalized(), 500.0, get_physics_process_delta_time())
 	else:
 		if is_fully_charged:
 			shoot()
 			crosshair.texture = load("res://Assets/MCSprites/aimReticle/aimReticle2.png")
 		timer.stop()
 		is_fully_charged = false
+		trajectory.clear_points()
 	
 	if Input.is_action_just_pressed("sword_swing"):
 		if(is_swinging):
