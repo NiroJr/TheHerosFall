@@ -121,11 +121,12 @@ scale = Vector2(1.5, 1.5)
 shape = SubResource("RectangleShape2D_it0lf")
 
 [node name="TurretSprite" type="AnimatedSprite2D" parent="." unique_id=1559927905]
-position = Vector2(0, -10)
+position = Vector2(0, -2)
 sprite_frames = SubResource("SpriteFrames_8tom7")
-animation = &"up_right"
+animation = &"down"
 
 [node name="PlayerDetection" type="Area2D" parent="." unique_id=1981254681]
+visible = false
 scale = Vector2(3, 3)
 collision_layer = 16
 
