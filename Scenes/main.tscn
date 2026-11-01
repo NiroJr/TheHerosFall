@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://bwmfdn52i4svu" path="res://Scenes/basic_enemy.tscn" id="3_8gbba"]
 [ext_resource type="PackedScene" uid="uid://bm4o0xwai1isc" path="res://Scenes/turret_enemy.tscn" id="4_21xkr"]
 [ext_resource type="Script" uid="uid://c1ouhp60rfwy" path="res://Scripts/level_exit.gd" id="4_jjvhh"]
+[ext_resource type="PackedScene" uid="uid://bwju7bl5m8f58" path="res://Scenes/mobile_turret.tscn" id="5_6bp64"]
 [ext_resource type="PackedScene" uid="uid://dbo51ckeahp7d" path="res://Scenes/pause_menu.tscn" id="5_kry3j"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kry3j"]
@@ -64,6 +65,8 @@ position = Vector2(1959, -266)
 
 [node name="basicEnemy2" parent="Enemies" unique_id=418855020 instance=ExtResource("3_8gbba")]
 position = Vector2(381, 22)
+
+[node name="mobileTurret" parent="Enemies" unique_id=1484966170 instance=ExtResource("5_6bp64")]
 
 [node name="LevelExit" type="Area2D" parent="." unique_id=1553636488]
 position = Vector2(2014, -156)

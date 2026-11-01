@@ -44,6 +44,7 @@ func _ready() -> void:
 func _on_charge_timeout() -> void:
 	is_fully_charged = true
 	crosshair.texture = load("res://Assets/MCSprites/aimReticle/aimReticle1.png")
+	trajectory.texture = load("res://Assets/MCSprites/aimReticle/aimReticle5.png")
 
 const Animations := [
 	"right_walk",
@@ -129,6 +130,7 @@ func _physics_process(_delta: float) -> void:
 		if is_fully_charged:
 			shoot()
 			crosshair.texture = load("res://Assets/MCSprites/aimReticle/aimReticle2.png")
+			trajectory.texture = load("res://Assets/MCSprites/aimReticle/aimReticle4.png")
 		timer.stop()
 		is_fully_charged = false
 		trajectory.clear_points()
