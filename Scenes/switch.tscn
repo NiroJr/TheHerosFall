@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://dqp6hhsrl2vc0"]
+
+[ext_resource type="Script" uid="uid://bkxgwbse32mvr" path="res://Scripts/switch.gd" id="1_hinho"]
+[ext_resource type="Texture2D" uid="uid://cum3orjcr6hlw" path="res://Assets/PuzzleSprites/switches/switchesAndWires3.png" id="2_swbo4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7mnnh"]
+size = Vector2(12, 24)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gdppa"]
+size = Vector2(12, 7.5)
+
+[node name="Switch" type="CharacterBody2D" unique_id=1056936827]
+collision_layer = 2
+collision_mask = 0
+motion_mode = 1
+script = ExtResource("1_hinho")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=281987715]
+texture = ExtResource("2_swbo4")
+region_enabled = true
+region_rect = Rect2(0, 0, 32, 32)
+
+[node name="HitBox" type="Area2D" parent="." unique_id=292311592]
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=1155029612]
+shape = SubResource("RectangleShape2D_7mnnh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1799835409]
+position = Vector2(0, 9)
+shape = SubResource("RectangleShape2D_gdppa")

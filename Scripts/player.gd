@@ -39,7 +39,6 @@ func _ready() -> void:
 	setup_elevation([$PlayerSprite, $SwordSwing])
 	_update_sort()
 	timer.timeout.connect(_on_charge_timeout)
-	can_fall_into_void = true
 
 func _on_charge_timeout() -> void:
 	is_fully_charged = true

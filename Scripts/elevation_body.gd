@@ -12,7 +12,7 @@ const FALL_LIMIT := -160.0
 
 var feet := Vector2(0, 14) #feet to the characters middle point
 var foot_size := Vector2(6, 3) 
-var can_fall_into_void := false # true = can fall into void
+@export var can_fall_into_void := false # true = can fall into void
 var skip_floor_check := false
 
 enum { WALK, STEP_UP, FALL }
