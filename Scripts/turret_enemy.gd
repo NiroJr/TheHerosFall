@@ -27,6 +27,7 @@ func _ready() -> void:
 	$PlayerDetection.area_entered.connect(detected)
 	$PlayerDetection.area_exited.connect(_outOfRange)
 	$PlayerDetection/RayCast2D.add_exception(self)
+	$Alert.visible = false
 	health_bar.value = MAX_HEALTH
 	feet = Vector2(0, 5)
 	setup_elevation()
@@ -46,9 +47,14 @@ func _physics_process(_delta: float) -> void:
 		line_of_sight = false
 		$AnimatedSprite2D.stop()
 		$AnimatedSprite2D.frame = 0;
+		
 func detected(body: Area2D) -> void:
 	if(body.is_in_group("PlayerHitBox")):
 		player = body
+		$Alert.visible = true
+		$Alert.play("default")
+		await $Alert.animation_finished
+		$Alert.visible = false
 
 func _outOfRange(body: Area2D) -> void:
 	var to_player: Vector2 = world_offset_to(body.get_parent())

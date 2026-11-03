@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://cowf82id2ec13" path="res://Assets/EnemySprites/MovingEnemy/SpinningSawEnemy2.png" id="3_6cefa"]
 [ext_resource type="Texture2D" uid="uid://darg7jr8cw41y" path="res://Assets/EnemySprites/MovingEnemy/SpinningSawEnemy3.png" id="4_6pvwk"]
 [ext_resource type="Texture2D" uid="uid://poyuwxiwy0re" path="res://Assets/EnemySprites/MovingEnemy/SpinningSawEnemy4.png" id="5_dhrsy"]
+[ext_resource type="Texture2D" uid="uid://dmh2ey3aw70mi" path="res://Assets/icon.svg" id="6_6cefa"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_68yga"]
 animations = [{
@@ -40,6 +41,17 @@ bg_color = Color(1, 0, 0, 1)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_it0lf"]
 size = Vector2(24, 18)
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_6pvwk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_6cefa")
+}],
+"loop": 0,
+"name": &"default",
+"speed": 5.0
+}]
+
 [node name="basicEnemy" type="CharacterBody2D" unique_id=42976722]
 collision_mask = 2
 motion_mode = 1
@@ -69,5 +81,10 @@ collision_mask = 45
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=637691548]
 scale = Vector2(1.5, 1.5)
 shape = SubResource("RectangleShape2D_it0lf")
+
+[node name="Alert" type="AnimatedSprite2D" parent="." unique_id=813022064]
+position = Vector2(0, -25)
+scale = Vector2(0.05957031, 0.18945313)
+sprite_frames = SubResource("SpriteFrames_6pvwk")
 
 [connection signal="area_entered" from="HitBox" to="." method="_on_hit_box_area_entered"]

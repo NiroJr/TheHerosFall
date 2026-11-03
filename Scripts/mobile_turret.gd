@@ -58,8 +58,10 @@ func _physics_process(delta):
 
 	if velocity == Vector2.ZERO:
 		$Sprite2D.animation = "default"
+		$Sprite2D.play("default")
 	else:
 		$Sprite2D.animation = "moving"
+		$Sprite2D.play("moving")
 
 	velocity += knockback
 	knockback = knockback.move_toward(Vector2.ZERO, 640 * delta)
@@ -78,10 +80,13 @@ func update_turret() -> void:
 		$TurretSprite.stop()
 		$TurretSprite.frame = 0
 
-
 func detected(body: Area2D) -> void:
 	if body.is_in_group("PlayerHitBox"):
 		player_box = body
+		$Alert.visible = true
+		$Alert.play("default")
+		await $Alert.animation_finished
+		$Alert.visible = false
 
 
 func _out_of_range(body: Area2D) -> void:

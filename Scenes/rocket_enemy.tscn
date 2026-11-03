@@ -1,0 +1,180 @@
+[gd_scene format=3 uid="uid://ci18wdckv44mw"]
+
+[ext_resource type="Script" uid="uid://b6xjtquiwwv3e" path="res://Scripts/rocket_enemy.gd" id="1_635ss"]
+[ext_resource type="Texture2D" uid="uid://cj0xjrxxhtv53" path="res://Assets/EnemySprites/ExplosionLauncher/explosionLauncher5.png" id="1_k8ujw"]
+[ext_resource type="Texture2D" uid="uid://cfiddkd1odrdg" path="res://Assets/EnemySprites/ExplosionLauncher/explosionLauncher6.png" id="2_635ss"]
+[ext_resource type="Script" uid="uid://cknqx6or5yjk5" path="res://Scripts/rocket.gd" id="2_iyasj"]
+[ext_resource type="Texture2D" uid="uid://dta637r2abja8" path="res://Assets/EnemySprites/ExplosionLauncher/explosionLauncher7.png" id="3_iyasj"]
+[ext_resource type="Texture2D" uid="uid://bgcpxf0gheh2c" path="res://Assets/EnemySprites/ExplosionLauncher/explosionLauncher9.png" id="4_ik1pi"]
+[ext_resource type="Texture2D" uid="uid://bbnut4t3iciuf" path="res://Assets/EnemySprites/ExplosionLauncher/explosionLauncher1.png" id="5_dn8ef"]
+[ext_resource type="Texture2D" uid="uid://dhp0dgxhymwgq" path="res://Assets/EnemySprites/ExplosionLauncher/explosionLauncher2.png" id="6_l6p8e"]
+[ext_resource type="Texture2D" uid="uid://kb4ra004ltc5" path="res://Assets/EnemySprites/ExplosionLauncher/explosionLauncher3.png" id="7_lfgww"]
+[ext_resource type="Texture2D" uid="uid://bdk6hysy17qi" path="res://Assets/EnemySprites/ExplosionLauncher/explosionLauncher4.png" id="8_ol67q"]
+[ext_resource type="Texture2D" uid="uid://c2rsprske1038" path="res://Assets/EnemySprites/ExplosionLauncher/explosionLauncher11.png" id="9_8hr43"]
+[ext_resource type="Texture2D" uid="uid://cunvh6coxsifa" path="res://Assets/EnemySprites/ExplosionLauncher/explosionLauncher12.png" id="10_vxm5m"]
+[ext_resource type="Texture2D" uid="uid://ctixq0jo3y6n7" path="res://Assets/EnemySprites/ExplosionLauncher/explosionLauncher13.png" id="11_38c0y"]
+[ext_resource type="Texture2D" uid="uid://k7vekksox3nc" path="res://Assets/EnemySprites/ExplosionLauncher/explosionLauncher14.png" id="12_2en5o"]
+[ext_resource type="Texture2D" uid="uid://dh4p4qbsv21kj" path="res://Assets/EnemySprites/ExplosionLauncher/explosionLauncher15.png" id="13_4fwin"]
+[ext_resource type="Texture2D" uid="uid://cey07lr4gcg0t" path="res://Assets/EnemySprites/ExplosionLauncher/explosionLauncher16.png" id="14_pcppo"]
+[ext_resource type="Texture2D" uid="uid://talnfv1vnljo" path="res://Assets/EnemySprites/ExplosionLauncher/explosionLauncher17.png" id="15_wxvah"]
+[ext_resource type="Texture2D" uid="uid://dfag00n51jmhc" path="res://Assets/EnemySprites/ExplosionLauncher/explosionLauncher18.png" id="16_tungf"]
+[ext_resource type="Texture2D" uid="uid://dfljbl5m7j2fi" path="res://Assets/EnemySprites/ExplosionLauncher/explosionLauncher19.png" id="17_k2a5j"]
+[ext_resource type="Texture2D" uid="uid://b7hn1v25b1owu" path="res://Assets/EnemySprites/ExplosionLauncher/explosionLauncher20.png" id="18_xpvgw"]
+[ext_resource type="Texture2D" uid="uid://c6wln45wos8fa" path="res://Assets/EnemySprites/ExplosionLauncher/explosionLauncher21.png" id="19_x18fx"]
+[ext_resource type="Texture2D" uid="uid://db76kaj4r6dyi" path="res://Assets/EnemySprites/ExplosionLauncher/explosionLauncher22.png" id="20_mm13i"]
+[ext_resource type="Texture2D" uid="uid://dmh2ey3aw70mi" path="res://Assets/icon.svg" id="23_ik1pi"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_i5tie"]
+radius = 6.0
+height = 20.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xrrqc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_k8ujw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_635ss")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_iyasj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_ik1pi")
+}],
+"loop": 0,
+"name": &"Land",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_dn8ef")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_l6p8e")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_lfgww")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_ol67q")
+}],
+"loop": 1,
+"name": &"Launch",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vikc2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_8hr43")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_vxm5m")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_38c0y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_2en5o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_4fwin")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_pcppo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_wxvah")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_tungf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_k2a5j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_xpvgw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_x18fx")
+}],
+"loop": 1,
+"name": &"Firing",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("20_mm13i")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_iyasj"]
+radius = 8.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i5tie"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_dn8ef"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("23_ik1pi")
+}],
+"loop": 0,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="CharacterBody2D" type="CharacterBody2D" unique_id=855117547]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_635ss")
+
+[node name="Rocket" type="Area2D" parent="." unique_id=955003827]
+visible = false
+collision_layer = 4
+script = ExtResource("2_iyasj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Rocket" unique_id=788104593]
+shape = SubResource("CapsuleShape2D_i5tie")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Rocket" unique_id=2128954881]
+scale = Vector2(0.5, 0.421875)
+sprite_frames = SubResource("SpriteFrames_xrrqc")
+animation = &"Launch"
+
+[node name="Hatch_Launcher" type="AnimatedSprite2D" parent="." unique_id=779601192]
+scale = Vector2(0.71875, 0.671875)
+sprite_frames = SubResource("SpriteFrames_vikc2")
+animation = &"Firing"
+
+[node name="PlayerDetection" type="Area2D" parent="." unique_id=1374940934]
+scale = Vector2(3, 3)
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetection" unique_id=250874806]
+scale = Vector2(6, 6)
+shape = SubResource("CircleShape2D_iyasj")
+
+[node name="RayCast2D" type="RayCast2D" parent="PlayerDetection" unique_id=1018871395 groups=["Enemy"]]
+target_position = Vector2(47, -0.33333334)
+collision_mask = 7
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="Fire" type="Timer" parent="." unique_id=563776560]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=657635866]
+shape = SubResource("RectangleShape2D_i5tie")
+
+[node name="Alert" type="AnimatedSprite2D" parent="." unique_id=1212517473]
+position = Vector2(0, -23)
+scale = Vector2(0.05957031, 0.16992186)
+sprite_frames = SubResource("SpriteFrames_dn8ef")
+
+[connection signal="timeout" from="Fire" to="." method="_on_fire_timeout"]

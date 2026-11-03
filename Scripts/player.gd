@@ -80,7 +80,7 @@ func _physics_process(_delta: float) -> void:
 			can_dash = true;
 			
 	if(is_dashing):
-		velocity = dash_dir*(attack_dash_dist/attack_dash_dur)
+		velocity = dash_dir.normalized()*(attack_dash_dist/attack_dash_dur)
 	else:
 		if hDirection:
 			velocity.x = hDirection * SPEED

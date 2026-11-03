@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://couagsdjv4j23" path="res://Scenes/ground.tscn" id="1_bo1nx"]
 [ext_resource type="PackedScene" uid="uid://ixg8ghykh70r" path="res://Scenes/player.tscn" id="1_jjgbg"]
+[ext_resource type="PackedScene" uid="uid://ci18wdckv44mw" path="res://Scenes/rocket_enemy.tscn" id="2_hptm8"]
 [ext_resource type="PackedScene" uid="uid://dnneyajyj3b8v" path="res://Scenes/wires.tscn" id="2_ynf5e"]
 [ext_resource type="PackedScene" uid="uid://bwmfdn52i4svu" path="res://Scenes/basic_enemy.tscn" id="3_8gbba"]
 [ext_resource type="PackedScene" uid="uid://bm4o0xwai1isc" path="res://Scenes/turret_enemy.tscn" id="4_21xkr"]
@@ -74,6 +75,9 @@ position = Vector2(1959, -266)
 position = Vector2(381, 22)
 
 [node name="mobileTurret" parent="Enemies" unique_id=1484966170 instance=ExtResource("5_6bp64")]
+
+[node name="Launcher1" parent="Enemies" unique_id=1781325329 instance=ExtResource("2_hptm8")]
+position = Vector2(-22, -334)
 
 [node name="LevelExit" type="Area2D" parent="." unique_id=1553636488]
 position = Vector2(2014, -156)
