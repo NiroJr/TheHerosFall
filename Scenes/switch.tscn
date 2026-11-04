@@ -10,8 +10,8 @@ size = Vector2(12, 24)
 size = Vector2(12, 7.5)
 
 [node name="Switch" type="CharacterBody2D" unique_id=1056936827]
-collision_layer = 2
-collision_mask = 0
+collision_layer = 0
+collision_mask = 2
 motion_mode = 1
 script = ExtResource("1_hinho")
 

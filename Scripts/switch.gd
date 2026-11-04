@@ -7,14 +7,14 @@ enum Kind { ORANGE, YELLOW, PURPLE }
 const ON_TEXTURES := {
 	Kind.ORANGE: preload("res://Assets/PuzzleSprites/switches/switchesAndWires4.png"),
 	Kind.YELLOW: preload("res://Assets/PuzzleSprites/switches/switchesAndWires2.png"),
-	Kind.PURPLE: preload("res://Assets/PuzzleSprites/switches/switchesAndWires1.png"),
+	Kind.PURPLE: preload("res://Assets/PuzzleSprites/switches/switchesAndWires1.png")
 }
 const OFF_TEXTURE := preload("res://Assets/PuzzleSprites/switches/switchesAndWires3.png")
 
-@export_group("哪些攻击能改变它")
+@export_group("What changes it")
 @export var accept_sword := true 
 @export var accept_shot := true
-@export var accept_reflected := true
+@export var accept_enemy := true
 @export_group("")
 @export var hit_cooldown := 0.25
 
@@ -51,9 +51,9 @@ func _attack_kind(area: Area2D) -> int:
 	if area.is_in_group("Combo1") or area.is_in_group("Combo2") or area.is_in_group("Combo3"):
 		return Kind.ORANGE if accept_sword else -1
 	var bullet := area.get_parent()
+	if bullet.shooter != null and not bullet.shooter.is_in_group("player"):
+		return Kind.PURPLE if accept_enemy else -1
 	if "enemy_projectile" in bullet and not bullet.enemy_projectile:
-		if bullet.shooter != null and not bullet.shooter.is_in_group("player"):
-			return Kind.PURPLE if accept_reflected else -1
 		return Kind.YELLOW if accept_shot else -1
 	return -1
 
@@ -61,8 +61,11 @@ func _attack_kind(area: Area2D) -> int:
 func set_color(value: Kind) -> void:
 	if is_on and kind == value:
 		return
-	is_on = true
-	kind = value
+	if not is_on:
+		is_on = true
+		kind = value
+	else:
+		is_on = false
 	_refresh()
 	power_changed.emit()
 
