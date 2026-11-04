@@ -41,6 +41,7 @@ func _ready() -> void:
 	setup_elevation([$PlayerSprite, $SwordSwing])
 	_update_sort()
 	timer.timeout.connect(_on_charge_timeout)
+	$PlayerSprite.process_mode = Node.PROCESS_MODE_ALWAYS
 
 func _on_charge_timeout() -> void:
 	is_fully_charged = true
@@ -75,6 +76,18 @@ const dash_Animations := [
 	"dash_up",	
 	"dash_upRight",
 ]
+
+const dashEndLag_Animations := [
+	"dashEndLag_side",
+	"dashEndLag_downRight",
+	"dashEndLag_down", 
+	"dashEndLag_downRight", #downLeft
+	"dashEndLag_side",  #left
+	"dashEndLag_upRight", #upLeft
+	"dashEndLag_Up",	
+	"dashEngLag_upRight",
+]
+
 func _physics_process(_delta: float) -> void:
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
@@ -86,10 +99,8 @@ func _physics_process(_delta: float) -> void:
 	
 	if Input.is_action_just_pressed("Dash") && (!is_swinging):
 		if(!is_dashing && can_dash):
-			_dash(160, 0.15);
-			await get_tree().create_timer(0.4).timeout
-			self.process_mode = Node.PROCESS_MODE_PAUSABLE
-			can_dash = true;
+			_dash(200, 0.4);
+			
 	var holding := Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT)
 	if(is_dashing):
 		velocity = dash_dir.normalized()*(attack_dash_dist/attack_dash_dur)
@@ -169,24 +180,34 @@ func _physics_process(_delta: float) -> void:
 
 			
 func _dash(dist: int, speed: float)-> void:
+	var swinging := is_swinging
 	can_dash = false
 	is_dashing = true
 	dash_dir = Vector2.RIGHT.rotated(facing_angle)
 	attack_dash_dist = dist
 	attack_dash_dur = speed
-	$HitBox.process_mode = PROCESS_MODE_DISABLED if !is_swinging else PROCESS_MODE_PAUSABLE
-	if(!is_swinging):
+	$HitBox.process_mode = Node.PROCESS_MODE_PAUSABLE if swinging else Node.PROCESS_MODE_DISABLED
+
+	if !swinging:
 		$SwordSwing.visible = false
 		$SwordSwing.process_mode = Node.PROCESS_MODE_DISABLED
-		$PlayerSprite.speed_scale = (12.0/13.0)/attack_dash_dur
+		$PlayerSprite.speed_scale = (12.0/13.0) / attack_dash_dur
 		$PlayerSprite.play(dash_Animations[sprite_index])
+
 	await get_tree().create_timer(speed).timeout
-	$PlayerSprite.speed_scale = 1
+
 	$HitBox.process_mode = Node.PROCESS_MODE_PAUSABLE
 	$SwordSwing.process_mode = Node.PROCESS_MODE_INHERIT
 	is_dashing = false
-	if(!is_swinging):
+
+	if !swinging:
+		$PlayerSprite.speed_scale = 1
+		$PlayerSprite.play(dashEndLag_Animations[sprite_index])
 		self.process_mode = Node.PROCESS_MODE_DISABLED
+		await $PlayerSprite.animation_finished
+		self.process_mode = Node.PROCESS_MODE_INHERIT
+
+	can_dash = true
 	
 func _parry()-> void:
 	var parry : Node2D = $SwordSwing/Parry

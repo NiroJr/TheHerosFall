@@ -136,6 +136,106 @@ size = Vector2(32, 17)
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("50_k2btx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("51_76dak")
+}, {
+"duration": 1.0,
+"texture": ExtResource("52_wf5ty")
+}, {
+"duration": 1.0,
+"texture": ExtResource("53_cnw1c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("54_e77uf")
+}],
+"loop": 0,
+"name": &"dashEndLag_Up",
+"speed": 18.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("11_h5cax")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_dj0x0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_f1uaf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_6hq81")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_5cld6")
+}],
+"loop": 0,
+"name": &"dashEndLag_down",
+"speed": 18.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("24_lvpu8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_iw8ov")
+}, {
+"duration": 1.0,
+"texture": ExtResource("26_s5ecd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_6ccf0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("28_uh6ff")
+}],
+"loop": 0,
+"name": &"dashEndLag_downRight",
+"speed": 18.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("37_7anab")
+}, {
+"duration": 1.0,
+"texture": ExtResource("38_q7v0o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("39_gc6xv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("40_473p5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("41_yj2ec")
+}],
+"loop": 0,
+"name": &"dashEndLag_side",
+"speed": 18.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("63_giuho")
+}, {
+"duration": 1.0,
+"texture": ExtResource("64_gmm01")
+}, {
+"duration": 1.0,
+"texture": ExtResource("65_ott2s")
+}, {
+"duration": 1.0,
+"texture": ExtResource("66_ftehy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("67_ylvu8")
+}],
+"loop": 0,
+"name": &"dashEndLag_upRight",
+"speed": 13.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": ExtResource("3_jmelf")
 }, {
 "duration": 1.0,
@@ -143,9 +243,6 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": ExtResource("5_feq18")
-}, {
-"duration": 1.0,
-"texture": ExtResource("6_wcnj3")
 }, {
 "duration": 1.0,
 "texture": ExtResource("7_jsob3")
@@ -163,19 +260,13 @@ animations = [{
 "texture": ExtResource("10_w4w4b")
 }, {
 "duration": 1.0,
-"texture": ExtResource("11_h5cax")
+"texture": ExtResource("8_pg0gw")
 }, {
 "duration": 1.0,
-"texture": ExtResource("12_dj0x0")
+"texture": ExtResource("9_qavoy")
 }, {
 "duration": 1.0,
-"texture": ExtResource("13_f1uaf")
-}, {
-"duration": 1.0,
-"texture": ExtResource("14_6hq81")
-}, {
-"duration": 1.0,
-"texture": ExtResource("15_5cld6")
+"texture": ExtResource("10_w4w4b")
 }],
 "loop": 0,
 "name": &"dash_down",
@@ -251,19 +342,13 @@ animations = [{
 "texture": ExtResource("36_vbb78")
 }, {
 "duration": 1.0,
-"texture": ExtResource("37_7anab")
+"texture": ExtResource("34_hfnjl")
 }, {
 "duration": 1.0,
-"texture": ExtResource("38_q7v0o")
+"texture": ExtResource("35_uxqhi")
 }, {
 "duration": 1.0,
-"texture": ExtResource("39_gc6xv")
-}, {
-"duration": 1.0,
-"texture": ExtResource("40_473p5")
-}, {
-"duration": 1.0,
-"texture": ExtResource("41_yj2ec")
+"texture": ExtResource("36_vbb78")
 }],
 "loop": 0,
 "name": &"dash_side",
@@ -295,6 +380,15 @@ animations = [{
 "texture": ExtResource("49_kfwar")
 }, {
 "duration": 1.0,
+"texture": ExtResource("47_3e4cc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("48_siibh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("49_kfwar")
+}, {
+"duration": 1.0,
 "texture": ExtResource("50_k2btx")
 }, {
 "duration": 1.0,
@@ -305,9 +399,6 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": ExtResource("53_cnw1c")
-}, {
-"duration": 1.0,
-"texture": ExtResource("54_e77uf")
 }],
 "loop": 0,
 "name": &"dash_up",
@@ -652,9 +743,7 @@ shape = SubResource("RectangleShape2D_i5tie")
 
 [node name="PlayerSprite" type="AnimatedSprite2D" parent="." unique_id=1537809165]
 sprite_frames = SubResource("SpriteFrames_xrrqc")
-animation = &"dash_side"
-frame = 12
-frame_progress = 1.0
+animation = &"dashEndLag_upRight"
 
 [node name="SwordSwing" type="Node2D" parent="." unique_id=794402511]
 z_index = 10
