@@ -136,7 +136,6 @@ collision_mask = 0
 script = ExtResource("1_635ss")
 
 [node name="Rocket" type="Area2D" parent="." unique_id=955003827]
-visible = false
 collision_layer = 4
 script = ExtResource("2_iyasj")
 
@@ -144,12 +143,10 @@ script = ExtResource("2_iyasj")
 shape = SubResource("CapsuleShape2D_i5tie")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Rocket" unique_id=2128954881]
-scale = Vector2(0.5, 0.421875)
 sprite_frames = SubResource("SpriteFrames_xrrqc")
 animation = &"Launch"
 
 [node name="Hatch_Launcher" type="AnimatedSprite2D" parent="." unique_id=779601192]
-scale = Vector2(0.71875, 0.671875)
 sprite_frames = SubResource("SpriteFrames_vikc2")
 animation = &"Firing"
 
@@ -168,6 +165,7 @@ collide_with_areas = true
 collide_with_bodies = false
 
 [node name="Fire" type="Timer" parent="." unique_id=563776560]
+wait_time = 3.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=657635866]
 shape = SubResource("RectangleShape2D_i5tie")

@@ -3,7 +3,8 @@ extends ElevationBody
 @onready var main = get_tree().current_scene
 @onready var projectile = load("res://Scenes/projectile.tscn")
 @onready var timer: Timer = get_node("ShootCooldown")
-@onready var crosshair: Sprite2D = get_node("Cursor")
+@onready var canvasLayer: CanvasLayer = get_node("CanvasLayer")
+@onready var crosshair: Sprite2D = canvasLayer.get_child(0)
 @onready var trajectory: Line2D = get_node("Trajectory")
 var is_fully_charged := false
 var facing_angle := 0.0
@@ -16,6 +17,7 @@ var is_swinging := false;
 var buffered_swing := false;
 var is_dashing := false;
 var can_dash = true;
+var is_parrying := false
 var attack_dash_dist := 20
 var attack_dash_dur := 0.2
 var dash_dir = Vector2(0,0)
@@ -63,6 +65,16 @@ const Animations := [
 	"up_idle",	
 	"upRight_idle"
 ]
+const dash_Animations := [
+	"dash_side",
+	"dash_downRight",
+	"dash_down", 
+	"dash_downRight", #downLeft
+	"dash_side",  #left
+	"dash_upRight", #upLeft
+	"dash_up",	
+	"dash_upRight",
+]
 func _physics_process(_delta: float) -> void:
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
@@ -78,9 +90,20 @@ func _physics_process(_delta: float) -> void:
 			await get_tree().create_timer(0.4).timeout
 			self.process_mode = Node.PROCESS_MODE_PAUSABLE
 			can_dash = true;
-			
+	var holding := Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT)
 	if(is_dashing):
 		velocity = dash_dir.normalized()*(attack_dash_dist/attack_dash_dur)
+	elif(holding):
+		if hDirection:
+			velocity.x = hDirection * SPEED*0.33
+		else:
+			velocity.x = move_toward(velocity.x, 0, SPEED*0.33)
+		if vDirection:
+			velocity.y = vDirection * SPEED*0.33
+		else:
+			velocity.y = move_toward(velocity.y, 0, SPEED*0.33)
+	elif(is_parrying):
+		velocity = Vector2.ZERO
 	else:
 		if hDirection:
 			velocity.x = hDirection * SPEED
@@ -109,9 +132,9 @@ func _physics_process(_delta: float) -> void:
 			$PlayerSprite.flip_h = true;
 		else:
 			$PlayerSprite.flip_h = false;
-		
-		$PlayerSprite.play(Animations[sprite_index]);
-	else: 
+		if(!is_dashing):
+			$PlayerSprite.play(Animations[sprite_index]);
+	elif(!is_dashing): 
 		$PlayerSprite.stop()
 		$PlayerSprite.play(Animations[sprite_index+8])
 		$PlayerSprite.frame = 0;
@@ -119,7 +142,7 @@ func _physics_process(_delta: float) -> void:
 	skip_floor_check = is_dashing
 	move_with_elevation(_delta)
 	
-	var holding := Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT)
+	#var holding := Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT)
 
 	if holding:
 		if timer.is_stopped() and not is_fully_charged:
@@ -146,14 +169,21 @@ func _physics_process(_delta: float) -> void:
 
 			
 func _dash(dist: int, speed: float)-> void:
+	$SwordSwing.visible = false
 	can_dash = false
 	is_dashing = true
 	dash_dir = Vector2.RIGHT.rotated(facing_angle)
 	attack_dash_dist = dist
 	attack_dash_dur = speed
+	$SwordSwing.process_mode = Node.PROCESS_MODE_DISABLED
 	$HitBox.process_mode = PROCESS_MODE_DISABLED if !is_swinging else PROCESS_MODE_PAUSABLE
+	if(!is_swinging):
+		$PlayerSprite.speed_scale = (12.0/13.0)/attack_dash_dur
+		$PlayerSprite.play(dash_Animations[sprite_index])
 	await get_tree().create_timer(speed).timeout
+	$PlayerSprite.speed_scale = 1
 	$HitBox.process_mode = Node.PROCESS_MODE_PAUSABLE
+	$SwordSwing.process_mode = Node.PROCESS_MODE_INHERIT
 	is_dashing = false
 	if(!is_swinging):
 		self.process_mode = Node.PROCESS_MODE_DISABLED
@@ -177,8 +207,11 @@ func _parry()-> void:
 	parry.visible = false
 	shape.set_deferred("disabled", true)
 
-func _on_parry_area_entered(area: Area2D) -> void:
+func _on_parry_area_entered(_area: Area2D) -> void:
+	is_parrying = true
 	$SwordSwing/Parry/parry_anim.play("parried")
+	await $SwordSwing/Parry/parry_anim.animation_finished
+	is_parrying = false
 
 func sword_swing() -> void:
 	is_swinging = true

@@ -22,6 +22,7 @@ var direction := Vector2.ZERO
 var knockback := Vector2.ZERO
 var health := MAX_HEALTH
 
+var alerted := false
 var player_box: Area2D = null
 var turret_sprite_index := 0
 var line_of_sight := false
@@ -51,7 +52,9 @@ func _physics_process(delta):
 	var distance = to_player.length()
 	var reachable: bool = player.elevation - elevation <= 1
 
-	if distance < 200 and reachable:
+	if(alerted):
+		velocity = Vector2.ZERO
+	elif distance < 200 and reachable:
 		velocity = direction * speed
 	else:
 		velocity = Vector2.ZERO
@@ -72,7 +75,8 @@ func _physics_process(delta):
 
 func update_turret() -> void:
 	if player_box:
-		check_sight_line()
+		if(!alerted):
+			check_sight_line()
 		$TurretSprite.flip_h = turret_sprite_index in [3, 4, 5]
 		$TurretSprite.play(TURRET_ANIMATIONS[turret_sprite_index])
 	else:
@@ -85,7 +89,10 @@ func detected(body: Area2D) -> void:
 		player_box = body
 		$Alert.visible = true
 		$Alert.play("default")
+		alerted = true
 		await $Alert.animation_finished
+		await get_tree().create_timer(1.0).timeout
+		alerted = false
 		$Alert.visible = false
 
 

@@ -1,12 +1,12 @@
 extends Area2D
-var flight_time := 1.2
-var flight_arc = 120
+var flight_time := 2.4
+var flight_arc = 240
 var start : Vector2
 var target : Vector2
 var lift: Vector2
 var time := 0.0
 var is_active := false
-# Called when the node enters the scene tree for the first time.
+
 func _ready() -> void:
 	area_entered.connect(_player_hit)
 	$AnimatedSprite2D.play("Launch")

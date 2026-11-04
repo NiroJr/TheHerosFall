@@ -7,6 +7,7 @@ var facing_angle = 0.0
 var sprite_dir = 0
 var sprite_index = 0
 var slice = TAU/8
+var alerted := false
 var line_of_sight := false
 var can_shoot := true
 const MAX_HEALTH := 100
@@ -34,7 +35,8 @@ func _ready() -> void:
 
 func _physics_process(_delta: float) -> void:		
 	if(player):
-		check_sight_line()
+		if(!alerted):
+			check_sight_line()
 		if(sprite_index == 3
 		or sprite_index == 4
 		or sprite_index == 5):
@@ -53,7 +55,10 @@ func detected(body: Area2D) -> void:
 		player = body
 		$Alert.visible = true
 		$Alert.play("default")
+		alerted = true
 		await $Alert.animation_finished
+		await  get_tree().create_timer(1.0).timeout
+		alerted = false
 		$Alert.visible = false
 
 func _outOfRange(body: Area2D) -> void:
