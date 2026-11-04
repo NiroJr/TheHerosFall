@@ -9,6 +9,7 @@ var knockback := Vector2.ZERO
 const MAX_HEALTH := 100
 var health := MAX_HEALTH
 var not_alerted := true
+var _alerted := false
 @onready var health_bar = $HealthBar
 
 var attacks_received: Array[Area2D] = []
@@ -33,7 +34,9 @@ func _physics_process(delta):
  
 	var reachable: bool = player.elevation - elevation <= 1
  
-	if distance < 200 and reachable:
+	if(_alerted):
+		velocity = Vector2.ZERO
+	elif distance < 200 and reachable:
 		velocity = direction * speed
 		alerted()
 		not_alerted = false
@@ -63,7 +66,10 @@ func alerted() -> void:
 	if(not_alerted):
 		$Alert.visible = true
 		$Alert.play("default")
+		_alerted = true
 		await $Alert.animation_finished
+		await get_tree().create_timer(1.0).timeout
+		_alerted = false
 		$Alert.visible = false
 
 func _on_hit_box_area_entered(area: Area2D) -> void:

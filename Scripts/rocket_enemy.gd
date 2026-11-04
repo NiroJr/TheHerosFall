@@ -3,6 +3,7 @@ extends ElevationBody
 var player :Area2D
 var line_of_sight := false
 var can_shoot := true
+var alerted := false
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	$Rocket/CollisionShape2D.set_deferred("disabled", true)
@@ -15,6 +16,8 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
+	if(alerted):
+		return
 	if(player):
 		check_sight_line()
 	else:
@@ -60,7 +63,10 @@ func _detected(area: Area2D) -> void:
 		player = area
 		$Alert.visible = true
 		$Alert.play("default")
+		alerted = true
 		await $Alert.animation_finished
+		await get_tree().create_timer(1.0).timeout
+		alerted = false
 		$Alert.visible = false
 
 func _out_of_range(area: Area2D) -> void:
