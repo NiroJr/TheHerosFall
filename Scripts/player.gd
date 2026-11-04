@@ -304,3 +304,4 @@ func _update_sort() -> void:
 			layer.y_sort_origin = (h - elevation - 1) * 100000
 		else:
 			layer.y_sort_origin = int(TILE * (h - elevation) - TILE / 2 - feet.y)
+		layer.notify_runtime_tile_data_update()

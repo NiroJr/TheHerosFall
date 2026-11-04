@@ -1,11 +1,12 @@
 extends TileMapLayer
 @export_range(0.0,1.0) var fade_alpha := 0.3
-@export var sprite_rect := Rect2(-16, -16, 32, 32)
+@export var sprite_rect := Rect2(-16, 16, 32, 0)
 var player: Node2D
 var level := 0
 var cell_groups: Dictionary = {}
 var faded_groups: Dictionary = {}
 var refresh_groups: Dictionary = {}
+var face_offsets: Dictionary = {}
 
 
 func _ready() -> void:
@@ -16,6 +17,7 @@ func _ready() -> void:
 	level = get_index()
 	player = get_tree().get_first_node_in_group("player")
 	build_groups()
+	build_face_offsets()
 
 func build_groups() -> void:
 	cell_groups.clear()
@@ -33,6 +35,22 @@ func build_groups() -> void:
 					cell_groups[neighbor] = group_id
 					pending.append(neighbor)
 		group_id += 1
+		
+func build_face_offsets() -> void:
+	face_offsets.clear()
+	var tile_h := tile_set.tile_size.y
+	for cell in get_used_cells():
+		if not _is_face(cell):
+			continue
+		var above := 0
+		while _is_face(cell + Vector2i(0, -above - 1)):
+			above += 1
+		face_offsets[cell] = -tile_h * above - 1
+	notify_runtime_tile_data_update()
+
+func _is_face(cell: Vector2i) -> bool:
+	var data := get_cell_tile_data(cell)
+	return data != null and not data.get_custom_data("is_floor")
 
 func _process(_delta: float) -> void:
 	if player == null:
@@ -40,7 +58,9 @@ func _process(_delta: float) -> void:
 		return
 	var new_faded: Dictionary = {}
 	if level > player.get("elevation"):
-		var area := Rect2(player.global_position + sprite_rect.position, sprite_rect.size)
+		var top := sprite_rect.position.y
+		var area := Rect2(player.global_position + Vector2(sprite_rect.position.x, top),
+				Vector2(sprite_rect.size.x, player.feet.y - top))
 		var c0 := local_to_map(to_local(area.position))
 		var c1 := local_to_map(to_local(area.end))
 		for y in range(c0.y, c1.y + 1):
@@ -56,13 +76,19 @@ func _process(_delta: float) -> void:
 
 func _drawn_over_player(cell: Vector2i) -> bool:
 	var data := get_cell_tile_data(cell)
-	var sort_y := to_global(map_to_local(cell)).y + y_sort_origin + data.y_sort_origin
+	if data == null:
+		return false
+	var sort_y: float = to_global(map_to_local(cell)).y + y_sort_origin + face_offsets.get(cell, data.y_sort_origin)
 	return sort_y > player.global_position.y
 
 func _use_tile_data_runtime_update(coords: Vector2i) -> bool:
+	if face_offsets.has(coords):
+		return true
 	return cell_groups.has(coords) and refresh_groups.has(cell_groups[coords])
 
 
 func _tile_data_runtime_update(coords: Vector2i, tile_data: TileData) -> void:
-	if faded_groups.has(cell_groups[coords]):
+	if face_offsets.has(coords):
+		tile_data.y_sort_origin = face_offsets[coords]
+	if cell_groups.has(coords) and faded_groups.has(cell_groups[coords]):
 		tile_data.modulate.a *= fade_alpha

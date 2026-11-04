@@ -6,7 +6,7 @@ extends CharacterBody2D
 
 const TILE := 16.0
 const STEP_UP_SPEED := 160.0
-const STEP_UP_PUSH := 8.0
+const STEP_PUSH := 8.0
 const GRAVITY := 800.0
 const FALL_LIMIT := -160.0
 
@@ -74,7 +74,7 @@ func move_with_elevation(delta: float) -> void:
 		STEP_UP:
 			z_height = move_toward(z_height, 0.0, STEP_UP_SPEED * delta)
 			if push_left != Vector2.ZERO:
-				var move := push_left.limit_length(STEP_UP_SPEED * STEP_UP_PUSH / TILE * delta)
+				var move := push_left.limit_length(STEP_UP_SPEED * STEP_PUSH / TILE * delta)
 				if _ground_level(_feet_world() + move + move.sign() * foot_size) == elevation:
 					move_and_collide(move)
 					push_left -= move
@@ -83,6 +83,10 @@ func move_with_elevation(delta: float) -> void:
 			if z_height == 0.0 and push_left == Vector2.ZERO:
 				state = WALK
 		FALL:
+			if push_left != Vector2.ZERO:
+				var move := push_left.limit_length(STEP_UP_SPEED * STEP_PUSH / TILE * delta)
+				move_and_collide(move)
+				push_left -= move
 			z_velocity -= GRAVITY * delta
 			z_height += z_velocity * delta
 			if _ground_level(_feet_world()) >= 0:
@@ -148,9 +152,10 @@ func _check_level_change() -> void:
 	z_velocity = 0.0
 	if shift > 0:
 		state = STEP_UP
-		push_left = velocity.normalized() * STEP_UP_PUSH
+		push_left = velocity.normalized() * STEP_PUSH
 	else:
 		state = FALL
+		push_left = velocity.normalized() * STEP_PUSH
 	_level_changed(shift)
 
 
