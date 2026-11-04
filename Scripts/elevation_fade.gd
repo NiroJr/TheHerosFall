@@ -1,6 +1,6 @@
 extends TileMapLayer
 @export_range(0.0,1.0) var fade_alpha := 0.3
-@export var sprite_rect := Rect2(-16, -32, 32, 60)
+@export var sprite_rect := Rect2(-16, -16, 32, 32)
 var player: Node2D
 var level := 0
 var cell_groups: Dictionary = {}
