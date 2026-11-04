@@ -743,17 +743,21 @@ show_percentage = false
 wait_time = 0.4
 one_shot = true
 
-[node name="Cursor" type="Sprite2D" parent="." unique_id=760588539]
-z_index = 4096
-texture = ExtResource("45_ax3m3")
-script = ExtResource("46_3vlem")
-
 [node name="Trajectory" type="Line2D" parent="." unique_id=17269404]
 texture_repeat = 2
 width = 15.0
 texture = ExtResource("47_8eeqe")
 texture_mode = 1
 script = ExtResource("47_3vlem")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1671005298]
+process_mode = 3
+layer = 100
+
+[node name="Cursor" type="Sprite2D" parent="CanvasLayer" unique_id=760588539]
+z_index = 4096
+texture = ExtResource("45_ax3m3")
+script = ExtResource("46_3vlem")
 
 [connection signal="area_entered" from="SwordSwing/Parry" to="." method="_on_parry_area_entered"]
 [connection signal="timeout" from="Combo" to="." method="_on_combo_timeout"]
