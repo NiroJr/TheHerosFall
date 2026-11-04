@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://c1ouhp60rfwy" path="res://Scripts/level_exit.gd" id="4_jjvhh"]
 [ext_resource type="PackedScene" uid="uid://bwju7bl5m8f58" path="res://Scenes/mobile_turret.tscn" id="5_6bp64"]
 [ext_resource type="PackedScene" uid="uid://dqp6hhsrl2vc0" path="res://Scenes/switch.tscn" id="8_344ge"]
+[ext_resource type="PackedScene" uid="uid://1py8rk2mba1u" path="res://Scenes/door.tscn" id="10_hptm8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kry3j"]
 size = Vector2(32, 32)
@@ -101,3 +102,7 @@ metadata/_edit_use_anchors_ = true
 
 [node name="Switch" parent="." unique_id=1056936827 instance=ExtResource("8_344ge")]
 position = Vector2(62, -176)
+
+[node name="door" parent="." unique_id=2050610732 node_paths=PackedStringArray("wires") instance=ExtResource("10_hptm8")]
+position = Vector2(118, -134)
+wires = NodePath("../Wires")
