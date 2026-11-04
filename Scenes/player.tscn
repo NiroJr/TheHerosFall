@@ -119,6 +119,7 @@
 [ext_resource type="Texture2D" uid="uid://cti32y67jtlu0" path="res://Assets/MCSprites/characterSprites/DashingSprites/UpLeft&Right/blinkDash57.png" id="59_nyd3j"]
 [ext_resource type="Texture2D" uid="uid://by5gltqh27782" path="res://Assets/MCSprites/characterSprites/DashingSprites/UpLeft&Right/blinkDash58.png" id="60_0gchq"]
 [ext_resource type="Texture2D" uid="uid://cvlrnxhwa14nw" path="res://Assets/MCSprites/characterSprites/DashingSprites/UpLeft&Right/blinkDash59.png" id="61_5w755"]
+[ext_resource type="PackedScene" uid="uid://dbo51ckeahp7d" path="res://Scenes/pause_menu.tscn" id="61_c8b32"]
 [ext_resource type="Texture2D" uid="uid://me0pxupfij21" path="res://Assets/MCSprites/characterSprites/DashingSprites/UpLeft&Right/blinkDash60.png" id="62_552og"]
 [ext_resource type="Texture2D" uid="uid://cdmwbn3loc2u5" path="res://Assets/MCSprites/characterSprites/DashingSprites/UpLeft&Right/blinkDash61.png" id="63_giuho"]
 [ext_resource type="Texture2D" uid="uid://duteu17uawkrb" path="res://Assets/MCSprites/characterSprites/DashingSprites/UpLeft&Right/blinkDash62.png" id="64_gmm01"]
@@ -846,6 +847,9 @@ layer = 100
 z_index = 4096
 texture = ExtResource("45_ax3m3")
 script = ExtResource("46_3vlem")
+
+[node name="PauseMenu" parent="CanvasLayer" unique_id=1151853713 instance=ExtResource("61_c8b32")]
+visible = false
 
 [connection signal="area_entered" from="SwordSwing/Parry" to="." method="_on_parry_area_entered"]
 [connection signal="timeout" from="Combo" to="." method="_on_combo_timeout"]

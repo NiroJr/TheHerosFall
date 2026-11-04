@@ -8,7 +8,6 @@
 [ext_resource type="PackedScene" uid="uid://bm4o0xwai1isc" path="res://Scenes/turret_enemy.tscn" id="4_21xkr"]
 [ext_resource type="Script" uid="uid://c1ouhp60rfwy" path="res://Scripts/level_exit.gd" id="4_jjvhh"]
 [ext_resource type="PackedScene" uid="uid://bwju7bl5m8f58" path="res://Scenes/mobile_turret.tscn" id="5_6bp64"]
-[ext_resource type="PackedScene" uid="uid://dbo51ckeahp7d" path="res://Scenes/pause_menu.tscn" id="5_kry3j"]
 [ext_resource type="PackedScene" uid="uid://dqp6hhsrl2vc0" path="res://Scenes/switch.tscn" id="8_344ge"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kry3j"]
@@ -99,11 +98,6 @@ offset_bottom = 17.0
 mouse_filter = 2
 color = Color(0.2, 0.9, 0.3, 0.35)
 metadata/_edit_use_anchors_ = true
-
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1132967213]
-
-[node name="PauseMenu" parent="CanvasLayer" unique_id=1151853713 instance=ExtResource("5_kry3j")]
-visible = false
 
 [node name="Switch" parent="." unique_id=1056936827 instance=ExtResource("8_344ge")]
 position = Vector2(62, -176)

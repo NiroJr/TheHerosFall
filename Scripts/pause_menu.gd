@@ -21,7 +21,9 @@ func resume_game():
 	hide()
 
 
-
-
 func _on_button_pressed() -> void:
 	resume_game()
+
+
+func _on_button_2_pressed() -> void:
+	get_tree().quit()
