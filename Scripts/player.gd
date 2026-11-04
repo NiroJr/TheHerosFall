@@ -3,7 +3,8 @@ extends ElevationBody
 @onready var main = get_tree().current_scene
 @onready var projectile = load("res://Scenes/projectile.tscn")
 @onready var timer: Timer = get_node("ShootCooldown")
-@onready var crosshair: Sprite2D = get_node("Cursor")
+@onready var canvasLayer: CanvasLayer = get_node("CanvasLayer")
+@onready var crosshair: Sprite2D = canvasLayer.get_child(0)
 @onready var trajectory: Line2D = get_node("Trajectory")
 var is_fully_charged := false
 var facing_angle := 0.0
