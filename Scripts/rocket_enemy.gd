@@ -12,7 +12,6 @@ func _ready() -> void:
 	$PlayerDetection.area_exited.connect(_out_of_range)
 	$PlayerDetection/RayCast2D.add_exception(self)
 	$Hatch_Launcher.play("default")
-	setup_elevation()
 
 
 func _process(_delta: float) -> void:
@@ -24,9 +23,6 @@ func _process(_delta: float) -> void:
 		line_of_sight = false
 
 func check_sight_line() -> void:
-	if player.get_parent().elevation != elevation:
-		line_of_sight = false
-		return
 	$PlayerDetection/RayCast2D.target_position = $PlayerDetection/RayCast2D.to_local(player.global_position)
 	$PlayerDetection/RayCast2D.force_raycast_update()
 	if($PlayerDetection/RayCast2D.is_colliding() && $PlayerDetection/RayCast2D.get_collider() == player):
@@ -39,7 +35,7 @@ func check_sight_line() -> void:
 func shoot() -> void:
 	can_shoot = false
 	$Hatch_Launcher.play("Firing")
-	while ($Hatch_Launcher.is_playing() && $Hatch_Launcher.frame < 4):
+	while ($Hatch_Launcher.is_playing() && $Hatch_Launcher.frame < 5):
 		await $Hatch_Launcher.frame_changed
 		if(!line_of_sight): 
 			$Fire.start()
@@ -54,6 +50,9 @@ func shoot() -> void:
 	main.add_child(rocket_instance)
 	rocket_instance.spawn(player_pos)
 	$Fire.start()
+	await $Hatch_Launcher.animation_finished
+	$Hatch_Launcher.stop()
+	$Hatch_Launcher.play("default")
 
 func _on_fire_timeout() -> void:
 	can_shoot = true

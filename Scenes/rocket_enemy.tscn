@@ -101,7 +101,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("19_x18fx")
 }],
-"loop": 1,
+"loop": 0,
 "name": &"Firing",
 "speed": 5.0
 }, {

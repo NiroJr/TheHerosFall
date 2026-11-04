@@ -169,15 +169,15 @@ func _physics_process(_delta: float) -> void:
 
 			
 func _dash(dist: int, speed: float)-> void:
-	$SwordSwing.visible = false
 	can_dash = false
 	is_dashing = true
 	dash_dir = Vector2.RIGHT.rotated(facing_angle)
 	attack_dash_dist = dist
 	attack_dash_dur = speed
-	$SwordSwing.process_mode = Node.PROCESS_MODE_DISABLED
 	$HitBox.process_mode = PROCESS_MODE_DISABLED if !is_swinging else PROCESS_MODE_PAUSABLE
 	if(!is_swinging):
+		$SwordSwing.visible = false
+		$SwordSwing.process_mode = Node.PROCESS_MODE_DISABLED
 		$PlayerSprite.speed_scale = (12.0/13.0)/attack_dash_dur
 		$PlayerSprite.play(dash_Animations[sprite_index])
 	await get_tree().create_timer(speed).timeout

@@ -657,7 +657,6 @@ frame = 12
 frame_progress = 1.0
 
 [node name="SwordSwing" type="Node2D" parent="." unique_id=794402511]
-visible = false
 z_index = 10
 z_as_relative = false
 
