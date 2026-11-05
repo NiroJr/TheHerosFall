@@ -85,7 +85,7 @@ const dashEndLag_Animations := [
 	"dashEndLag_side",  #left
 	"dashEndLag_upRight", #upLeft
 	"dashEndLag_Up",	
-	"dashEngLag_upRight",
+	"dashEndLag_upRight",
 ]
 
 func _physics_process(_delta: float) -> void:

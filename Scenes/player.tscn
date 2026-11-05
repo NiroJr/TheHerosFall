@@ -153,7 +153,7 @@ animations = [{
 }],
 "loop": 0,
 "name": &"dashEndLag_Up",
-"speed": 18.0
+"speed": 25.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -173,7 +173,7 @@ animations = [{
 }],
 "loop": 0,
 "name": &"dashEndLag_down",
-"speed": 18.0
+"speed": 25.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -193,7 +193,7 @@ animations = [{
 }],
 "loop": 0,
 "name": &"dashEndLag_downRight",
-"speed": 18.0
+"speed": 25.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -213,7 +213,7 @@ animations = [{
 }],
 "loop": 0,
 "name": &"dashEndLag_side",
-"speed": 18.0
+"speed": 25.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -233,7 +233,7 @@ animations = [{
 }],
 "loop": 0,
 "name": &"dashEndLag_upRight",
-"speed": 13.0
+"speed": 25.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -299,19 +299,13 @@ animations = [{
 "texture": ExtResource("23_24pht")
 }, {
 "duration": 1.0,
-"texture": ExtResource("24_lvpu8")
+"texture": ExtResource("21_sg72k")
 }, {
 "duration": 1.0,
-"texture": ExtResource("25_iw8ov")
+"texture": ExtResource("22_fjjiw")
 }, {
 "duration": 1.0,
-"texture": ExtResource("26_s5ecd")
-}, {
-"duration": 1.0,
-"texture": ExtResource("27_6ccf0")
-}, {
-"duration": 1.0,
-"texture": ExtResource("28_uh6ff")
+"texture": ExtResource("23_24pht")
 }],
 "loop": 0,
 "name": &"dash_downRight",
@@ -416,6 +410,9 @@ animations = [{
 "texture": ExtResource("57_sg5e1")
 }, {
 "duration": 1.0,
+"texture": ExtResource("62_552og")
+}, {
+"duration": 1.0,
 "texture": ExtResource("58_c83yi")
 }, {
 "duration": 1.0,
@@ -428,22 +425,13 @@ animations = [{
 "texture": ExtResource("61_5w755")
 }, {
 "duration": 1.0,
-"texture": ExtResource("62_552og")
+"texture": ExtResource("59_nyd3j")
 }, {
 "duration": 1.0,
-"texture": ExtResource("63_giuho")
+"texture": ExtResource("60_0gchq")
 }, {
 "duration": 1.0,
-"texture": ExtResource("64_gmm01")
-}, {
-"duration": 1.0,
-"texture": ExtResource("65_ott2s")
-}, {
-"duration": 1.0,
-"texture": ExtResource("66_ftehy")
-}, {
-"duration": 1.0,
-"texture": ExtResource("67_ylvu8")
+"texture": ExtResource("61_5w755")
 }],
 "loop": 0,
 "name": &"dash_upRight",
