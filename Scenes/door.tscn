@@ -105,7 +105,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_it0lf"]
-size = Vector2(54, 6)
+size = Vector2(54, 4)
 
 [node name="door" type="CharacterBody2D" unique_id=2050610732]
 collision_layer = 3
@@ -118,5 +118,5 @@ sprite_frames = SubResource("SpriteFrames_it0lf")
 animation = &"yellow"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1801766700]
-position = Vector2(0, 13)
+position = Vector2(0, 14)
 shape = SubResource("RectangleShape2D_it0lf")

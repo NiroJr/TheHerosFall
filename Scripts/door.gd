@@ -14,9 +14,11 @@ func _ready() -> void:
 	sprite.play(door_color)
 	sprite.stop()
 	sprite.frame = 0
+	collision.set_deferred("disabled", true)
 	
 	if wires != null:
 		wires.power_changed.connect(update_power)
+		update_power()
 
 func update_power():
 	if wires == null:

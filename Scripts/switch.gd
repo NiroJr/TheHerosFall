@@ -2,6 +2,9 @@ class_name Switch
 extends ElevationBody
 signal power_changed
 
+@export_enum("OFF", "ORANGE", "YELLOW", "PURPLE")
+var starting_power = "OFF"
+
 enum Kind { ORANGE, YELLOW, PURPLE }
 
 const ON_TEXTURES := {
@@ -24,6 +27,17 @@ var _cooldown := 0.0
 
 
 func _ready() -> void:
+	var color: int
+	
+	match starting_power:
+		"ORANGE":
+			color = 1
+		"YELLOW":
+			color = 2
+		"PURPLE":
+			color = 3
+	if color > 0:
+		set_color(color - 1)
 	feet = Vector2(0, 11)
 	setup_elevation()
 	$HitBox.area_entered.connect(_on_hit)

@@ -1,0 +1,121 @@
+[gd_scene format=3 uid="uid://omjnof5v426x"]
+
+[ext_resource type="Script" uid="uid://cl5hogspfdl6g" path="res://Scripts/door.gd" id="1_upcs6"]
+[ext_resource type="Texture2D" uid="uid://d01di3msoguyy" path="res://Assets/PuzzleSprites/BiggerDoors/bigElectricDoor21.png" id="2_70d8w"]
+[ext_resource type="Texture2D" uid="uid://dpbdbhp7hqrvx" path="res://Assets/PuzzleSprites/BiggerDoors/bigElectricDoor20.png" id="3_fcq6b"]
+[ext_resource type="Texture2D" uid="uid://chp6isuucutmb" path="res://Assets/PuzzleSprites/BiggerDoors/bigElectricDoor19.png" id="4_1y732"]
+[ext_resource type="Texture2D" uid="uid://coj7ugjs8y0xt" path="res://Assets/PuzzleSprites/BiggerDoors/bigElectricDoor18.png" id="5_404k3"]
+[ext_resource type="Texture2D" uid="uid://gbnfhrofp56s" path="res://Assets/PuzzleSprites/BiggerDoors/bigElectricDoor17.png" id="6_82l0t"]
+[ext_resource type="Texture2D" uid="uid://dcwlkssp0b2jf" path="res://Assets/PuzzleSprites/BiggerDoors/bigElectricDoor16.png" id="7_cap6v"]
+[ext_resource type="Texture2D" uid="uid://bsxb7ifrblulq" path="res://Assets/PuzzleSprites/BiggerDoors/bigElectricDoor15.png" id="8_q8co7"]
+[ext_resource type="Texture2D" uid="uid://t7pngi1qn63q" path="res://Assets/PuzzleSprites/BiggerDoors/bigElectricDoor14.png" id="9_4ndxx"]
+[ext_resource type="Texture2D" uid="uid://c4mmr7kdnnm04" path="res://Assets/PuzzleSprites/BiggerDoors/bigElectricDoor13.png" id="10_embvj"]
+[ext_resource type="Texture2D" uid="uid://dpwo0h2wue6b3" path="res://Assets/PuzzleSprites/BiggerDoors/bigElectricDoor12.png" id="11_r4xuh"]
+[ext_resource type="Texture2D" uid="uid://dodbuf0nwql82" path="res://Assets/PuzzleSprites/BiggerDoors/bigElectricDoor11.png" id="12_tu8ar"]
+[ext_resource type="Texture2D" uid="uid://bskq0lg3tk0vn" path="res://Assets/PuzzleSprites/BiggerDoors/bigElectricDoor10.png" id="13_npldv"]
+[ext_resource type="Texture2D" uid="uid://b8anyk4xip04f" path="res://Assets/PuzzleSprites/BiggerDoors/bigElectricDoor9.png" id="14_qbbpx"]
+[ext_resource type="Texture2D" uid="uid://urjk0wnnnbcp" path="res://Assets/PuzzleSprites/BiggerDoors/bigElectricDoor8.png" id="15_feig5"]
+[ext_resource type="Texture2D" uid="uid://jcvebg18n3id" path="res://Assets/PuzzleSprites/BiggerDoors/bigElectricDoor7.png" id="16_rsw1e"]
+[ext_resource type="Texture2D" uid="uid://obpxqls4vlfa" path="res://Assets/PuzzleSprites/BiggerDoors/bigElectricDoor6.png" id="17_edk0o"]
+[ext_resource type="Texture2D" uid="uid://d3dgm6sm7nov" path="res://Assets/PuzzleSprites/BiggerDoors/bigElectricDoor5.png" id="18_4xjan"]
+[ext_resource type="Texture2D" uid="uid://cur80dffa0rmm" path="res://Assets/PuzzleSprites/BiggerDoors/bigElectricDoor4.png" id="19_mnxgr"]
+[ext_resource type="Texture2D" uid="uid://bbn64kbge22cg" path="res://Assets/PuzzleSprites/BiggerDoors/bigElectricDoor3.png" id="20_gtlya"]
+[ext_resource type="Texture2D" uid="uid://0105g4jaws3s" path="res://Assets/PuzzleSprites/BiggerDoors/bigElectricDoor2.png" id="21_ux8d2"]
+[ext_resource type="Texture2D" uid="uid://dpdwwuy7vqcll" path="res://Assets/PuzzleSprites/BiggerDoors/bigElectricDoor1.png" id="22_0uof3"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_it0lf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_70d8w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_fcq6b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_1y732")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_404k3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_82l0t")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_cap6v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_q8co7")
+}],
+"loop": 0,
+"name": &"orange",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_4ndxx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_embvj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_r4xuh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_tu8ar")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_npldv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_qbbpx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_feig5")
+}],
+"loop": 0,
+"name": &"purple",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("16_rsw1e")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_edk0o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_4xjan")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_mnxgr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_gtlya")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_ux8d2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_0uof3")
+}],
+"loop": 0,
+"name": &"yellow",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_it0lf"]
+size = Vector2(81.5, 13.698139)
+
+[node name="big_door" type="CharacterBody2D" unique_id=693904857]
+collision_layer = 3
+collision_mask = 3
+script = ExtResource("1_upcs6")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=399780830]
+sprite_frames = SubResource("SpriteFrames_it0lf")
+animation = &"yellow"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=36704192]
+position = Vector2(-0.09265137, 25.263536)
+shape = SubResource("RectangleShape2D_it0lf")
