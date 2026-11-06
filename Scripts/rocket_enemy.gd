@@ -10,6 +10,7 @@ func _ready() -> void:
 	$Rocket.visible = false
 	$PlayerDetection.area_entered.connect(_detected)
 	$PlayerDetection.area_exited.connect(_out_of_range)
+	$target.visible = false
 	$PlayerDetection/RayCast2D.add_exception(self)
 	$Hatch_Launcher.play("default")
 
@@ -43,6 +44,8 @@ func shoot() -> void:
 			return
 	var rocket_instance = $Rocket.duplicate()
 	var player_pos = player.global_position
+	$target.global_position = player.global_position
+	$target.visible = true
 	rocket_instance.visible = true
 	rocket_instance.get_node("CollisionShape2D").disabled = false
 	rocket_instance.global_position = $Hatch_Launcher.global_position
