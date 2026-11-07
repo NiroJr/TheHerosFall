@@ -43,6 +43,7 @@ func shoot() -> void:
 			$Hatch_Launcher.play("default")
 			return
 	var rocket_instance = $Rocket.duplicate()
+	rocket_instance.target_node = $target
 	var player_pos = player.global_position
 	$target.global_position = player.global_position
 	$target.visible = true

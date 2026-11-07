@@ -1,6 +1,6 @@
 extends Area2D
-var lift_time := 1.2
-var fall_time := 0.2
+var lift_time := 1
+var fall_time := 0.1
 var flight_arc = 240
 var start : Vector2
 var target : Vector2
@@ -8,9 +8,10 @@ var lift: Vector2
 var time := 0.0
 var is_active := false
 @export var target_node := Node2D
+var has_exploded := false
 
 func _ready() -> void:
-	area_entered.connect(_player_hit)
+	#area_entered.connect(_player_hit)
 	$AnimatedSprite2D.play("Launch")
 	$Shadow.top_level = true
 	
@@ -48,15 +49,21 @@ func _process(delta: float) -> void:
 		_explode()
 		
 func _explode()-> void:
+	if has_exploded: 
+		return
+	has_exploded = true
+	is_active = false
 	$Shadow.visible = false
 	$AnimatedSprite2D.play("Land")
+	for area in get_overlapping_areas():
+		if area.is_in_group("PlayerHitBox"):
+			area.get_parent().take_damage(20)
+	set_deferred("monitoring", false)
 	await $AnimatedSprite2D.animation_finished
-	target_node.visible = false
+	if is_instance_valid(target_node):
+		target_node.visible = false
 	queue_free()
 	
 
-func _player_hit(area : Area2D) -> void:
-	if(area.is_in_group("PlayerHitBox")):
-		area.get_parent().take_damage(20)
-		_explode()
+
 	

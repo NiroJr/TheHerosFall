@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://bgcpxf0gheh2c" path="res://Assets/EnemySprites/ExplosionLauncher/explosionLauncher9.png" id="4_ik1pi"]
 [ext_resource type="Texture2D" uid="uid://bbnut4t3iciuf" path="res://Assets/EnemySprites/ExplosionLauncher/explosionLauncher1.png" id="5_dn8ef"]
 [ext_resource type="Texture2D" uid="uid://dhp0dgxhymwgq" path="res://Assets/EnemySprites/ExplosionLauncher/explosionLauncher2.png" id="6_l6p8e"]
+[ext_resource type="Texture2D" uid="uid://bi8pyloyjwlen" path="res://Assets/EnemySprites/ExplosionLauncher/explosionLauncher8.png" id="6_vxm5m"]
 [ext_resource type="Texture2D" uid="uid://kb4ra004ltc5" path="res://Assets/EnemySprites/ExplosionLauncher/explosionLauncher3.png" id="7_lfgww"]
 [ext_resource type="Texture2D" uid="uid://bdk6hysy17qi" path="res://Assets/EnemySprites/ExplosionLauncher/explosionLauncher4.png" id="8_ol67q"]
 [ext_resource type="Texture2D" uid="uid://c2rsprske1038" path="res://Assets/EnemySprites/ExplosionLauncher/explosionLauncher11.png" id="9_8hr43"]
@@ -18,6 +19,7 @@
 [ext_resource type="Texture2D" uid="uid://dh4p4qbsv21kj" path="res://Assets/EnemySprites/ExplosionLauncher/explosionLauncher15.png" id="13_4fwin"]
 [ext_resource type="Texture2D" uid="uid://cey07lr4gcg0t" path="res://Assets/EnemySprites/ExplosionLauncher/explosionLauncher16.png" id="14_pcppo"]
 [ext_resource type="Texture2D" uid="uid://talnfv1vnljo" path="res://Assets/EnemySprites/ExplosionLauncher/explosionLauncher17.png" id="15_wxvah"]
+[ext_resource type="Texture2D" uid="uid://dmr2b1ntpmtxf" path="res://Assets/EnemySprites/ExplosionLauncher/explosionLauncher24.png" id="16_38c0y"]
 [ext_resource type="Texture2D" uid="uid://dfag00n51jmhc" path="res://Assets/EnemySprites/ExplosionLauncher/explosionLauncher18.png" id="16_tungf"]
 [ext_resource type="Texture2D" uid="uid://dfljbl5m7j2fi" path="res://Assets/EnemySprites/ExplosionLauncher/explosionLauncher19.png" id="17_k2a5j"]
 [ext_resource type="Texture2D" uid="uid://b7hn1v25b1owu" path="res://Assets/EnemySprites/ExplosionLauncher/explosionLauncher20.png" id="18_xpvgw"]
@@ -25,29 +27,41 @@
 [ext_resource type="Texture2D" uid="uid://db76kaj4r6dyi" path="res://Assets/EnemySprites/ExplosionLauncher/explosionLauncher22.png" id="20_mm13i"]
 [ext_resource type="Texture2D" uid="uid://dmh2ey3aw70mi" path="res://Assets/icon.svg" id="23_ik1pi"]
 [ext_resource type="Texture2D" uid="uid://7e23yys7ok7i" path="res://Assets/EnemySprites/ExplosionLauncher/explosionLauncher10.png" id="24_dn8ef"]
+[ext_resource type="Texture2D" uid="uid://dg86fsnjw1oam" path="res://Assets/EnemySprites/ExplosionLauncher/explosionLauncher23.png" id="26_2en5o"]
+[ext_resource type="Texture2D" uid="uid://dc2rkanski2yj" path="res://Assets/EnemySprites/ExplosionLauncher/explosionLauncher25.png" id="27_4fwin"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_i5tie"]
-radius = 6.0
-height = 20.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_vxm5m"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_xrrqc"]
 animations = [{
 "frames": [{
-"duration": 1.0,
+"duration": 0.5,
 "texture": ExtResource("1_k8ujw")
 }, {
-"duration": 1.0,
+"duration": 0.5,
 "texture": ExtResource("2_635ss")
 }, {
-"duration": 1.0,
+"duration": 0.8,
 "texture": ExtResource("3_iyasj")
 }, {
-"duration": 1.0,
+"duration": 1.2,
+"texture": ExtResource("6_vxm5m")
+}, {
+"duration": 1.5,
 "texture": ExtResource("4_ik1pi")
+}, {
+"duration": 1.7,
+"texture": ExtResource("24_dn8ef")
+}, {
+"duration": 0.5,
+"texture": ExtResource("9_8hr43")
+}, {
+"duration": 0.5,
+"texture": ExtResource("10_vxm5m")
 }],
 "loop": 0,
 "name": &"Land",
-"speed": 5.0
+"speed": 12.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -64,20 +78,14 @@ animations = [{
 }],
 "loop": 1,
 "name": &"Launch",
-"speed": 5.0
+"speed": 12.0
 }]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_vikc2"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("9_8hr43")
-}, {
-"duration": 1.0,
-"texture": ExtResource("10_vxm5m")
-}, {
-"duration": 1.0,
-"texture": ExtResource("11_38c0y")
+"texture": ExtResource("16_38c0y")
 }, {
 "duration": 1.0,
 "texture": ExtResource("12_2en5o")
@@ -102,14 +110,23 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": ExtResource("19_x18fx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_mm13i")
+}, {
+"duration": 1.0,
+"texture": ExtResource("26_2en5o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_38c0y")
 }],
 "loop": 0,
 "name": &"Firing",
-"speed": 5.0
+"speed": 7.0
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("20_mm13i")
+"texture": ExtResource("27_4fwin")
 }],
 "loop": 1,
 "name": &"default",
@@ -138,17 +155,18 @@ collision_mask = 0
 script = ExtResource("1_635ss")
 
 [node name="Rocket" type="Area2D" parent="." unique_id=955003827 node_paths=PackedStringArray("target_node")]
-visible = false
 collision_layer = 4
 script = ExtResource("2_iyasj")
 target_node = NodePath("../target")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Rocket" unique_id=788104593]
-shape = SubResource("CapsuleShape2D_i5tie")
+scale = Vector2(5.25, 5.25)
+shape = SubResource("CircleShape2D_vxm5m")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Rocket" unique_id=2128954881]
 sprite_frames = SubResource("SpriteFrames_xrrqc")
-animation = &"Launch"
+animation = &"Land"
+frame = 5
 
 [node name="Shadow" type="Node2D" parent="Rocket" unique_id=1069738564]
 script = ExtResource("11_l6p8e")
@@ -159,6 +177,7 @@ sprite_frames = SubResource("SpriteFrames_vikc2")
 animation = &"Firing"
 
 [node name="PlayerDetection" type="Area2D" parent="." unique_id=1374940934]
+visible = false
 scale = Vector2(3, 3)
 collision_layer = 16
 
@@ -176,6 +195,8 @@ collide_with_bodies = false
 wait_time = 3.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=657635866]
+visible = false
+scale = Vector2(1.5, 1.5)
 shape = SubResource("RectangleShape2D_i5tie")
 
 [node name="Alert" type="AnimatedSprite2D" parent="." unique_id=1212517473]
@@ -184,6 +205,6 @@ scale = Vector2(0.05957031, 0.16992186)
 sprite_frames = SubResource("SpriteFrames_dn8ef")
 
 [node name="target" type="Sprite2D" parent="." unique_id=17554515]
-texture = ExtResource("24_dn8ef")
+texture = ExtResource("11_38c0y")
 
 [connection signal="timeout" from="Fire" to="." method="_on_fire_timeout"]
