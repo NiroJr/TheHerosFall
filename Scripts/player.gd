@@ -21,6 +21,8 @@ var is_parrying := false
 var attack_dash_dist := 20
 var attack_dash_dur := 0.2
 var dash_dir = Vector2(0,0)
+var dashDistance = 150
+var dashTime = 0.35
 
 var health := 100
 @onready var health_bar : ProgressBar = $HUD/HealthBar
@@ -99,7 +101,7 @@ func _physics_process(_delta: float) -> void:
 	
 	if Input.is_action_just_pressed("Dash") && (!is_swinging):
 		if(!is_dashing && can_dash):
-			_dash(200, 0.4);
+			_dash(dashDistance, dashTime);
 			
 	var holding := Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT)
 	if(is_dashing):
