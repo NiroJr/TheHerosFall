@@ -3,7 +3,7 @@ extends TileMapLayer
 
 signal power_changed
 
-@export var source: Node 
+@export var sources: Array[Node]
 
 var is_on := false
 var kind: int = 0 
@@ -17,10 +17,23 @@ func _ready() -> void:
 		var data := get_cell_tile_data(cell)
 		if data != null and data.get_custom_data("wire_shape") != "":
 			_cells[cell] = data.get_custom_data("wire_shape")
-	if source != null and source.has_signal("power_changed"):
-		source.power_changed.connect(_refresh)
+	for source in sources:
+		if source != null and source.has_signal("power_changed"):
+			source.power_changed.connect(_on_switch_activation.bind(source))
 	_refresh()
 
+func _on_switch_activation(active: Node) -> void:
+	if not active.is_on or active.is_receiving:
+		_refresh()
+		return
+	
+	var color: int = active.kind
+	for source in sources:
+		if source == null or source == active:
+			continue
+		source.set_color(color, true)
+	
+	_refresh()
 
 func _build_lookup() -> void:
 	for i in tile_set.get_source_count():
@@ -37,9 +50,15 @@ func _build_lookup() -> void:
 
 
 func _refresh() -> void:
-	if source != null:
-		is_on = source.is_on
-		kind = source.kind
+	is_on = false
+	kind = 0
+	
+	for source in sources:
+		if source != null and source.is_on:
+			is_on = true
+			kind = source.kind
+			break
+			
 	var color := kind + 1 if is_on else 0
 	for cell in _cells:
 		var key := "%s:%d" % [_cells[cell], color]

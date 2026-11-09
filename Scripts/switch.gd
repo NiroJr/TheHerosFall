@@ -24,10 +24,10 @@ const OFF_TEXTURE := preload("res://Assets/PuzzleSprites/switches/switchesAndWir
 var is_on := false
 var kind: Kind = Kind.ORANGE
 var _cooldown := 0.0
-
+var is_receiving := false
 
 func _ready() -> void:
-	var color: int
+	var color: int = 0
 	
 	match starting_power:
 		"ORANGE":
@@ -72,17 +72,19 @@ func _attack_kind(area: Area2D) -> int:
 	return -1
 
 
-func set_color(value: Kind) -> void:
+func set_color(value: Kind, indirect := false) -> void:
 	if is_on and kind == value:
 		return
 	if not is_on:
 		is_on = true
 		kind = value
+
 	else:
 		is_on = false
+	is_receiving = indirect
 	_refresh()
 	power_changed.emit()
-
+	is_receiving = false
 
 func _refresh() -> void:
 	$Sprite2D.texture = ON_TEXTURES[kind] if is_on else OFF_TEXTURE
