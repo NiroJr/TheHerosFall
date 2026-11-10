@@ -1,5 +1,6 @@
 extends ElevationBody
 
+signal died
 
 var detectionDistance = 300
 var speed = 75.0
@@ -59,6 +60,7 @@ func take_damage(amount: int):
 	health_bar.value = health
 	if(health <= 0):
 		queue_free()
+		died.emit()
 	#knockback on attacks
 	knockback = -direction * 240
 	

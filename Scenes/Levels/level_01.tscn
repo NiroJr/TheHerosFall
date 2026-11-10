@@ -8,7 +8,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_exit"]
 size = Vector2(32, 32)
 
-[node name="Main" type="Node2D" unique_id=97405304]
+[node name="Main2" type="Node2D" unique_id=97405304]
 y_sort_enabled = true
 
 [node name="Background" parent="." unique_id=1104582814 instance=ExtResource("1_ground")]
@@ -52,15 +52,17 @@ position = Vector2(320, 160)
 position = Vector2(560, 300)
 collision_layer = 0
 script = ExtResource("4_exit")
+next_level = "uid://q3ak4w7m6jb3"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LevelExit" unique_id=1128927451]
+position = Vector2(-240, -248)
 shape = SubResource("RectangleShape2D_exit")
 debug_color = Color(0.2, 0.9, 0.3, 0.45)
 
 [node name="ExitMarker" type="ColorRect" parent="LevelExit" unique_id=933162711]
-offset_left = -16.0
-offset_top = -16.0
-offset_right = 16.0
-offset_bottom = 16.0
+offset_left = -256.0
+offset_top = -264.0
+offset_right = -224.0
+offset_bottom = -232.0
 mouse_filter = 2
 color = Color(0.2, 0.9, 0.3, 0.35)
