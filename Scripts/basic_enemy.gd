@@ -1,7 +1,7 @@
 extends ElevationBody
 
 
-
+var detectionDistance = 300
 var speed = 75.0
 var player: Node2D
 var direction := Vector2.ZERO
@@ -36,7 +36,7 @@ func _physics_process(delta):
  
 	if(_alerted):
 		velocity = Vector2.ZERO
-	elif distance < 200 and reachable:
+	elif distance < detectionDistance and reachable:
 		velocity = direction * speed
 		alerted()
 		not_alerted = false
@@ -83,9 +83,9 @@ func _on_hit_box_area_entered(area: Area2D) -> void:
 	player.enemies_hit.append(self)
 	
 	if area.is_in_group("Combo1"):
-		take_damage(10)
+		take_damage(25)
 	elif area.is_in_group("Combo2"):
-		take_damage(20)
+		take_damage(25)
 	elif area.is_in_group("Combo3"):
 		take_damage(50)
 	elif area.is_in_group("Parry"):

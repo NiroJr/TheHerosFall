@@ -593,8 +593,8 @@ animations = [{
 "speed": 12.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_fkwtr"]
-radius = 20.024984
+[sub_resource type="CircleShape2D" id="CircleShape2D_fhkba"]
+radius = 30.0
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_i5tie"]
 animations = [{
@@ -702,6 +702,9 @@ animations = [{
 "speed": 60.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_fkwtr"]
+radius = 30.0
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r7t2e"]
 size = Vector2(34, 45)
 
@@ -739,22 +742,19 @@ z_index = 10
 z_as_relative = false
 
 [node name="Combo1" type="Area2D" parent="SwordSwing" unique_id=1024733563 groups=["Combo1"]]
-visible = false
 collision_layer = 8
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SwordSwing/Combo1" unique_id=1225933086]
-visible = false
 position = Vector2(0, 15)
 rotation = 1.5707964
-shape = SubResource("CircleShape2D_fkwtr")
+shape = SubResource("CircleShape2D_fhkba")
 
 [node name="SwordAnimation" type="AnimatedSprite2D" parent="SwordSwing/Combo1" unique_id=1568799830]
 sprite_frames = SubResource("SpriteFrames_i5tie")
 animation = &"Combo1"
 frame = 6
 frame_progress = 1.0
-offset = Vector2(3, -8)
 
 [node name="Combo2" type="Area2D" parent="SwordSwing" unique_id=162041491 groups=["Combo2"]]
 visible = false
@@ -786,7 +786,6 @@ shape = SubResource("CircleShape2D_fkwtr")
 [node name="SwordAnimation" type="AnimatedSprite2D" parent="SwordSwing/Combo3" unique_id=867388474]
 sprite_frames = SubResource("SpriteFrames_i5tie")
 animation = &"Combo1"
-offset = Vector2(0, -5)
 
 [node name="Parry" type="Area2D" parent="SwordSwing" unique_id=121541716 groups=["Parry"]]
 collision_layer = 32
@@ -799,6 +798,8 @@ shape = SubResource("RectangleShape2D_r7t2e")
 [node name="parry_anim" type="AnimatedSprite2D" parent="SwordSwing/Parry" unique_id=303857955]
 sprite_frames = SubResource("SpriteFrames_i5tie")
 animation = &"Combo3"
+frame = 5
+frame_progress = 1.0
 
 [node name="Combo" type="Timer" parent="." unique_id=741614805]
 wait_time = 0.5

@@ -138,8 +138,7 @@ sprite_frames = SubResource("SpriteFrames_8tom7")
 animation = &"down"
 
 [node name="PlayerDetection" type="Area2D" parent="." unique_id=1981254681]
-visible = false
-scale = Vector2(3, 3)
+scale = Vector2(3.5, 3.5)
 collision_layer = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetection" unique_id=633465115]

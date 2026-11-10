@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 @export var speed = 500
+var enemyProjectileSpeed = 300
 var enemy_projectile := false
 var dir : float
 var spawnPos : Vector2
@@ -11,6 +12,11 @@ var ground_offset := 0.0
 var floor_layers: Array = []
 @onready var sprite = $AnimatedSprite2D 
 
+#damage values 
+var playerProjectileDamage = 20
+var enemyProjectileDamage = 10 
+
+
 func _ready():
 	global_position = spawnPos
 	if(!enemy_projectile):
@@ -19,6 +25,7 @@ func _ready():
 	else:
 		global_rotation = spawnRot - PI/2
 		sprite.play("turret");
+		speed = enemyProjectileSpeed
 	if shooter != null and "floor_layers" in shooter:
 		floor_layers = shooter.floor_layers
  
@@ -47,7 +54,7 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 		return
 	if enemy_projectile:
 		if area.is_in_group("PlayerHitBox"):
-			collide.take_damage(1)
+			collide.take_damage(enemyProjectileDamage)
 			queue_free()
 		elif(area.is_in_group("Parry")):
 			dir = dir + PI
@@ -56,7 +63,7 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 		elif(area.is_in_group("Enemy") && collide != shooter):
 			queue_free()
 	elif(area.is_in_group("Enemy")):
-			collide.take_damage(5)
+			collide.take_damage(playerProjectileDamage)
 			queue_free()
 			
 func _elevation_of(node: Node) -> int:

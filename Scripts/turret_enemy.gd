@@ -116,8 +116,8 @@ func _on_hit_box_area_entered(area: Area2D) -> void:
 		return
 	player.get_parent().enemies_hit.append(self)
 	if area.is_in_group("Combo1"):
-		take_damage(10)
+		take_damage(25)
 	elif area.is_in_group("Combo2"):
-		take_damage(20)
+		take_damage(25)
 	elif area.is_in_group("Combo3"):
 		take_damage(50)

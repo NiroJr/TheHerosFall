@@ -265,7 +265,7 @@ func sword_swing() -> void:
 		if(use_combo1):
 			_dash(16, 0.12)
 		else:
-			_dash(32, 0.12)
+			_dash(25, 0.12)
 		can_dash = true
 		velocity = Vector2.ZERO;
 		await anim.animation_finished
