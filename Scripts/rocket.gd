@@ -17,7 +17,7 @@ func _ready() -> void:
 	
 func spawn(target_position : Vector2) -> void:
 	start = global_position
-	target = target_position
+	target = target_position+Vector2(1,0)
 	var mid_point := start.lerp(target, 0.5)
 	lift = mid_point + Vector2(0, -flight_arc)
 	is_active = true
@@ -51,14 +51,17 @@ func _process(delta: float) -> void:
 func _explode()-> void:
 	if has_exploded: 
 		return
+	self.add_to_group("Enemy")
 	has_exploded = true
 	is_active = false
 	$Shadow.visible = false
 	$AnimatedSprite2D.play("Land")
-	for area in get_overlapping_areas():
-		if area.is_in_group("PlayerHitBox"):
-			area.get_parent().take_damage(20)
-	set_deferred("monitoring", false)
+	await get_tree().physics_frame
+	for area in self.get_overlapping_areas():
+		if area != null && area.is_in_group("PlayerHitBox"):
+			area.get_parent().take_damage(50)
+			area.get_parent()._shake(20)
+	self.set_deferred("monitoring", false)
 	await $AnimatedSprite2D.animation_finished
 	if is_instance_valid(target_node):
 		target_node.visible = false

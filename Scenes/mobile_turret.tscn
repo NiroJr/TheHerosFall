@@ -10,7 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://cq8grmbro6tp1" path="res://Assets/EnemySprites/Turret+Bullets/turret3.png" id="8_7fcl2"]
 [ext_resource type="Texture2D" uid="uid://bt40c4rupsivu" path="res://Assets/EnemySprites/Turret+Bullets/turret5.png" id="9_qoqqw"]
 [ext_resource type="Texture2D" uid="uid://c0n65ufgfodeo" path="res://Assets/EnemySprites/Turret+Bullets/turret4.png" id="10_3cus0"]
-[ext_resource type="Texture2D" uid="uid://dmh2ey3aw70mi" path="res://Assets/icon.svg" id="11_fhkba"]
+[ext_resource type="Texture2D" uid="uid://ihh1023nelxp" path="res://Assets/EnemySprites/EnemyAlert/alert1.png" id="11_fhkba"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_68yga"]
 animations = [{
@@ -155,7 +155,6 @@ collide_with_bodies = false
 
 [node name="Alert" type="AnimatedSprite2D" parent="." unique_id=1806522953]
 position = Vector2(0, -23)
-scale = Vector2(0.05957031, 0.16992186)
 sprite_frames = SubResource("SpriteFrames_7fcl2")
 
 [connection signal="area_entered" from="HitBox" to="." method="_on_hit_box_area_entered"]

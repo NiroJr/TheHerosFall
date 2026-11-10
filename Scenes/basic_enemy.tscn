@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://cowf82id2ec13" path="res://Assets/EnemySprites/MovingEnemy/SpinningSawEnemy2.png" id="3_6cefa"]
 [ext_resource type="Texture2D" uid="uid://darg7jr8cw41y" path="res://Assets/EnemySprites/MovingEnemy/SpinningSawEnemy3.png" id="4_6pvwk"]
 [ext_resource type="Texture2D" uid="uid://poyuwxiwy0re" path="res://Assets/EnemySprites/MovingEnemy/SpinningSawEnemy4.png" id="5_dhrsy"]
-[ext_resource type="Texture2D" uid="uid://dmh2ey3aw70mi" path="res://Assets/icon.svg" id="6_6cefa"]
+[ext_resource type="Texture2D" uid="uid://ihh1023nelxp" path="res://Assets/EnemySprites/EnemyAlert/alert1.png" id="6_6cefa"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_68yga"]
 animations = [{
@@ -84,7 +84,6 @@ shape = SubResource("RectangleShape2D_it0lf")
 
 [node name="Alert" type="AnimatedSprite2D" parent="." unique_id=813022064]
 position = Vector2(0, -25)
-scale = Vector2(0.05957031, 0.18945313)
 sprite_frames = SubResource("SpriteFrames_6pvwk")
 
 [connection signal="area_entered" from="HitBox" to="." method="_on_hit_box_area_entered"]

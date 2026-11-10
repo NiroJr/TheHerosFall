@@ -25,10 +25,10 @@
 [ext_resource type="Texture2D" uid="uid://b7hn1v25b1owu" path="res://Assets/EnemySprites/ExplosionLauncher/explosionLauncher20.png" id="18_xpvgw"]
 [ext_resource type="Texture2D" uid="uid://c6wln45wos8fa" path="res://Assets/EnemySprites/ExplosionLauncher/explosionLauncher21.png" id="19_x18fx"]
 [ext_resource type="Texture2D" uid="uid://db76kaj4r6dyi" path="res://Assets/EnemySprites/ExplosionLauncher/explosionLauncher22.png" id="20_mm13i"]
-[ext_resource type="Texture2D" uid="uid://dmh2ey3aw70mi" path="res://Assets/icon.svg" id="23_ik1pi"]
 [ext_resource type="Texture2D" uid="uid://7e23yys7ok7i" path="res://Assets/EnemySprites/ExplosionLauncher/explosionLauncher10.png" id="24_dn8ef"]
 [ext_resource type="Texture2D" uid="uid://dg86fsnjw1oam" path="res://Assets/EnemySprites/ExplosionLauncher/explosionLauncher23.png" id="26_2en5o"]
 [ext_resource type="Texture2D" uid="uid://dc2rkanski2yj" path="res://Assets/EnemySprites/ExplosionLauncher/explosionLauncher25.png" id="27_4fwin"]
+[ext_resource type="Texture2D" uid="uid://ihh1023nelxp" path="res://Assets/EnemySprites/EnemyAlert/alert1.png" id="28_vxm5m"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vxm5m"]
 
@@ -142,7 +142,7 @@ radius = 8.0
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("23_ik1pi")
+"texture": ExtResource("28_vxm5m")
 }],
 "loop": 0,
 "name": &"default",
@@ -177,7 +177,6 @@ sprite_frames = SubResource("SpriteFrames_vikc2")
 animation = &"Firing"
 
 [node name="PlayerDetection" type="Area2D" parent="." unique_id=1374940934]
-visible = false
 scale = Vector2(3, 3)
 collision_layer = 16
 
@@ -201,7 +200,6 @@ shape = SubResource("RectangleShape2D_i5tie")
 
 [node name="Alert" type="AnimatedSprite2D" parent="." unique_id=1212517473]
 position = Vector2(0, -23)
-scale = Vector2(0.05957031, 0.16992186)
 sprite_frames = SubResource("SpriteFrames_dn8ef")
 
 [node name="target" type="Sprite2D" parent="." unique_id=17554515]

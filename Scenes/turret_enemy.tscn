@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://cq8grmbro6tp1" path="res://Assets/EnemySprites/Turret+Bullets/turret3.png" id="4_tjr58"]
 [ext_resource type="Texture2D" uid="uid://bt40c4rupsivu" path="res://Assets/EnemySprites/Turret+Bullets/turret5.png" id="5_ppywy"]
 [ext_resource type="Texture2D" uid="uid://c0n65ufgfodeo" path="res://Assets/EnemySprites/Turret+Bullets/turret4.png" id="6_nl20t"]
-[ext_resource type="Texture2D" uid="uid://dmh2ey3aw70mi" path="res://Assets/icon.svg" id="7_soew2"]
+[ext_resource type="Texture2D" uid="uid://ihh1023nelxp" path="res://Assets/EnemySprites/EnemyAlert/alert1.png" id="7_soew2"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_i5tie"]
 animations = [{
@@ -124,7 +124,6 @@ shape = SubResource("RectangleShape2D_68yga")
 
 [node name="Alert" type="AnimatedSprite2D" parent="." unique_id=18298078]
 position = Vector2(2.3841858e-07, -13.000001)
-scale = Vector2(0.023437498, 0.078125015)
 sprite_frames = SubResource("SpriteFrames_vikc2")
 
 [connection signal="timeout" from="Fire" to="." method="_on_fire_timeout"]
