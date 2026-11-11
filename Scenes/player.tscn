@@ -892,16 +892,16 @@ animations = [{
 "speed": 5.0
 }, {
 "frames": [{
-"duration": 4.0,
+"duration": 3.0,
 "texture": ExtResource("11_qpa8y")
 }, {
-"duration": 4.0,
+"duration": 3.0,
 "texture": ExtResource("12_sbwqj")
 }, {
-"duration": 4.0,
+"duration": 3.0,
 "texture": ExtResource("13_xwi16")
 }, {
-"duration": 4.0,
+"duration": 3.0,
 "texture": ExtResource("15_ph33w")
 }, {
 "duration": 12.0,
@@ -1007,9 +1007,7 @@ shape = SubResource("RectangleShape2D_r7t2e")
 
 [node name="parry_anim" type="AnimatedSprite2D" parent="SwordSwing/Parry" unique_id=303857955]
 sprite_frames = SubResource("SpriteFrames_i5tie")
-animation = &"Combo3"
-frame = 5
-frame_progress = 1.0
+animation = &"parry"
 
 [node name="Combo" type="Timer" parent="." unique_id=741614805]
 wait_time = 0.5
