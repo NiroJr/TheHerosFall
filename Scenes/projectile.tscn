@@ -90,6 +90,7 @@ animations = [{
 collision_layer = 8
 collision_mask = 6
 script = ExtResource("1_f8cdk")
+debug_bounce = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=693153417]
 sprite_frames = SubResource("SpriteFrames_m7t8w")

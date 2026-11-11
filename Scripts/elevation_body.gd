@@ -13,6 +13,7 @@ const FALL_LIMIT := -160.0
 var feet := Vector2(0, 14) #feet to the characters middle point
 var foot_size := Vector2(6, 3) 
 @export var can_fall_into_void := false # true = can fall into void
+@export var can_step_up := true # true = can step up a floor
 var skip_floor_check := false
 
 enum { WALK, STEP_UP, FALL }
@@ -131,7 +132,7 @@ func _can_move(step: Vector2) -> bool:
 		return ground <= elevation
 	if ground < 0:
 		return can_fall_into_void
-	return ground <= elevation + 1
+	return ground <= elevation + (1 if can_step_up else 0)
 
 
 func _check_level_change() -> void:

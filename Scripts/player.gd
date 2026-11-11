@@ -359,7 +359,7 @@ func shoot():
 	var angle = aim_dir.angle()
 	instance.elevation = elevation
 	instance.shooter = self
-	instance.ground_offset = feet.y
+	instance.ground_offset = 0
 	instance.dir = angle             
 	instance.spawnPos = global_position
 	instance.spawnRot = angle        
