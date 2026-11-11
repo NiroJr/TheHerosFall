@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://dtfojwdh213s3"]
+
+[ext_resource type="Script" uid="uid://c1ouhp60rfwy" path="res://Scripts/level_exit.gd" id="1_845nk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kry3j"]
+size = Vector2(32, 32)
+
+[node name="LevelExit" type="Area2D" unique_id=1531800044]
+collision_layer = 0
+script = ExtResource("1_845nk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=396945421]
+shape = SubResource("RectangleShape2D_kry3j")
+debug_color = Color(0.2, 0.9, 0.3, 0.45)
+
+[node name="ExitMarker" type="ColorRect" parent="." unique_id=2023952305]
+mouse_filter = 2
+color = Color(0.2, 0.9, 0.3, 0.35)
+metadata/_edit_use_anchors_ = true

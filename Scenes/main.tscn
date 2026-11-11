@@ -6,14 +6,11 @@
 [ext_resource type="PackedScene" uid="uid://dnneyajyj3b8v" path="res://Scenes/wires.tscn" id="2_ynf5e"]
 [ext_resource type="PackedScene" uid="uid://bwmfdn52i4svu" path="res://Scenes/basic_enemy.tscn" id="3_8gbba"]
 [ext_resource type="PackedScene" uid="uid://bm4o0xwai1isc" path="res://Scenes/turret_enemy.tscn" id="4_21xkr"]
-[ext_resource type="Script" uid="uid://c1ouhp60rfwy" path="res://Scripts/level_exit.gd" id="4_jjvhh"]
 [ext_resource type="PackedScene" uid="uid://bwju7bl5m8f58" path="res://Scenes/mobile_turret.tscn" id="5_6bp64"]
 [ext_resource type="PackedScene" uid="uid://dqp6hhsrl2vc0" path="res://Scenes/switch.tscn" id="8_344ge"]
 [ext_resource type="PackedScene" uid="uid://1py8rk2mba1u" path="res://Scenes/door.tscn" id="10_hptm8"]
+[ext_resource type="PackedScene" uid="uid://dtfojwdh213s3" path="res://Scenes/level_exit.tscn" id="11_6iyac"]
 [ext_resource type="PackedScene" uid="uid://omjnof5v426x" path="res://Scenes/big_door.tscn" id="11_d1ilt"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_kry3j"]
-size = Vector2(32, 32)
 
 [node name="Main" type="Node2D" unique_id=1706061838]
 y_sort_enabled = true
@@ -44,6 +41,10 @@ tile_map_data = PackedByteArray("AABGAPD/AQAFAAQAAABGAO//AQAFAAMAAABGAO7/AQAFAAI
 [node name="Player" parent="." unique_id=481447577 instance=ExtResource("1_jjgbg")]
 position = Vector2(-29, -172)
 can_fall_into_void = true
+
+[node name="LevelExit" parent="." unique_id=1531800044 instance=ExtResource("11_6iyac")]
+position = Vector2(2024, -144)
+next_level = "uid://nrus3nukru1d"
 
 [node name="Enemies" type="Node2D" parent="." unique_id=1494934035]
 y_sort_enabled = true
@@ -76,45 +77,6 @@ position = Vector2(381, 22)
 
 [node name="Launcher1" parent="Enemies" unique_id=1781325329 instance=ExtResource("2_hptm8")]
 position = Vector2(-22, -334)
-
-[node name="LevelExit" type="Area2D" parent="." unique_id=1553636488]
-position = Vector2(1995, -156)
-collision_layer = 0
-script = ExtResource("4_jjvhh")
-next_level = "uid://nrus3nukru1d"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelExit" unique_id=687286376]
-position = Vector2(32, 1)
-shape = SubResource("RectangleShape2D_kry3j")
-debug_color = Color(0.2, 0.9, 0.3, 0.45)
-
-[node name="ExitMarker" type="ColorRect" parent="LevelExit" unique_id=1265670126]
-offset_left = 16.0
-offset_top = -15.0
-offset_right = 48.0
-offset_bottom = 17.0
-mouse_filter = 2
-color = Color(0.2, 0.9, 0.3, 0.35)
-metadata/_edit_use_anchors_ = true
-
-[node name="LevelExit2" type="Area2D" parent="." unique_id=3551406]
-position = Vector2(102, 131)
-collision_layer = 0
-script = ExtResource("4_jjvhh")
-next_level = "uid://nrus3nukru1d"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelExit2" unique_id=1740251983]
-shape = SubResource("RectangleShape2D_kry3j")
-debug_color = Color(0.2, 0.9, 0.3, 0.45)
-
-[node name="ExitMarker" type="ColorRect" parent="LevelExit2" unique_id=1832080106]
-offset_left = -16.0
-offset_top = -16.0
-offset_right = 16.0
-offset_bottom = 16.0
-mouse_filter = 2
-color = Color(0.2, 0.9, 0.3, 0.35)
-metadata/_edit_use_anchors_ = true
 
 [node name="puzzle" type="Node2D" parent="." unique_id=941488080]
 position = Vector2(10, -208)

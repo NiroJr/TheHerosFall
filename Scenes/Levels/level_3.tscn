@@ -2,10 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://couagsdjv4j23" path="res://Scenes/ground.tscn" id="1_nfly3"]
 [ext_resource type="PackedScene" uid="uid://ixg8ghykh70r" path="res://Scenes/player.tscn" id="2_t8c31"]
-[ext_resource type="Script" uid="uid://c1ouhp60rfwy" path="res://Scripts/level_exit.gd" id="3_rc141"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_yy6i0"]
-size = Vector2(32, 32)
+[ext_resource type="PackedScene" uid="uid://dtfojwdh213s3" path="res://Scenes/level_exit.tscn" id="3_nfly3"]
 
 [node name="Level3" type="Node2D" unique_id=950313308]
 
@@ -19,22 +16,7 @@ tile_map_data = PackedByteArray("AAARAAUAAQACAAMAAAARAAQAAQAGAAIAAAARAAMAAQAGAAI
 [node name="Player" parent="." unique_id=481447577 instance=ExtResource("2_t8c31")]
 position = Vector2(45, 65)
 
-[node name="LevelExit" type="Area2D" parent="." unique_id=1950295381]
+[node name="LevelExit" parent="." unique_id=1531800044 instance=ExtResource("3_nfly3")]
 visible = false
-collision_layer = 0
-script = ExtResource("3_rc141")
+position = Vector2(48, 114)
 next_level = "uid://q3ak4w7m6jb3"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelExit" unique_id=1644334913]
-position = Vector2(49, 128)
-shape = SubResource("RectangleShape2D_yy6i0")
-debug_color = Color(0.2, 0.9, 0.3, 0.45)
-
-[node name="ExitMarker" type="ColorRect" parent="LevelExit" unique_id=452135391]
-offset_left = 32.0
-offset_top = 112.0
-offset_right = 64.0
-offset_bottom = 144.0
-mouse_filter = 2
-color = Color(0.2, 0.9, 0.3, 0.35)
-metadata/_edit_use_anchors_ = true
