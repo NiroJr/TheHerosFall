@@ -19,12 +19,12 @@ position = Vector2(-130, 10)
 
 [node name="LevelExit" parent="." unique_id=1531800044 instance=ExtResource("3_wsibe")]
 visible = false
-position = Vector2(-95, -80)
+position = Vector2(-96, -77)
 next_level = "uid://ekb2e5kn0fi2"
 
 [node name="LevelExit2" parent="." unique_id=2040439636 instance=ExtResource("3_wsibe")]
 visible = false
-position = Vector2(0, -80)
+position = Vector2(0, -78)
 next_level = "uid://cyvlhrir4dl7e"
 
 [node name="LevelExit3" parent="." unique_id=114609328 instance=ExtResource("3_wsibe")]

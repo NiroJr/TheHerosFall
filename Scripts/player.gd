@@ -32,7 +32,12 @@ var knocked := false
 var camera_shake := 0.0
 var hitstop_dur = 0.08
 
-var health := 100
+var health:
+	get:
+		return PlayerData.health
+	set(value):
+		PlayerData.health = value
+
 @onready var health_bar : ProgressBar = $HUD/HealthBar
 
 var enemies_hit: Array[Node] = []

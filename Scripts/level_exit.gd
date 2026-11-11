@@ -1,6 +1,7 @@
 extends Area2D
 @export_file("*.tscn") var next_level: String = ""
 
+var room_states: Dictionary = {}
 
 func _ready() -> void:
 	body_entered.connect(_on_body_entered)
