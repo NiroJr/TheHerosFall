@@ -1,9 +1,15 @@
 extends CharacterBody2D
 
+signal power_changed
+
 @export var waves: Array[Wave] = []
+@onready var sprite = $AnimatedSprite2D
 
 var current_wave: int = 0
 var enemies_defeated: int = 0
+
+var is_on := true
+var kind := 2
 
 func _ready() -> void:
 	for wave in waves:
@@ -16,7 +22,9 @@ func _ready() -> void:
 func start_wave():
 	enemies_defeated = 0
 	if current_wave >= waves.size():
-		#turn off wires
+		is_on = false
+		power_changed.emit()
+		sprite.frame = 1
 		return
 	for path in waves[current_wave].enemies:
 		var enemy = get_node(path)
