@@ -6,6 +6,7 @@ extends ElevationBody
 @onready var canvasLayer: CanvasLayer = get_node("CanvasLayer")
 @onready var crosshair: Sprite2D = canvasLayer.get_child(0)
 @onready var trajectory: Line2D = get_node("Trajectory")
+var charge_frames: Array[Texture2D] = [preload("res://Assets/MCSprites/aimReticle/aimChargeUpAnimation/aimReticle6.png"), preload("res://Assets/MCSprites/aimReticle/aimChargeUpAnimation/aimReticle7.png"), preload("res://Assets/MCSprites/aimReticle/aimChargeUpAnimation/aimReticle8.png"), preload("res://Assets/MCSprites/aimReticle/aimChargeUpAnimation/aimReticle9.png"), preload("res://Assets/MCSprites/aimReticle/aimChargeUpAnimation/aimReticle10.png")]
 var is_fully_charged := false
 var facing_angle := 0.0
 const SPEED = 300.0
@@ -54,10 +55,11 @@ func _ready() -> void:
 	_update_sort()
 	timer.timeout.connect(_on_charge_timeout)
 	$PlayerSprite.process_mode = Node.PROCESS_MODE_ALWAYS
+	crosshair.texture = charge_frames[0]
 
 func _on_charge_timeout() -> void:
 	is_fully_charged = true
-	crosshair.texture = load("res://Assets/MCSprites/aimReticle/aimReticle1.png")
+	crosshair.texture = charge_frames[charge_frames.size() - 1]
 	trajectory.texture = load("res://Assets/MCSprites/aimReticle/aimReticle5.png")
 
 const Animations := [
@@ -206,13 +208,16 @@ func _physics_process(_delta: float) -> void:
 	if holding:
 		if timer.is_stopped() and not is_fully_charged:
 			timer.start()
+		if not is_fully_charged:
+			var progress := 1.0 - (timer.time_left / timer.wait_time)
+			crosshair.texture = charge_frames[min(int(progress * charge_frames.size()), charge_frames.size() - 1)]
 		
 		trajectory.update_trajectory(aim_dir, 500.0, get_physics_process_delta_time())
 	else:
 		if is_fully_charged:
 			shoot()
-			crosshair.texture = load("res://Assets/MCSprites/aimReticle/aimReticle2.png")
 			trajectory.texture = load("res://Assets/MCSprites/aimReticle/aimReticle4.png")
+		crosshair.texture = charge_frames[0]
 		timer.stop()
 		is_fully_charged = false
 		trajectory.clear_points()

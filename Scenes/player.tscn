@@ -1026,7 +1026,7 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_8gbba")
 show_percentage = false
 
 [node name="ShootCooldown" type="Timer" parent="." unique_id=1339821598]
-wait_time = 0.4
+wait_time = 0.7
 one_shot = true
 
 [node name="Trajectory" type="Line2D" parent="." unique_id=17269404]
