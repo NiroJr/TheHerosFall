@@ -323,7 +323,7 @@ func sword_swing() -> void:
 			0:
 				$PlayerSprite.play(combo1_Animations[sprite_index])
 			1:
-				if(sprite_index == 2):
+				if(sprite_index == 2 or sprite_index == 6):
 					$PlayerSprite.flip_h =true
 				$PlayerSprite.play(combo2_Animations[sprite_index])
 			#2:

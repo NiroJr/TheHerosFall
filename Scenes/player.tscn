@@ -125,6 +125,7 @@
 [ext_resource type="Texture2D" uid="uid://bgvgxto0ol68e" path="res://Assets/MCSprites/characterSprites/firstAttackSprites/upRight&Left/firstAttackSprites28.png" id="36_dxcir"]
 [ext_resource type="Texture2D" uid="uid://cu6ernesb03mt" path="res://Assets/MCSprites/characterSprites/DashingSprites/Left&Right/blinkDash34.png" id="36_vbb78"]
 [ext_resource type="Texture2D" uid="uid://rhd2ge6go7bd" path="res://Assets/MCSprites/characterSprites/DashingSprites/Left&Right/blinkDash35.png" id="37_7anab"]
+[ext_resource type="Texture2D" uid="uid://cf1jg6k7wi43b" path="res://Assets/MCSprites/characterSprites/firstAttackSprites/downRight&Left/firstAttackSprites32.png" id="37_wf5ty"]
 [ext_resource type="Texture2D" uid="uid://cekj6j5byujob" path="res://Assets/MCSprites/characterSprites/DashingSprites/Left&Right/blinkDash36.png" id="38_q7v0o"]
 [ext_resource type="Texture2D" uid="uid://bttx5lx08dep2" path="res://Assets/MCSprites/characterSprites/DashingSprites/Left&Right/blinkDash37.png" id="39_gc6xv"]
 [ext_resource type="Texture2D" uid="uid://cu08avgn5kfms" path="res://Assets/MCSprites/characterSprites/DashingSprites/Left&Right/blinkDash38.png" id="40_473p5"]
@@ -193,10 +194,10 @@ animations = [{
 }],
 "loop": 0,
 "name": &"combo1_down",
-"speed": 15.0
+"speed": 20.0
 }, {
 "frames": [{
-"duration": 1.0,
+"duration": 1.5,
 "texture": ExtResource("10_c83yi")
 }, {
 "duration": 1.0,
@@ -219,7 +220,7 @@ animations = [{
 }],
 "loop": 0,
 "name": &"combo1_downRight",
-"speed": 24.0
+"speed": 20.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -231,7 +232,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("18_ftehy")
 }, {
-"duration": 1.0,
+"duration": 1.5,
 "texture": ExtResource("19_ylvu8")
 }, {
 "duration": 1.0,
@@ -245,7 +246,7 @@ animations = [{
 }],
 "loop": 0,
 "name": &"combo1_side",
-"speed": 24.0
+"speed": 20.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -257,7 +258,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("25_xtit1")
 }, {
-"duration": 1.0,
+"duration": 1.5,
 "texture": ExtResource("26_151ft")
 }, {
 "duration": 1.0,
@@ -271,7 +272,7 @@ animations = [{
 }],
 "loop": 0,
 "name": &"combo1_up",
-"speed": 24.0
+"speed": 20.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -283,7 +284,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("32_eycad")
 }, {
-"duration": 1.0,
+"duration": 1.5,
 "texture": ExtResource("33_3t3b1")
 }, {
 "duration": 1.0,
@@ -297,7 +298,7 @@ animations = [{
 }],
 "loop": 0,
 "name": &"combo1_upRight",
-"speed": 24.0
+"speed": 20.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -323,27 +324,111 @@ animations = [{
 }],
 "loop": 0,
 "name": &"combo2_down",
-"speed": 15.0
+"speed": 20.0
 }, {
-"frames": [],
-"loop": 1,
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("10_c83yi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_nyd3j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_0gchq")
+}, {
+"duration": 1.5,
+"texture": ExtResource("37_wf5ty")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_5w755")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_552og")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_giuho")
+}],
+"loop": 0,
 "name": &"combo2_downRight",
-"speed": 5.0
+"speed": 20.0
 }, {
-"frames": [],
-"loop": 1,
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("16_gmm01")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_ott2s")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_ftehy")
+}, {
+"duration": 1.5,
+"texture": ExtResource("19_ylvu8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_lustd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_gbwas")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_ljkmv")
+}],
+"loop": 0,
 "name": &"combo2_side",
-"speed": 5.0
+"speed": 20.0
 }, {
-"frames": [],
-"loop": 1,
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("23_8k4al")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_e0hkx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_xtit1")
+}, {
+"duration": 1.5,
+"texture": ExtResource("26_151ft")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_274r3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("28_5e4ga")
+}, {
+"duration": 1.0,
+"texture": ExtResource("29_rntbp")
+}],
+"loop": 0,
 "name": &"combo2_up",
-"speed": 5.0
+"speed": 20.0
 }, {
-"frames": [],
-"loop": 1,
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("30_xw5nt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("31_rie18")
+}, {
+"duration": 1.0,
+"texture": ExtResource("32_eycad")
+}, {
+"duration": 1.5,
+"texture": ExtResource("33_3t3b1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("34_dixlh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("35_pd0oe")
+}, {
+"duration": 1.0,
+"texture": ExtResource("36_dxcir")
+}],
+"loop": 0,
 "name": &"combo2_upRight",
-"speed": 5.0
+"speed": 20.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -832,7 +917,7 @@ animations = [{
 }],
 "loop": 0,
 "name": &"Combo1",
-"speed": 15.0
+"speed": 20.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -858,7 +943,7 @@ animations = [{
 }],
 "loop": 0,
 "name": &"Combo2",
-"speed": 24.0
+"speed": 20.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -881,7 +966,7 @@ animations = [{
 }],
 "loop": 0,
 "name": &"Combo3",
-"speed": 18.0
+"speed": 20.0
 }, {
 "frames": [{
 "duration": 1.5,
@@ -945,9 +1030,7 @@ shape = SubResource("RectangleShape2D_i5tie")
 
 [node name="PlayerSprite" type="AnimatedSprite2D" parent="." unique_id=1537809165]
 sprite_frames = SubResource("SpriteFrames_xrrqc")
-animation = &"combo2_down"
-frame = 6
-frame_progress = 1.0
+animation = &"combo1_downRight"
 
 [node name="SwordSwing" type="Node2D" parent="." unique_id=794402511]
 z_index = 10
