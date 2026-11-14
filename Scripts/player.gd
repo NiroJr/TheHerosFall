@@ -217,7 +217,7 @@ func _physics_process(_delta: float) -> void:
 			var progress := 1.0 - (timer.time_left / timer.wait_time)
 			crosshair.texture = charge_frames[min(int(progress * charge_frames.size()), charge_frames.size() - 1)]
 		
-		trajectory.update_trajectory(aim_dir, 500.0, get_physics_process_delta_time())
+		trajectory.update_trajectory(aim_dir, 500.0, get_physics_process_delta_time(), global_position, elevation, floor_layers)	
 	else:
 		if is_fully_charged:
 			shoot()
