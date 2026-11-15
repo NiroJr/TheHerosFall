@@ -108,23 +108,23 @@ const dashEndLag_Animations := [
 ]
 
 const combo1_Animations := [
-	"combo1_side",
+	"combo1_right",
 	"combo1_downRight",
 	"combo1_down", 
-	"combo1_downRight", #downLeft
-	"combo1_side",  #left
-	"combo1_upRight", #upLeft
+	"combo1_downLeft", #downLeft
+	"combo1_left",  #left
+	"combo1_upLeft", #upLeft
 	"combo1_up",	
 	"combo1_upRight",
 ]
 
 const combo2_Animations := [
-	"combo2_side",
+	"combo2_right",
 	"combo2_downRight",
 	"combo2_down", 
-	"combo2_downRight", #downLeft
-	"combo2_side",  #left
-	"combo2_upRight", #upLeft
+	"combo2_downLeft", #downLeft
+	"combo2_left",  #left
+	"combo2_upLeft", #upLeft
 	"combo2_up",	
 	"combo2_upRight",
 ]
@@ -319,16 +319,23 @@ func sword_swing() -> void:
 
 		shape.set_deferred("disabled", false)
 		swing_anim = true
+		
+		#changes animation based on curret combo
 		match combo_step:
 			0:
+				#normal sprites
+				$PlayerSprite.flip_h = false
 				$PlayerSprite.play(combo1_Animations[sprite_index])
+				
 			1:
-				if(sprite_index == 2 or sprite_index == 6):
-					$PlayerSprite.flip_h =true
+				#flipped sprites for eveything, the left and right attack anim are swapped
+				$PlayerSprite.flip_h =true
 				$PlayerSprite.play(combo2_Animations[sprite_index])
 			#2:
 			#	$PlayerSprite.play(combo1_Animations[sprite_index])
 		anim.play(anim_name)
+		
+		#dashes forward on third frame of animation
 		while(anim.frame < 3):
 			await anim.frame_changed
 		if(use_combo1):
@@ -337,6 +344,8 @@ func sword_swing() -> void:
 			_dash(25, 0.12)
 		can_dash = true
 		velocity = Vector2.ZERO;
+		
+		#resets attack
 		await anim.animation_finished
 		swing_anim = false
 		shape.set_deferred("disabled", true)
