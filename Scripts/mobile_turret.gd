@@ -22,6 +22,7 @@ var direction := Vector2.ZERO
 var knockback := Vector2.ZERO
 var health := MAX_HEALTH
 
+var is_stunned := false
 var alerted := false
 var player_box: Area2D = null
 var turret_sprite_index := 0
@@ -68,6 +69,12 @@ func _physics_process(delta):
 
 	velocity += knockback
 	knockback = knockback.move_toward(Vector2.ZERO, 640 * delta)
+	if(knockback == Vector2.ZERO && is_stunned):
+		$Alert.visible = true
+		$Alert.play("stun")
+		await get_tree().create_timer(0.2).timeout
+		$Alert.visible = false
+		is_stunned = false
 
 	move_with_elevation(delta)
 	update_turret()
@@ -88,7 +95,7 @@ func detected(body: Area2D) -> void:
 	if body.is_in_group("PlayerHitBox"):
 		player_box = body
 		$Alert.visible = true
-		$Alert.play("default")
+		$Alert.play("alert")
 		alerted = true
 		await $Alert.animation_finished
 		await get_tree().create_timer(1.0).timeout
@@ -148,6 +155,7 @@ func take_damage(amount: int):
 	if health <= 0:
 		queue_free()
 	knockback = -direction * 240
+	is_stunned = true
 
 
 func _on_hit_box_area_entered(area: Area2D) -> void:

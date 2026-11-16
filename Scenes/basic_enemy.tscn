@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://darg7jr8cw41y" path="res://Assets/EnemySprites/MovingEnemy/SpinningSawEnemy3.png" id="4_6pvwk"]
 [ext_resource type="Texture2D" uid="uid://poyuwxiwy0re" path="res://Assets/EnemySprites/MovingEnemy/SpinningSawEnemy4.png" id="5_dhrsy"]
 [ext_resource type="Texture2D" uid="uid://ihh1023nelxp" path="res://Assets/EnemySprites/EnemyAlert/alert1.png" id="6_6cefa"]
+[ext_resource type="Texture2D" uid="uid://dmh2ey3aw70mi" path="res://Assets/icon.svg" id="7_6pvwk"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_68yga"]
 animations = [{
@@ -48,7 +49,15 @@ animations = [{
 "texture": ExtResource("6_6cefa")
 }],
 "loop": 0,
-"name": &"default",
+"name": &"alert",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_6pvwk")
+}],
+"loop": 1,
+"name": &"stun",
 "speed": 5.0
 }]
 
@@ -83,7 +92,9 @@ scale = Vector2(1.5, 1.5)
 shape = SubResource("RectangleShape2D_it0lf")
 
 [node name="Alert" type="AnimatedSprite2D" parent="." unique_id=813022064]
-position = Vector2(0, -25)
+position = Vector2(0, -28)
+scale = Vector2(0.054687496, 0.1953125)
 sprite_frames = SubResource("SpriteFrames_6pvwk")
+animation = &"stun"
 
 [connection signal="area_entered" from="HitBox" to="." method="_on_hit_box_area_entered"]

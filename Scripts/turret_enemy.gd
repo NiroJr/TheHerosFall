@@ -54,7 +54,7 @@ func detected(body: Area2D) -> void:
 	if(body.is_in_group("PlayerHitBox")):
 		player = body
 		$Alert.visible = true
-		$Alert.play("default")
+		$Alert.play("alert")
 		alerted = true
 		await $Alert.animation_finished
 		await  get_tree().create_timer(1.0).timeout
@@ -108,7 +108,10 @@ func take_damage(amount: int):
 	health_bar.value = health
 	if(health <= 0):
 		queue_free()
-
+	$Alert.visible = true
+	$Alert.play("stun")
+	await get_tree().create_timer(0.2).timeout
+	$Alert.visible = false
 func _on_hit_box_area_entered(area: Area2D) -> void:
 	if get_tree().get_first_node_in_group("player").elevation != elevation:
 		return

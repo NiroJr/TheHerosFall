@@ -1037,6 +1037,7 @@ z_index = 10
 z_as_relative = false
 
 [node name="Combo1" type="Area2D" parent="SwordSwing" unique_id=1024733563 groups=["Combo1"]]
+visible = false
 collision_layer = 8
 collision_mask = 4
 
@@ -1072,7 +1073,6 @@ collision_layer = 8
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SwordSwing/Combo3" unique_id=1835157658]
-visible = false
 position = Vector2(0, 15)
 shape = SubResource("CircleShape2D_fkwtr")
 

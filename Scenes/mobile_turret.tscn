@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://bt40c4rupsivu" path="res://Assets/EnemySprites/Turret+Bullets/turret5.png" id="9_qoqqw"]
 [ext_resource type="Texture2D" uid="uid://c0n65ufgfodeo" path="res://Assets/EnemySprites/Turret+Bullets/turret4.png" id="10_3cus0"]
 [ext_resource type="Texture2D" uid="uid://ihh1023nelxp" path="res://Assets/EnemySprites/EnemyAlert/alert1.png" id="11_fhkba"]
+[ext_resource type="Texture2D" uid="uid://dmh2ey3aw70mi" path="res://Assets/icon.svg" id="12_7fcl2"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_68yga"]
 animations = [{
@@ -99,7 +100,15 @@ animations = [{
 "texture": ExtResource("11_fhkba")
 }],
 "loop": 0,
-"name": &"default",
+"name": &"alert",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 5.0,
+"texture": ExtResource("12_7fcl2")
+}],
+"loop": 0,
+"name": &"stun",
 "speed": 5.0
 }]
 
@@ -154,8 +163,10 @@ collide_with_bodies = false
 [node name="Fire" type="Timer" parent="." unique_id=1643419348]
 
 [node name="Alert" type="AnimatedSprite2D" parent="." unique_id=1806522953]
-position = Vector2(0, -23)
+position = Vector2(0, -25)
+scale = Vector2(0.046875, 0.19921878)
 sprite_frames = SubResource("SpriteFrames_7fcl2")
+animation = &"stun"
 
 [connection signal="area_entered" from="HitBox" to="." method="_on_hit_box_area_entered"]
 [connection signal="timeout" from="Fire" to="." method="_on_fire_timeout"]

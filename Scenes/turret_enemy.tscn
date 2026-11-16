@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://bt40c4rupsivu" path="res://Assets/EnemySprites/Turret+Bullets/turret5.png" id="5_ppywy"]
 [ext_resource type="Texture2D" uid="uid://c0n65ufgfodeo" path="res://Assets/EnemySprites/Turret+Bullets/turret4.png" id="6_nl20t"]
 [ext_resource type="Texture2D" uid="uid://ihh1023nelxp" path="res://Assets/EnemySprites/EnemyAlert/alert1.png" id="7_soew2"]
+[ext_resource type="Texture2D" uid="uid://dmh2ey3aw70mi" path="res://Assets/icon.svg" id="8_tjr58"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_i5tie"]
 animations = [{
@@ -70,7 +71,15 @@ animations = [{
 "texture": ExtResource("7_soew2")
 }],
 "loop": 0,
-"name": &"default",
+"name": &"alert",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_tjr58")
+}],
+"loop": 0,
+"name": &"stun",
 "speed": 5.0
 }]
 
@@ -123,8 +132,10 @@ scale = Vector2(0.5, 0.5)
 shape = SubResource("RectangleShape2D_68yga")
 
 [node name="Alert" type="AnimatedSprite2D" parent="." unique_id=18298078]
-position = Vector2(2.3841858e-07, -13.000001)
+position = Vector2(0, -19)
+scale = Vector2(0.046875, 0.140625)
 sprite_frames = SubResource("SpriteFrames_vikc2")
+animation = &"stun"
 
 [connection signal="timeout" from="Fire" to="." method="_on_fire_timeout"]
 [connection signal="area_entered" from="HitBox" to="." method="_on_hit_box_area_entered"]

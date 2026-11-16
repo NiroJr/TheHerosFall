@@ -11,6 +11,7 @@ const MAX_HEALTH := 100
 var health := MAX_HEALTH
 var not_alerted := true
 var _alerted := false
+var is_stunned := false
 @onready var health_bar = $HealthBar
 
 var attacks_received: Array[Area2D] = []
@@ -28,7 +29,6 @@ func _physics_process(delta):
 	if not is_instance_valid(player):
 		velocity = Vector2.ZERO
 		return
- 
 	var to_player: Vector2 = world_offset_to(player)
 	direction = to_player.normalized()
 	var distance = to_player.length()
@@ -52,7 +52,12 @@ func _physics_process(delta):
  
 	velocity += knockback
 	knockback = knockback.move_toward(Vector2.ZERO, 640 * delta)
- 
+	if(knockback == Vector2.ZERO && is_stunned):
+		$Alert.visible = true
+		$Alert.play("stun")
+		await get_tree().create_timer(0.2).timeout
+		$Alert.visible = false
+		is_stunned = false
 	move_with_elevation(delta)
 	
 func take_damage(amount: int):
@@ -62,12 +67,14 @@ func take_damage(amount: int):
 		queue_free()
 		died.emit()
 	#knockback on attacks
-	knockback = -direction * 240
+	knockback = -direction * 280
+	is_stunned = true
 	
+
 func alerted() -> void:
 	if(not_alerted):
 		$Alert.visible = true
-		$Alert.play("default")
+		$Alert.play("alert")
 		_alerted = true
 		await $Alert.animation_finished
 		await get_tree().create_timer(1.0).timeout

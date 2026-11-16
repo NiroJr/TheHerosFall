@@ -269,6 +269,7 @@ func _dash(dist: int, speed: float)-> void:
 	can_dash = true
 	
 func _parry()-> void:
+	is_parrying = true
 	var parry : Node2D = $SwordSwing/Parry
 	$SwordSwing.visible = true
 	$SwordSwing/Combo1.visible = false
@@ -286,6 +287,7 @@ func _parry()-> void:
 	$SwordSwing.visible = false
 	parry.visible = false
 	shape.set_deferred("disabled", true)
+	is_parrying = false
 
 func _on_parry_area_entered(_area: Area2D) -> void:
 	is_parrying = true
@@ -338,6 +340,7 @@ func sword_swing() -> void:
 		can_dash = true
 		velocity = Vector2.ZERO;
 		await anim.animation_finished
+		$PlayerSprite.flip_h = false
 		swing_anim = false
 		shape.set_deferred("disabled", true)
 		combo_step = (combo_step + 1) % 3
