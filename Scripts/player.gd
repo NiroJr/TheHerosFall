@@ -178,23 +178,18 @@ func _physics_process(_delta: float) -> void:
 	#		velocity.y = move_toward(velocity.y, 0, SPEED)
 
 	#	velocity = velocity.normalized() * SPEED
-	
-		
+	#flips sprites when left input is recieved and the direction is given
+	if !swing_anim:
+		$PlayerSprite.flip_h = (sprite_index in [3, 4, 5])
 		
 	#Rotates the player body and facing direction for projectile during movement
-	if(velocity != Vector2.ZERO && !swing_anim):
+	if(velocity != Vector2.ZERO):
 		facing_angle = velocity.angle()
 		sprite_dir = fposmod(facing_angle, TAU)
 		sprite_index = roundi(sprite_dir/slice)%8
 		
 		
-		#flips sprites when left input is recieved and the direction is given
-		if(sprite_index == 3
-		or sprite_index == 4
-		or sprite_index == 5):
-			$PlayerSprite.flip_h = true;
-		else:
-			$PlayerSprite.flip_h = false;
+		
 		if(!is_dashing):
 			$PlayerSprite.play(Animations[sprite_index]);
 	elif(!is_dashing && !swing_anim): 
@@ -323,16 +318,16 @@ func sword_swing() -> void:
 		swing_anim = true
 		
 		#changes animation based on curret combo
+		var player_anim = $PlayerSprite
 		match combo_step:
 			0:
 				#normal sprites
-				$PlayerSprite.flip_h = false
-				$PlayerSprite.play(combo1_Animations[sprite_index])
-				
+				player_anim.flip_h = false
+				player_anim.play(combo1_Animations[sprite_index])
 			1:
 				#flipped sprites for eveything, the left and right attack anim are swapped
-				$PlayerSprite.flip_h =true
-				$PlayerSprite.play(combo2_Animations[sprite_index])
+				player_anim.flip_h =true
+				player_anim.play(combo2_Animations[sprite_index])
 			#2:
 			#	$PlayerSprite.play(combo1_Animations[sprite_index])
 		anim.play(anim_name)
@@ -349,7 +344,7 @@ func sword_swing() -> void:
 		
 		#resets attack
 		await anim.animation_finished
-		$PlayerSprite.flip_h = false
+		player_anim.flip_h = false
 		swing_anim = false
 		shape.set_deferred("disabled", true)
 		combo_step = (combo_step + 1) % 3
@@ -390,6 +385,13 @@ func take_damage(amount: int):
 	#	return
 	health = clampi(health - amount, 0, 100)
 	health_bar.value = health
+	hit_flash(0.2)
+func hit_flash(duration: float) ->void:
+	var mat := $PlayerSprite.material as ShaderMaterial
+	if mat:
+		mat.set_shader_parameter("flash", 1.0)
+		var tween := create_tween()
+		tween.tween_property(mat, "shader_parameter/flash", 0.0, duration)
 	
  
 func _level_changed(shift: float) -> void:

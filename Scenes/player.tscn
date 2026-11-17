@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://ixg8ghykh70r"]
 
+[ext_resource type="Shader" uid="uid://by4sak0va4jri" path="res://Scripts/hit_flash.gdshader" id="1_151ft"]
 [ext_resource type="Script" uid="uid://cb1dss3l8ws0u" path="res://Scripts/player.gd" id="1_onrkg"]
 [ext_resource type="Texture2D" uid="uid://bx8ixurtkk4nc" path="res://Assets/MCSprites/characterSprites/IdleSprites/MainChar1.png" id="2_cvnsp"]
 [ext_resource type="Texture2D" uid="uid://c0rpfaxkn81ww" path="res://Assets/MCSprites/characterSprites/firstAttackSprites/down/firstAttackSprites1.png" id="3_76dak"]
@@ -188,6 +189,12 @@ size = Vector2(28, 54)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i5tie"]
 size = Vector2(32, 17)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_151ft"]
+resource_local_to_scene = true
+shader = ExtResource("1_151ft")
+shader_parameter/flash = 0.0
+shader_parameter/flash_color = Color(1, 1, 1, 1)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_xrrqc"]
 animations = [{
@@ -1206,6 +1213,7 @@ scale = Vector2(0.5, 0.5)
 shape = SubResource("RectangleShape2D_i5tie")
 
 [node name="PlayerSprite" type="AnimatedSprite2D" parent="." unique_id=1537809165]
+material = SubResource("ShaderMaterial_151ft")
 sprite_frames = SubResource("SpriteFrames_xrrqc")
 animation = &"combo1_right"
 
