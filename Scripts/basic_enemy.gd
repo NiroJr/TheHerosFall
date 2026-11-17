@@ -69,7 +69,15 @@ func take_damage(amount: int):
 	#knockback on attacks
 	knockback = -direction * 280
 	is_stunned = true
+	hit_flash(0.2)
 	
+func hit_flash(duration: float) ->void:
+	var mat := $Sprite2D.material as ShaderMaterial
+	if mat:
+		mat.set_shader_parameter("flash", 1.0)
+		var tween := create_tween()
+		tween.tween_property(mat, "shader_parameter/flash", 0.0, duration)
+		await tween.finished
 
 func alerted() -> void:
 	if(not_alerted):

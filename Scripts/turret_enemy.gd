@@ -110,8 +110,18 @@ func take_damage(amount: int):
 		queue_free()
 	$Alert.visible = true
 	$Alert.play("stun")
+	hit_flash(0.2)
 	await get_tree().create_timer(0.2).timeout
 	$Alert.visible = false
+	
+func hit_flash(duration: float) ->void:
+	var mat := $AnimatedSprite2D.material as ShaderMaterial
+	if mat:
+		mat.set_shader_parameter("flash", 1.0)
+		var tween := create_tween()
+		tween.tween_property(mat, "shader_parameter/flash", 0.0, duration)
+		await tween.finished
+
 func _on_hit_box_area_entered(area: Area2D) -> void:
 	if get_tree().get_first_node_in_group("player").elevation != elevation:
 		return

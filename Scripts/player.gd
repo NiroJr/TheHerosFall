@@ -31,6 +31,7 @@ var knockback := Vector2.ZERO
 var knocked := false
 var camera_shake := 0.0
 var hitstop_dur = 0.08
+var iframes := 0.0
 
 var health:
 	get:
@@ -131,8 +132,8 @@ const combo2_Animations := [
 func _physics_process(_delta: float) -> void:
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
-	if(is_swinging):
-		pass
+	if(iframes > 0.0):
+		iframes = move_toward(iframes, 0.0, _delta)
 	if(camera_shake > 0.0):
 		camera_shake = move_toward(camera_shake, 0.0, 25*_delta)
 		$Camera2D.offset = Vector2(randf_range(-camera_shake, camera_shake), randf_range(-camera_shake, camera_shake))
@@ -240,9 +241,9 @@ func _dash(dist: int, speed: float)-> void:
 	dash_dir = Vector2.RIGHT.rotated(facing_angle)
 	attack_dash_dist = dist
 	attack_dash_dur = speed
-	$HitBox.process_mode = Node.PROCESS_MODE_PAUSABLE if swinging else Node.PROCESS_MODE_DISABLED
 
 	if !swinging:
+		iframes = speed
 		$SwordSwing.visible = false
 		$SwordSwing.process_mode = Node.PROCESS_MODE_DISABLED
 		$PlayerSprite.speed_scale = (12.0/13.0) / attack_dash_dur
@@ -250,7 +251,6 @@ func _dash(dist: int, speed: float)-> void:
 
 	await get_tree().create_timer(speed).timeout
 
-	$HitBox.process_mode = Node.PROCESS_MODE_PAUSABLE
 	$SwordSwing.process_mode = Node.PROCESS_MODE_INHERIT
 	is_dashing = false
 
@@ -381,8 +381,9 @@ func _shake(strength: float) ->void:
 	camera_shake = strength
 
 func take_damage(amount: int):
-	#if(is_dashing):
-	#	return
+	if(iframes > 0):
+		return
+	iframes = 0.15
 	health = clampi(health - amount, 0, 100)
 	health_bar.value = health
 	hit_flash(0.2)
@@ -392,6 +393,7 @@ func hit_flash(duration: float) ->void:
 		mat.set_shader_parameter("flash", 1.0)
 		var tween := create_tween()
 		tween.tween_property(mat, "shader_parameter/flash", 0.0, duration)
+		await tween.finished
 	
  
 func _level_changed(shift: float) -> void:
@@ -424,6 +426,8 @@ func _update_sort() -> void:
 
 func _on_hit_box_area_entered(area: Area2D) -> void:
 	if(area.is_in_group("Enemy")):
+		if(iframes > 0.0):
+			return
 		var hit_dir := (global_position - area.global_position).normalized()
 		knockback = hit_dir*240
 		knocked = true

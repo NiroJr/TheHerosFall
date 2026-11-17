@@ -156,6 +156,19 @@ func take_damage(amount: int):
 		queue_free()
 	knockback = -direction * 240
 	is_stunned = true
+	hit_flash(0.2)
+
+func hit_flash(duration: float) ->void:
+	var mat := $Sprite2D.material as ShaderMaterial
+	var mat2 := $TurretSprite.material as ShaderMaterial
+	if mat && mat2:
+		mat.set_shader_parameter("flash", 1.0)
+		mat2.set_shader_parameter("flash", 1.0)
+		var tween := create_tween()
+		var tween2 := create_tween()
+		tween.tween_property(mat, "shader_parameter/flash", 0.0, duration)
+		tween2.tween_property(mat2, "shader_parameter/flash", 0.0, duration)
+		await tween.finished
 
 
 func _on_hit_box_area_entered(area: Area2D) -> void:

@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cq33yph0a1sgv" path="res://Scripts/mobile_turret.gd" id="1_ijx7e"]
 [ext_resource type="Texture2D" uid="uid://d4fe7ijm2twut" path="res://Assets/EnemySprites/MovingEnemy/SpinningSawEnemy1.png" id="2_iomyu"]
+[ext_resource type="Shader" uid="uid://by4sak0va4jri" path="res://Scripts/hit_flash.gdshader" id="2_qoqqw"]
 [ext_resource type="Texture2D" uid="uid://cowf82id2ec13" path="res://Assets/EnemySprites/MovingEnemy/SpinningSawEnemy2.png" id="3_x7btr"]
 [ext_resource type="Texture2D" uid="uid://darg7jr8cw41y" path="res://Assets/EnemySprites/MovingEnemy/SpinningSawEnemy3.png" id="4_bqgr7"]
 [ext_resource type="Texture2D" uid="uid://poyuwxiwy0re" path="res://Assets/EnemySprites/MovingEnemy/SpinningSawEnemy4.png" id="5_343a0"]
@@ -12,6 +13,12 @@
 [ext_resource type="Texture2D" uid="uid://c0n65ufgfodeo" path="res://Assets/EnemySprites/Turret+Bullets/turret4.png" id="10_3cus0"]
 [ext_resource type="Texture2D" uid="uid://ihh1023nelxp" path="res://Assets/EnemySprites/EnemyAlert/alert1.png" id="11_fhkba"]
 [ext_resource type="Texture2D" uid="uid://dmh2ey3aw70mi" path="res://Assets/icon.svg" id="12_7fcl2"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dhrsy"]
+resource_local_to_scene = true
+shader = ExtResource("2_qoqqw")
+shader_parameter/flash = 0.0
+shader_parameter/flash_color = Color(1, 0.2627451, 0.2, 1)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_68yga"]
 animations = [{
@@ -46,6 +53,12 @@ bg_color = Color(1, 0, 0, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_it0lf"]
 size = Vector2(24, 18)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3cus0"]
+resource_local_to_scene = true
+shader = ExtResource("2_qoqqw")
+shader_parameter/flash = 0.0
+shader_parameter/flash_color = Color(1, 0.2627451, 0.2, 1)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_8tom7"]
 animations = [{
@@ -118,6 +131,7 @@ motion_mode = 1
 script = ExtResource("1_ijx7e")
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="." unique_id=417532793]
+material = SubResource("ShaderMaterial_dhrsy")
 position = Vector2(-1.4305115e-06, -1.4305115e-06)
 sprite_frames = SubResource("SpriteFrames_68yga")
 
@@ -142,6 +156,7 @@ scale = Vector2(1.5, 1.5)
 shape = SubResource("RectangleShape2D_it0lf")
 
 [node name="TurretSprite" type="AnimatedSprite2D" parent="." unique_id=1559927905]
+material = SubResource("ShaderMaterial_3cus0")
 position = Vector2(0, -2)
 sprite_frames = SubResource("SpriteFrames_8tom7")
 animation = &"down"
