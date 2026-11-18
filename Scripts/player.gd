@@ -318,7 +318,9 @@ func sword_swing() -> void:
 				player_anim.play(combo2_Animations[sprite_index])
 			#2:
 			#	$PlayerSprite.play(combo1_Animations[sprite_index])
-		if(combo_step < 2 && sprite_index ==1):
+		if(combo_step < 2 
+		&& (sprite_index % 2 == 1)):
+			combo_node.rotation = facing_angle - PI/4
 			anim.play("Combo1_downRight")
 		else:
 			anim.play(anim_name)
