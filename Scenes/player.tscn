@@ -183,6 +183,13 @@
 [ext_resource type="Texture2D" uid="uid://b2lp1hbygtwci" path="res://Assets/MCSprites/characterSprites/DashingSprites/UpLeft&Right/blinkDash63.png" id="65_ott2s"]
 [ext_resource type="Texture2D" uid="uid://b51qi358ghgn7" path="res://Assets/MCSprites/characterSprites/DashingSprites/UpLeft&Right/blinkDash64.png" id="66_ftehy"]
 [ext_resource type="Texture2D" uid="uid://ciwrxovmhna1i" path="res://Assets/MCSprites/characterSprites/DashingSprites/UpLeft&Right/blinkDash65.png" id="67_ylvu8"]
+[ext_resource type="Texture2D" uid="uid://wgm43h86icua" path="res://Assets/MCSprites/attackSprites/fireAttack14.png" id="167_3t3b1"]
+[ext_resource type="Texture2D" uid="uid://ck6fipnhourn1" path="res://Assets/MCSprites/attackSprites/fireAttack15.png" id="168_dixlh"]
+[ext_resource type="Texture2D" uid="uid://bqjtkxbkv5ruv" path="res://Assets/MCSprites/attackSprites/fireAttack16.png" id="169_pd0oe"]
+[ext_resource type="Texture2D" uid="uid://bnetbt1kgkijc" path="res://Assets/MCSprites/attackSprites/fireAttack17.png" id="170_dxcir"]
+[ext_resource type="Texture2D" uid="uid://dkifjwbut3250" path="res://Assets/MCSprites/attackSprites/fireAttack18.png" id="171_7rs8m"]
+[ext_resource type="Texture2D" uid="uid://cc75oubkjksn2" path="res://Assets/MCSprites/attackSprites/fireAttack19.png" id="172_7s2nw"]
+[ext_resource type="Texture2D" uid="uid://cmd6e2trvonop" path="res://Assets/MCSprites/attackSprites/fireAttack20.png" id="173_6kbb5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_it0lf"]
 size = Vector2(28, 54)
@@ -460,25 +467,25 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("10_xtit1")
+"texture": ExtResource("10_c83yi")
 }, {
 "duration": 1.0,
-"texture": ExtResource("11_151ft")
+"texture": ExtResource("11_nyd3j")
 }, {
 "duration": 1.0,
-"texture": ExtResource("12_274r3")
+"texture": ExtResource("12_0gchq")
 }, {
 "duration": 1.5,
-"texture": ExtResource("13_5e4ga")
+"texture": ExtResource("37_wf5ty")
 }, {
 "duration": 1.0,
-"texture": ExtResource("14_rntbp")
+"texture": ExtResource("13_5w755")
 }, {
 "duration": 1.0,
-"texture": ExtResource("15_xw5nt")
+"texture": ExtResource("14_552og")
 }, {
 "duration": 1.0,
-"texture": ExtResource("16_rie18")
+"texture": ExtResource("15_giuho")
 }],
 "loop": 0,
 "name": &"combo2_downRight",
@@ -1105,6 +1112,32 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("167_3t3b1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("168_dixlh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("169_pd0oe")
+}, {
+"duration": 1.5,
+"texture": ExtResource("170_dxcir")
+}, {
+"duration": 1.0,
+"texture": ExtResource("171_7rs8m")
+}, {
+"duration": 1.0,
+"texture": ExtResource("172_7s2nw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("173_6kbb5")
+}],
+"loop": 0,
+"name": &"Combo1_downRight",
+"speed": 20.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": ExtResource("7_fs7ks")
 }, {
 "duration": 1.0,
@@ -1196,11 +1229,13 @@ motion_mode = 1
 script = ExtResource("1_onrkg")
 
 [node name="Shadow" type="Node2D" parent="." unique_id=431461792]
+visible = false
 position = Vector2(0, 14)
 script = ExtResource("20_l6n3p")
 
 [node name="HitBox" type="Area2D" parent="." unique_id=1825929533 groups=["PlayerHitBox"]]
 process_mode = 1
+visible = false
 collision_mask = 12
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=565094471]
@@ -1208,6 +1243,7 @@ scale = Vector2(0.5, 0.5)
 shape = SubResource("RectangleShape2D_it0lf")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=396957255]
+visible = false
 position = Vector2(0, 14)
 scale = Vector2(0.5, 0.5)
 shape = SubResource("RectangleShape2D_i5tie")
@@ -1215,7 +1251,7 @@ shape = SubResource("RectangleShape2D_i5tie")
 [node name="PlayerSprite" type="AnimatedSprite2D" parent="." unique_id=1537809165]
 material = SubResource("ShaderMaterial_151ft")
 sprite_frames = SubResource("SpriteFrames_xrrqc")
-animation = &"combo1_downRight"
+animation = &"combo2_downLeft"
 
 [node name="SwordSwing" type="Node2D" parent="." unique_id=794402511]
 z_index = 10
@@ -1249,7 +1285,7 @@ shape = SubResource("CircleShape2D_fkwtr")
 [node name="SwordAnimation" type="AnimatedSprite2D" parent="SwordSwing/Combo2" unique_id=1949784242]
 visible = false
 sprite_frames = SubResource("SpriteFrames_i5tie")
-animation = &"Combo1"
+animation = &"Combo1_downRight"
 flip_v = true
 
 [node name="Combo3" type="Area2D" parent="SwordSwing" unique_id=44817697 groups=["Combo3"]]
@@ -1266,6 +1302,7 @@ sprite_frames = SubResource("SpriteFrames_i5tie")
 animation = &"Combo1"
 
 [node name="Parry" type="Area2D" parent="SwordSwing" unique_id=121541716 groups=["Parry"]]
+visible = false
 collision_layer = 32
 collision_mask = 12
 
