@@ -251,7 +251,7 @@ animations = [{
 "speed": 20.0
 }, {
 "frames": [{
-"duration": 1.5,
+"duration": 1.0,
 "texture": ExtResource("10_c83yi")
 }, {
 "duration": 1.0,
@@ -260,8 +260,8 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("12_0gchq")
 }, {
-"duration": 1.0,
-"texture": ExtResource("11_nyd3j")
+"duration": 1.5,
+"texture": ExtResource("37_wf5ty")
 }, {
 "duration": 1.0,
 "texture": ExtResource("13_5w755")
@@ -1215,7 +1215,7 @@ shape = SubResource("RectangleShape2D_i5tie")
 [node name="PlayerSprite" type="AnimatedSprite2D" parent="." unique_id=1537809165]
 material = SubResource("ShaderMaterial_151ft")
 sprite_frames = SubResource("SpriteFrames_xrrqc")
-animation = &"combo1_right"
+animation = &"combo1_downRight"
 
 [node name="SwordSwing" type="Node2D" parent="." unique_id=794402511]
 z_index = 10
@@ -1233,7 +1233,7 @@ shape = SubResource("CircleShape2D_fhkba")
 
 [node name="SwordAnimation" type="AnimatedSprite2D" parent="SwordSwing/Combo1" unique_id=1568799830]
 sprite_frames = SubResource("SpriteFrames_i5tie")
-animation = &"Combo1"
+animation = &"Combo3"
 
 [node name="Combo2" type="Area2D" parent="SwordSwing" unique_id=162041491 groups=["Combo2"]]
 visible = false
