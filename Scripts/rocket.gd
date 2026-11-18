@@ -9,6 +9,7 @@ var time := 0.0
 var is_active := false
 @export var target_node := Node2D
 var has_exploded := false
+var camera_shake := 0.0
 
 func _ready() -> void:
 	#area_entered.connect(_player_hit)
@@ -57,11 +58,11 @@ func _explode()-> void:
 	$Shadow.visible = false
 	$AnimatedSprite2D.play("Land")
 	await get_tree().physics_frame
+	var player := get_tree().get_first_node_in_group("player")
 	for area in self.get_overlapping_areas():
 		if area != null && area.is_in_group("PlayerHitBox"):
 			area.get_parent().take_damage(50)
-			area.get_parent()._shake(20)
-	self.set_deferred("monitoring", false)
+	player._shake(20)
 	await $AnimatedSprite2D.animation_finished
 	if is_instance_valid(target_node):
 		target_node.visible = false
