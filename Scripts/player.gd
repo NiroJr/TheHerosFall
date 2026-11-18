@@ -147,6 +147,9 @@ func _physics_process(_delta: float) -> void:
 	direction = Vector2.ZERO
 	if(!is_swinging):
 		direction = Input.get_vector("Left","Right","Up","Down")
+		if(direction != Vector2.ZERO):
+			var dir_angle = snappedf(direction.angle(), slice)
+			direction = Vector2.from_angle(dir_angle)
 	
 	if Input.is_action_just_pressed("Dash") && (!is_swinging):
 		if(!is_dashing && can_dash):
@@ -157,28 +160,10 @@ func _physics_process(_delta: float) -> void:
 		velocity = dash_dir.normalized()*(attack_dash_dist/attack_dash_dur)
 	elif(holding):
 		velocity = direction*(SPEED*0.33)
-	#	if hDirection:
-	#		velocity.x = hDirection * SPEED*0.33
-	#	else:
-	#		velocity.x = move_toward(velocity.x, 0, SPEED*0.33)
-	#	if vDirection:
-	#		velocity.y = vDirection * SPEED*0.33
-	#	else:
-	#		velocity.y = move_toward(velocity.y, 0, SPEED*0.33)
 	elif(is_parrying):
 		velocity = Vector2.ZERO
 	else:
 		velocity = direction*SPEED
-	#	if hDirection:
-	#		velocity.x = hDirection * SPEED
-	#	else:
-	#		velocity.x = move_toward(velocity.x, 0, SPEED)
-	#	if vDirection:
-	#		velocity.y = vDirection * SPEED
-	#	else:
-	#		velocity.y = move_toward(velocity.y, 0, SPEED)
-
-	#	velocity = velocity.normalized() * SPEED
 	#flips sprites when left input is recieved and the direction is given
 	if !swing_anim:
 		$PlayerSprite.flip_h = (sprite_index in [3, 4, 5])
@@ -226,8 +211,7 @@ func _physics_process(_delta: float) -> void:
 	if Input.is_action_just_pressed("sword_swing"):
 		if(is_swinging):
 			buffered_swing = true;
-		else:
-			is_dashing = false
+		elif !is_dashing:
 			sword_swing()
 	
 	if Input.is_action_just_pressed("Parry"):
@@ -264,6 +248,8 @@ func _dash(dist: int, speed: float)-> void:
 	can_dash = true
 	
 func _parry()-> void:
+	if(is_dashing):
+		return
 	is_parrying = true
 	var parry : Node2D = $SwordSwing/Parry
 	$SwordSwing.visible = true
@@ -291,6 +277,8 @@ func _on_parry_area_entered(_area: Area2D) -> void:
 	is_parrying = false
 
 func sword_swing() -> void:
+	if(is_dashing):
+		return
 	is_swinging = true
 	while true:
 		buffered_swing = false

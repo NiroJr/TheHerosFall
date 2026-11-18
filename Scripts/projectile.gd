@@ -80,7 +80,8 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 		elif(area.is_in_group("Enemy") && collide != shooter):
 			queue_free()
 	elif(area.is_in_group("Enemy")):
-			collide.take_damage(playerProjectileDamage)
+			if(collide.has_method("take_damage")):
+				collide.take_damage(playerProjectileDamage)
 			queue_free()
 			
 func _elevation_of(node: Node) -> int:
