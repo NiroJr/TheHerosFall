@@ -12,7 +12,7 @@ var has_exploded := false
 var camera_shake := 0.0
 
 func _ready() -> void:
-	#area_entered.connect(_player_hit)
+	$CollisionShape2D.set_deferred("disabled", true)
 	$AnimatedSprite2D.play("Launch")
 	$Shadow.top_level = true
 	
@@ -53,11 +53,13 @@ func _explode()-> void:
 	if has_exploded: 
 		return
 	self.add_to_group("Enemy")
+	$CollisionShape2D.set_deferred("disabled", false)
 	has_exploded = true
 	is_active = false
 	$Shadow.visible = false
 	$AnimatedSprite2D.play("Land")
-	await get_tree().physics_frame
+	for i in range(2):
+		await get_tree().physics_frame
 	var player := get_tree().get_first_node_in_group("player")
 	for area in self.get_overlapping_areas():
 		if area != null && area.is_in_group("PlayerHitBox"):

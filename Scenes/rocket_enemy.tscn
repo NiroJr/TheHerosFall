@@ -136,8 +136,6 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_iyasj"]
 radius = 8.0
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_i5tie"]
-
 [sub_resource type="SpriteFrames" id="SpriteFrames_dn8ef"]
 animations = [{
 "frames": [{
@@ -149,12 +147,15 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i5tie"]
+
 [node name="CharacterBody2D" type="CharacterBody2D" unique_id=855117547]
 collision_layer = 0
 collision_mask = 0
 script = ExtResource("1_635ss")
 
 [node name="Rocket" type="Area2D" parent="." unique_id=955003827 node_paths=PackedStringArray("target_node")]
+visible = false
 collision_layer = 4
 script = ExtResource("2_iyasj")
 target_node = NodePath("../target")
@@ -173,10 +174,12 @@ script = ExtResource("11_l6p8e")
 base = "Rocket"
 
 [node name="Hatch_Launcher" type="AnimatedSprite2D" parent="." unique_id=779601192]
+z_index = -1
 sprite_frames = SubResource("SpriteFrames_vikc2")
 animation = &"Firing"
 
 [node name="PlayerDetection" type="Area2D" parent="." unique_id=1374940934]
+visible = false
 scale = Vector2(3, 3)
 collision_layer = 16
 
@@ -193,16 +196,26 @@ collide_with_bodies = false
 [node name="Fire" type="Timer" parent="." unique_id=563776560]
 wait_time = 3.0
 
+[node name="Alert" type="AnimatedSprite2D" parent="." unique_id=1212517473]
+visible = false
+position = Vector2(0, -23)
+sprite_frames = SubResource("SpriteFrames_dn8ef")
+
+[node name="target" type="Sprite2D" parent="." unique_id=17554515]
+visible = false
+texture = ExtResource("11_38c0y")
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=657635866]
 visible = false
 scale = Vector2(1.5, 1.5)
 shape = SubResource("RectangleShape2D_i5tie")
 
-[node name="Alert" type="AnimatedSprite2D" parent="." unique_id=1212517473]
-position = Vector2(0, -23)
-sprite_frames = SubResource("SpriteFrames_dn8ef")
+[node name="Hover" type="Area2D" parent="." unique_id=1493652518]
 
-[node name="target" type="Sprite2D" parent="." unique_id=17554515]
-texture = ExtResource("11_38c0y")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hover" unique_id=2035278248]
+scale = Vector2(1.5, 1.5)
+shape = SubResource("RectangleShape2D_i5tie")
 
 [connection signal="timeout" from="Fire" to="." method="_on_fire_timeout"]
+[connection signal="area_entered" from="Hover" to="." method="_on_hover_area_entered"]
+[connection signal="area_exited" from="Hover" to="." method="_on_hover_area_exited"]

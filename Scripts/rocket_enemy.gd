@@ -4,6 +4,7 @@ var player :Area2D
 var line_of_sight := false
 var can_shoot := true
 var alerted := false
+var hover := false
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	$Rocket/CollisionShape2D.set_deferred("disabled", true)
@@ -48,11 +49,13 @@ func shoot() -> void:
 	$target.global_position = player.global_position
 	$target.visible = true
 	rocket_instance.visible = true
-	rocket_instance.get_node("CollisionShape2D").disabled = false
+	#rocket_instance.get_node("CollisionShape2D").disabled = false
 	rocket_instance.global_position = $Hatch_Launcher.global_position
 	rocket_instance.z_index = self.z_index +1
 	main.add_child(rocket_instance)
 	rocket_instance.spawn(player_pos)
+	if(hover):
+		rocket_instance._explode()
 	$Fire.start()
 	await $Hatch_Launcher.animation_finished
 	$Hatch_Launcher.stop()
@@ -78,3 +81,11 @@ func _out_of_range(area: Area2D) -> void:
 		player = null
 		line_of_sight = false
 		$Hatch_Launcher.play("default")
+
+
+func _on_hover_area_entered(area: Area2D) -> void:
+	hover = true # Replace with function body.
+
+
+func _on_hover_area_exited(area: Area2D) -> void:
+	hover = false # Replace with function body.

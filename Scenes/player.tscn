@@ -1235,7 +1235,6 @@ script = ExtResource("20_l6n3p")
 
 [node name="HitBox" type="Area2D" parent="." unique_id=1825929533 groups=["PlayerHitBox"]]
 process_mode = 1
-visible = false
 collision_mask = 12
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=565094471]
@@ -1243,7 +1242,6 @@ scale = Vector2(0.5, 0.5)
 shape = SubResource("RectangleShape2D_it0lf")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=396957255]
-visible = false
 position = Vector2(0, 14)
 scale = Vector2(0.5, 0.5)
 shape = SubResource("RectangleShape2D_i5tie")
@@ -1254,11 +1252,11 @@ sprite_frames = SubResource("SpriteFrames_xrrqc")
 animation = &"combo2_downLeft"
 
 [node name="SwordSwing" type="Node2D" parent="." unique_id=794402511]
+visible = false
 z_index = 10
 z_as_relative = false
 
 [node name="Combo1" type="Area2D" parent="SwordSwing" unique_id=1024733563 groups=["Combo1"]]
-visible = false
 collision_layer = 8
 collision_mask = 4
 
@@ -1269,7 +1267,9 @@ shape = SubResource("CircleShape2D_fhkba")
 
 [node name="SwordAnimation" type="AnimatedSprite2D" parent="SwordSwing/Combo1" unique_id=1568799830]
 sprite_frames = SubResource("SpriteFrames_i5tie")
-animation = &"Combo3"
+animation = &"Combo1_downRight"
+frame = 6
+frame_progress = 1.0
 
 [node name="Combo2" type="Area2D" parent="SwordSwing" unique_id=162041491 groups=["Combo2"]]
 visible = false

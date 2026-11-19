@@ -307,6 +307,7 @@ func sword_swing() -> void:
 		
 		#changes animation based on curret combo
 		var player_anim = $PlayerSprite
+		var is_diagonal := sprite_index%2 == 1
 		match combo_step:
 			0:
 				#normal sprites
@@ -318,9 +319,8 @@ func sword_swing() -> void:
 				player_anim.play(combo2_Animations[sprite_index])
 			#2:
 			#	$PlayerSprite.play(combo1_Animations[sprite_index])
-		if(combo_step < 2 
-		&& (sprite_index % 2 == 1)):
-			combo_node.rotation = facing_angle - PI/4
+		if(combo_step < 2 && is_diagonal):
+			anim.rotate(PI/4)
 			anim.play("Combo1_downRight")
 		else:
 			anim.play(anim_name)
@@ -337,6 +337,8 @@ func sword_swing() -> void:
 		
 		#resets attack
 		await anim.animation_finished
+		if is_diagonal && combo_step != 2:
+			anim.rotate(-PI/4)
 		player_anim.flip_h = false
 		swing_anim = false
 		shape.set_deferred("disabled", true)
@@ -421,7 +423,7 @@ func _on_hit_box_area_entered(area: Area2D) -> void:
 	if(area.is_in_group("Enemy")):
 		if(iframes > 0.0):
 			return
-		var hit_dir := (global_position - area.global_position).normalized()
+		var hit_dir := ((global_position - area.global_position)+Vector2(1,1)).normalized()
 		knockback = hit_dir*240
 		knocked = true
 		await get_tree().create_timer(0.3).timeout
