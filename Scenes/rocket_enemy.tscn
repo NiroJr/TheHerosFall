@@ -155,13 +155,12 @@ collision_mask = 0
 script = ExtResource("1_635ss")
 
 [node name="Rocket" type="Area2D" parent="." unique_id=955003827 node_paths=PackedStringArray("target_node")]
-visible = false
 collision_layer = 4
 script = ExtResource("2_iyasj")
 target_node = NodePath("../target")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Rocket" unique_id=788104593]
-scale = Vector2(5.25, 5.25)
+scale = Vector2(3.5, 3.5)
 shape = SubResource("CircleShape2D_vxm5m")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Rocket" unique_id=2128954881]

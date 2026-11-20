@@ -467,25 +467,25 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("10_c83yi")
+"texture": ExtResource("10_xtit1")
 }, {
 "duration": 1.0,
-"texture": ExtResource("11_nyd3j")
+"texture": ExtResource("11_151ft")
 }, {
 "duration": 1.0,
-"texture": ExtResource("12_0gchq")
-}, {
-"duration": 1.5,
-"texture": ExtResource("37_wf5ty")
+"texture": ExtResource("12_274r3")
 }, {
 "duration": 1.0,
-"texture": ExtResource("13_5w755")
+"texture": ExtResource("13_5e4ga")
 }, {
 "duration": 1.0,
-"texture": ExtResource("14_552og")
+"texture": ExtResource("14_rntbp")
 }, {
 "duration": 1.0,
-"texture": ExtResource("15_giuho")
+"texture": ExtResource("15_xw5nt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_rie18")
 }],
 "loop": 0,
 "name": &"combo2_downRight",
@@ -1194,16 +1194,16 @@ animations = [{
 "speed": 5.0
 }, {
 "frames": [{
-"duration": 3.0,
+"duration": 1.5,
 "texture": ExtResource("11_qpa8y")
 }, {
-"duration": 3.0,
+"duration": 1.5,
 "texture": ExtResource("12_sbwqj")
 }, {
-"duration": 3.0,
+"duration": 1.5,
 "texture": ExtResource("13_xwi16")
 }, {
-"duration": 3.0,
+"duration": 2.0,
 "texture": ExtResource("15_ph33w")
 }, {
 "duration": 12.0,
@@ -1249,7 +1249,7 @@ shape = SubResource("RectangleShape2D_i5tie")
 [node name="PlayerSprite" type="AnimatedSprite2D" parent="." unique_id=1537809165]
 material = SubResource("ShaderMaterial_151ft")
 sprite_frames = SubResource("SpriteFrames_xrrqc")
-animation = &"combo2_downLeft"
+animation = &"combo2_downRight"
 
 [node name="SwordSwing" type="Node2D" parent="." unique_id=794402511]
 visible = false
@@ -1267,9 +1267,7 @@ shape = SubResource("CircleShape2D_fhkba")
 
 [node name="SwordAnimation" type="AnimatedSprite2D" parent="SwordSwing/Combo1" unique_id=1568799830]
 sprite_frames = SubResource("SpriteFrames_i5tie")
-animation = &"Combo1_downRight"
-frame = 6
-frame_progress = 1.0
+animation = &"parry"
 
 [node name="Combo2" type="Area2D" parent="SwordSwing" unique_id=162041491 groups=["Combo2"]]
 visible = false

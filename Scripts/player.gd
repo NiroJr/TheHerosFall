@@ -1,5 +1,6 @@
 extends ElevationBody
 
+#crosshair and directional variables
 @onready var main = get_tree().current_scene
 @onready var projectile = load("res://Scenes/projectile.tscn")
 @onready var timer: Timer = get_node("ShootCooldown")
@@ -14,6 +15,8 @@ var sprite_dir  := 0.0;
 var slice  := TAU/8;
 var sprite_index := 0;
 var direction = Vector2.ZERO
+
+#Dashes and Attacks
 var combo_step := 0;
 var is_swinging := false;
 var buffered_swing := false;
@@ -24,8 +27,10 @@ var swing_anim := false
 var attack_dash_dist := 20
 var attack_dash_dur := 0.2
 var dash_dir = Vector2(0,0)
-var dashDistance = 150
+var dashDistance = 125
 var dashTime = 0.35
+
+#various other variables
 var aim_dir := Vector2.ZERO
 var knockback := Vector2.ZERO
 var knocked := false
@@ -33,6 +38,7 @@ var camera_shake := 0.0
 var hitstop_dur = 0.08
 var iframes := 0.0
 
+#health
 var health:
 	get:
 		return PlayerData.health
