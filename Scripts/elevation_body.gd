@@ -61,7 +61,7 @@ func move_with_elevation(delta: float) -> void:
 		return
 	match state:
 		WALK:
-			if not skip_floor_check and _ground_level(_feet_world()) == elevation:
+			if not skip_floor_check and _ground_level(_feet_world()) == elevation and not _on_bridge():
 				last_safe_position = global_position
 				last_safe_elevation = elevation
 			var step := velocity * delta
@@ -103,12 +103,14 @@ func _feet_world() -> Vector2:
 
 
 func _is_floor(h: int, point: Vector2) -> bool:
+	for bridge in get_tree().get_nodes_in_group("laser_bridges"):
+		if bridge.level == h and bridge.has_floor(point):
+			return true
 	var layer := floor_layers[h]
 	var data := layer.get_cell_tile_data(layer.local_to_map(layer.to_local(point)))
 	return data != null and data.get_custom_data("is_floor")
 
 
-# 世界坐标 world 这里的地面有几层高；-1 表示虚空
 func _ground_level(world: Vector2) -> int:
 	for h in range(floor_layers.size() - 1, -1, -1):
 		if _is_floor(h, world - Vector2(0, h * TILE)):
@@ -178,6 +180,12 @@ func world_offset_to(other: ElevationBody) -> Vector2:
 func _level_changed(_shift: float) -> void:
 	pass
 
+func _on_bridge() -> bool:
+	var point := _feet_world() - Vector2(0, elevation * TILE)
+	for bridge in get_tree().get_nodes_in_group("laser_bridges"):
+		if bridge.level == elevation and bridge.has_floor(point):
+			return true
+	return false
 
 func _fell_into_void() -> void:
 	global_position = spawn_position

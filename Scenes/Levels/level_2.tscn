@@ -6,8 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://kjmcgldutaab" path="res://Scenes/enemy_wave.tscn" id="5_8qsmg"]
 [ext_resource type="Script" uid="uid://bcv5607ntfvvh" path="res://Scripts/wave.gd" id="6_8qsmg"]
 [ext_resource type="PackedScene" uid="uid://dtfojwdh213s3" path="res://Scenes/level_exit.tscn" id="6_fphuk"]
-[ext_resource type="PackedScene" uid="uid://dnneyajyj3b8v" path="res://Scenes/wires.tscn" id="7_pnnky"]
-[ext_resource type="PackedScene" uid="uid://1py8rk2mba1u" path="res://Scenes/door.tscn" id="8_blpqv"]
+[ext_resource type="PackedScene" uid="uid://dnneyajyj3b8v" path="res://Scenes/Puzzle elemets/wires.tscn" id="7_pnnky"]
+[ext_resource type="PackedScene" uid="uid://1py8rk2mba1u" path="res://Scenes/Puzzle elemets/door.tscn" id="8_blpqv"]
 
 [sub_resource type="Resource" id="Resource_hqjws"]
 script = ExtResource("6_8qsmg")
