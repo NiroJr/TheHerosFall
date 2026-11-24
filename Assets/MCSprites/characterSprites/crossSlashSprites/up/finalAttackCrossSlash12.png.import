@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bcj56urmr2h01"
-path="res://.godot/imported/letters.png-500420486d288135e4978d0a88b0778e.ctex"
+uid="uid://chb6vfcp44wf0"
+path="res://.godot/imported/finalAttackCrossSlash12.png-b145c70c45e6ac8bca7e3dbb2aee3570.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Menu+text/letters.png"
-dest_files=["res://.godot/imported/letters.png-500420486d288135e4978d0a88b0778e.ctex"]
+source_file="res://Assets/MCSprites/characterSprites/crossSlashSprites/up/finalAttackCrossSlash12.png"
+dest_files=["res://.godot/imported/finalAttackCrossSlash12.png-b145c70c45e6ac8bca7e3dbb2aee3570.ctex"]
 
 [params]
 
