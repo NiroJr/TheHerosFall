@@ -83,8 +83,9 @@ position = Vector2(381, 22)
 [node name="mobileTurret" parent="Enemies" unique_id=1484966170 instance=ExtResource("5_6bp64")]
 y_sort_enabled = true
 
-[node name="Launcher1" parent="Enemies" unique_id=1781325329 instance=ExtResource("2_hptm8")]
+[node name="Launcher1" parent="Enemies" unique_id=1781325329 node_paths=PackedStringArray("wires") instance=ExtResource("2_hptm8")]
 position = Vector2(-22, -334)
+wires = NodePath("../../puzzle/wires/Wires5")
 
 [node name="puzzle" type="Node2D" parent="." unique_id=941488080]
 y_sort_enabled = true
@@ -101,6 +102,10 @@ position = Vector2(589, 118)
 
 [node name="Switch3" parent="puzzle/switches" unique_id=189590309 instance=ExtResource("8_344ge")]
 position = Vector2(587, 21)
+
+[node name="Switch4" parent="puzzle/switches" unique_id=1177629327 instance=ExtResource("8_344ge")]
+position = Vector2(80, -138)
+starting_power = "PURPLE"
 
 [node name="doors" type="Node2D" parent="puzzle" unique_id=229416586]
 position = Vector2(381, 98)
@@ -139,3 +144,8 @@ sources = [NodePath("../../switches/Switch3")]
 [node name="Wires4" parent="puzzle/wires" unique_id=1973111781 node_paths=PackedStringArray("sources") instance=ExtResource("2_ynf5e")]
 tile_map_data = PackedByteArray("AAAnAAcAAAADAAAAAAAoAAcAAAADAAAAAAApAAcAAAADAAAAAAAqAAcAAAADAAAAAAA=")
 sources = [NodePath("../../switches/Switch2")]
+
+[node name="Wires5" parent="puzzle/wires" unique_id=951635969 node_paths=PackedStringArray("sources") instance=ExtResource("2_ynf5e")]
+position = Vector2(5, 0)
+tile_map_data = PackedByteArray("AAAGAPf/AAADAAAAAAAFAPf/AAADAAAAAAAEAPf/AAADAAAAAAADAPf/AAADAAAAAAACAPf/AAADAAAAAAABAPf/AAADAAAAAAA=")
+sources = [NodePath("../../switches/Switch4")]

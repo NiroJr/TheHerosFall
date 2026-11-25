@@ -5,6 +5,9 @@ var line_of_sight := false
 var can_shoot := true
 var alerted := false
 var hover := false
+
+@export var wires : Wires
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	$Rocket/CollisionShape2D.set_deferred("disabled", true)
@@ -25,6 +28,13 @@ func _process(_delta: float) -> void:
 		line_of_sight = false
 
 func check_sight_line() -> void:
+	if wires == null:
+		return
+	
+	var power = wires.kind + 1 if wires.is_on else 0
+	
+	if power != 3:
+		return
 	$PlayerDetection/RayCast2D.target_position = $PlayerDetection/RayCast2D.to_local(player.global_position)
 	$PlayerDetection/RayCast2D.force_raycast_update()
 	if($PlayerDetection/RayCast2D.is_colliding() && $PlayerDetection/RayCast2D.get_collider() == player):
@@ -65,6 +75,14 @@ func _on_fire_timeout() -> void:
 	can_shoot = true
 
 func _detected(area: Area2D) -> void:
+	if wires == null:
+		return
+	
+	var power = wires.kind + 1 if wires.is_on else 0
+	print(power)
+	if power != 3:
+		return
+	
 	if(area.is_in_group("PlayerHitBox")):
 		player = area
 		$Alert.visible = true

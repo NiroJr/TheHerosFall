@@ -68,9 +68,11 @@ func _outOfRange(body: Area2D) -> void:
 		line_of_sight = false
 
 func check_sight_line() -> void:
+	
 	if player.get_parent().elevation != elevation:
 		line_of_sight = false
 		return
+	
 	$PlayerDetection/RayCast2D.target_position = $PlayerDetection/RayCast2D.to_local(player.global_position)
 	$PlayerDetection/RayCast2D.force_raycast_update()
 	if($PlayerDetection/RayCast2D.is_colliding() && $PlayerDetection/RayCast2D.get_collider() == player):

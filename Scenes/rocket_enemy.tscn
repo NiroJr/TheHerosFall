@@ -164,6 +164,7 @@ scale = Vector2(3.5, 3.5)
 shape = SubResource("CircleShape2D_vxm5m")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Rocket" unique_id=2128954881]
+visible = false
 sprite_frames = SubResource("SpriteFrames_xrrqc")
 animation = &"Land"
 frame = 5
