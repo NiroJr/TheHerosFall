@@ -35,7 +35,6 @@ var aim_dir := Vector2.ZERO
 var knockback := Vector2.ZERO
 var knocked := false
 var camera_shake := 0.0
-var hitstop_dur = 0.08
 var iframes := 0.0
 
 #health
@@ -278,6 +277,7 @@ func _parry()-> void:
 
 func _on_parry_area_entered(_area: Area2D) -> void:
 	is_parrying = true
+	hit_stop(0.3)
 	$SwordSwing/Parry/parry_anim.play("parried")
 	await $SwordSwing/Parry/parry_anim.animation_finished
 	is_parrying = false
@@ -363,9 +363,14 @@ func _on_combo_timeout() -> void:
 		
 func _swordHit(area: Area2D)->void:
 	if area.is_in_group("Enemy"):
-		Engine.time_scale = 0.1
-		await get_tree().create_timer(hitstop_dur, true, false, true).timeout
-		Engine.time_scale = 1
+		hit_stop(0.2)
+
+func hit_stop(time : float)->void:
+	print("parry: ", is_parrying, "hit: ", is_swinging)
+	Engine.time_scale = 0.01
+	print("timescale", Engine.time_scale)
+	await get_tree().create_timer(time, true, false, true).timeout
+	Engine.time_scale = 1
 
 func shoot():
 	var instance = projectile.instantiate()

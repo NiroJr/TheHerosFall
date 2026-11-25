@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dr5ntnatmmcwn"
-path="res://.godot/imported/blinkDash42.png-e0e81a91678545b3ad94dd0a12f5adff.ctex"
+path="res://.godot/imported/blinkDash42.png-885cff5f0de75f3fcbb6ebe83e391b0c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/MCSprites/characterSprites/dashingSprites/DownRight&Left/blinkDash42.png"
-dest_files=["res://.godot/imported/blinkDash42.png-e0e81a91678545b3ad94dd0a12f5adff.ctex"]
+source_file="res://Assets/MCSprites/characterSprites/DashingSprites/DownRight&Left/blinkDash42.png"
+dest_files=["res://.godot/imported/blinkDash42.png-885cff5f0de75f3fcbb6ebe83e391b0c.ctex"]
 
 [params]
 
